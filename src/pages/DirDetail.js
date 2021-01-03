@@ -1,5 +1,7 @@
 import React from "react";
 
-export default () => {
+const DirDetail = () => {
   return <div>hi</div>;
 };
+
+export default DirDetail;
