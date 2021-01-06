@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { LoginPage, MainPage } from "./pages";
 import DirDetail from "./pages/DirDetail";
 import MyPage from './pages/MyPage';
+import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
   const isLoggined = true;
