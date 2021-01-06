@@ -4,37 +4,37 @@ import updateIconBk from "../assets/img/update_dir_icon_bk.svg";
 import shareIcon from "../assets/img/share_icon.svg";
 import cookieIcon from "../assets/img/cookie_icon.svg";
 
-export default () => {
+const DirDetaill = () => {
   return (
-    <>
-      <Container>
-        <div className="header">
-          <div className="header__title">캐릭터/일러스트레이션</div>
-          <div className="header__update-icon"></div>
-          <div className="empty"></div>
-          <div className="header__share">
-            <img className="icon" src={shareIcon} />
-            <div className="desc">디렉토리 공유</div>
-          </div>
+    <Container>
+      <div className="header">
+        <div className="header__title">캐릭터/일러스트레이션</div>
+        <div className="header__update-icon"></div>
+        <div className="empty"></div>
+        <div className="header__share">
+          <img alt="" className="icon" src={shareIcon} />
+          <div className="desc">디렉토리 공유</div>
         </div>
-        <div className="info">
-          <img className="info__icon" src={cookieIcon} />
-          <div className="info__cookie-num">37개</div>
+      </div>
+      <div className="info">
+        <img alt="" className="info__icon" src={cookieIcon} />
+        <div className="info__cookie-num">37개</div>
+      </div>
+      <div className="mid">
+        <div className="mid__profile"></div>
+        <div className="mid__name">Jeongin Lee</div>
+        <div className="empty"></div>
+        <div className="toggle">
+          <div className="toggle__help">?</div>
+          <div className="toggle__title">안 읽은 쿠키 모아보기</div>
+          {/* 여기 스위치가 와야 해 */}
         </div>
-        <div className="mid">
-          <div className="mid__profile"></div>
-          <div className="mid__name">Jeongin Lee</div>
-          <div className="empty"></div>
-          <div className="toggle">
-            <div className="toggle__help">?</div>
-            <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-            {/* 여기 스위치가 와야 해 */}
-          </div>
-        </div>
-      </Container>
-    </>
+      </div>
+    </Container>
   );
 };
+
+export default DirDetaill;
 
 const Container = styled.div`
   margin-top: 10rem;
