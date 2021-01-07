@@ -34,14 +34,6 @@ export default () => {
           <Swtich />
         </div>
       </div>
-      <CardContainer>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </CardContainer>
     </Container>
   );
 };
