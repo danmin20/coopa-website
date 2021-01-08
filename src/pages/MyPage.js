@@ -98,6 +98,7 @@ export default () => {
           <LogoutBtn isBtnHover={isBtnHover} src={meerkatLogout}></LogoutBtn>
         </div>
       </ServiceInfo>
+      {isProfileBtnClicked && <ProfileFixModal isProfileClicked={isProfileBtnClicked} setIsProfileClicked={setIsProfileBtnClicked}/>}
     </Container>
   );
 };
