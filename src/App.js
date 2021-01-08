@@ -4,6 +4,7 @@ import { LoginPage, MainPage, DirDetail, MyPage } from "./pages";
 import GlobalStyles from "./GlobalStyles";
 import Header from "./components/Header";
 import ProfileFixModal from "./components/ProfileFixModal";
+import Header from "./components/Header";
 
 function App() {
   const isLoggined = true;
