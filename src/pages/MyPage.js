@@ -83,6 +83,7 @@ export default () => {
           <div className="logout__btn">로그아웃</div>
         </div>
       </ServiceInfo>
+      {isProfileBtnClicked && <ProfileFixModal isProfileClicked={isProfileBtnClicked} setIsProfileClicked={setIsProfileBtnClicked}/>}
     </Container>
   );
 };
