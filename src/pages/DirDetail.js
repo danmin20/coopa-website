@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import updateIconBk from "../assets/img/update_dir_icon_bk.svg";
 import shareIcon from "../assets/img/share_icon.svg";
+import shareIconW from "../assets/img/share_icon_white.svg";
 import cookieIcon from "../assets/img/cookie_icon.svg";
+import Swtich from "../components/Switch";
+import Card from "../components/Card";
 
-const DirDetaill = () => {
+export default () => {
+  const handleToggle = () => {};
   return (
     <Container>
       <div className="header">
@@ -12,7 +16,7 @@ const DirDetaill = () => {
         <div className="header__update-icon"></div>
         <div className="empty"></div>
         <div className="header__share">
-          <img alt="" className="icon" src={shareIcon} />
+          <div className="icon"></div>
           <div className="desc">디렉토리 공유</div>
         </div>
       </div>
@@ -27,22 +31,38 @@ const DirDetaill = () => {
         <div className="toggle">
           <div className="toggle__help">?</div>
           <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-          {/* 여기 스위치가 와야 해 */}
+          <Swtich />
         </div>
       </div>
+      <CardContainer>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </CardContainer>
     </Container>
   );
 };
 
-export default DirDetaill;
+const CardContainer = styled.div`
+  max-width: 100vw;
+  margin-top: 5.2rem;
+  margin-bottom: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3.2rem;
+`;
 
 const Container = styled.div`
-  margin-top: 10rem;
+  margin: 10rem 19.2rem 0;
   .header {
     display: flex;
     align-items: center;
     &__title {
       font-weight: bold;
+      line-height: 3.6rem;
       font-size: 3.8rem;
       color: ${({ theme }) => theme.colors.black_2};
     }
@@ -54,6 +74,7 @@ const Container = styled.div`
       background: url(${updateIconBk}) center center / cover no-repeat;
     }
     &__share {
+      cursor: pointer;
       border: 2px solid #ff7034;
       border-radius: 0.8rem;
       width: 21rem;
@@ -63,10 +84,24 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      .icon {
+        width: 1.8rem;
+        height: 2rem;
+        background: url(${shareIcon}) center center / cover no-repeat;
+      }
       .desc {
         margin-left: 1.1rem;
         font-size: 2rem;
         font-weight: 500;
+        letter-spacing: -0.02em;
+        line-height: 2.6rem;
+      }
+      :hover {
+        .icon {
+          background: url(${shareIconW}) center center / cover no-repeat;
+        }
+        color: ${({ theme }) => theme.colors.white};
+        background-color: ${({ theme }) => theme.colors.orange};
       }
     }
   }
@@ -83,6 +118,7 @@ const Container = styled.div`
   .mid {
     margin-top: 6.4rem;
     display: flex;
+    align-items: center;
     &__profile {
       width: 3.2rem;
       height: 3.2rem;
@@ -91,7 +127,8 @@ const Container = styled.div`
       /* background: profile url here */
     }
     &__name {
-      font-size: 2.2.rem;
+      margin-left: 1.4rem;
+      font-size: 2.2rem;
       font-weight: 500;
     }
   }
@@ -113,9 +150,9 @@ const Container = styled.div`
       font-weight: 500;
     }
     &__title {
+      margin: 0 1.5rem 0 0.8rem;
       font-size: 2rem;
       color: #404040;
-      margin-left: 0.8rem;
     }
   }
   .empty {

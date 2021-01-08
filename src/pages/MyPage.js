@@ -189,7 +189,7 @@ const UserInfo = styled.div`
     flex-direction: column;
     width: 71.4rem;
     &__name {
-      font-family: Spoqa Han Sans Neo;
+      /* font-family: Spoqa Han Sans Neo; */
       font-style: normal;
       font-weight: bold;
       font-size: 4rem;
@@ -199,7 +199,7 @@ const UserInfo = styled.div`
       color: #222222;
     }
     &__info {
-      font-family: Spoqa Han Sans Neo;
+      /* font-family: Spoqa Han Sans Neo; */
       font-style: normal;
       font-weight: normal;
       font-size: 2rem;
@@ -220,7 +220,7 @@ const UserInfo = styled.div`
       filter: drop-shadow(0px 0px 1.2rem rgba(0, 0, 0, 0.13));
       border-radius: 1rem;
 
-      font-family: Spoqa Han Sans Neo;
+      /* font-family: Spoqa Han Sans Neo; */
       font-style: normal;
       font-weight: normal;
       font-size: 2.3rem;
@@ -247,7 +247,7 @@ const CookieInfo = styled.div`
     margin-right: 2.1rem;
   }
   .cookie-info {
-    font-family: Spoqa Han Sans Neo;
+    /* font-family: Spoqa Han Sans Neo; */
     font-style: normal;
     font-weight: 500;
     font-size: 2.3rem;
@@ -256,7 +256,7 @@ const CookieInfo = styled.div`
     color: #222222;
     &__num,
     &__visit {
-      font-family: Spoqa Han Sans Neo;
+      /* font-family: Spoqa Han Sans Neo; */
       font-style: normal;
       font-weight: bold;
       font-size: 3.2rem;

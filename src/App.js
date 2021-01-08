@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { LoginPage, MainPage, DirDetail, MyPage } from "./pages";
 import GlobalStyles from "./GlobalStyles";
+import Header from "./components/Header";
 
 function App() {
   const isLoggined = true;
@@ -10,6 +11,7 @@ function App() {
     <>
       <GlobalStyles />
       <Router>
+        <Header />
         <Switch>
           <Route path="/" exact>
             {isLoggined ? <LoginPage /> : <MainPage />}
