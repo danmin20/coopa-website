@@ -80,7 +80,7 @@ const Container = styled.div`
       width: 21rem;
       height: 5.6rem;
       background-color: ${({ theme }) => theme.colors.white};
-      color: ${({ theme }) => theme.colors.orange};
+      color: ${({ theme }) => theme.colors.cookieOrange};
       display: flex;
       justify-content: center;
       align-items: center;
@@ -97,11 +97,13 @@ const Container = styled.div`
         line-height: 2.6rem;
       }
       :hover {
+        transition: color 0.5s;
+        transition: background 0.5s;
         .icon {
           background: url(${shareIconW}) center center / cover no-repeat;
         }
         color: ${({ theme }) => theme.colors.white};
-        background-color: ${({ theme }) => theme.colors.orange};
+        background-color: ${({ theme }) => theme.colors.cookieOrange};
       }
     }
   }
@@ -112,6 +114,7 @@ const Container = styled.div`
       margin-left: 1.4rem;
       font-size: 2.6rem;
       font-weight: 500;
+      color: ${({ theme }) => theme.colors.black_2};
     }
   }
 
@@ -123,13 +126,14 @@ const Container = styled.div`
       width: 3.2rem;
       height: 3.2rem;
       border-radius: 3.2rem;
-      background-color: ${({ theme }) => theme.colors.lightGray};
+      background-color: #efefef;
       /* background: profile url here */
     }
     &__name {
       margin-left: 1.4rem;
       font-size: 2.2rem;
       font-weight: 500;
+      color: ${({ theme }) => theme.colors.black_2};
     }
   }
 
@@ -140,7 +144,7 @@ const Container = styled.div`
       cursor: pointer;
       width: 2.8rem;
       height: 2.8rem;
-      background: ${({ theme }) => theme.colors.mediumGray};
+      background: ${({ theme }) => theme.colors.grey_4};
       border-radius: 2.8rem;
       display: flex;
       justify-content: center;
@@ -152,7 +156,7 @@ const Container = styled.div`
     &__title {
       margin: 0 1.5rem 0 0.8rem;
       font-size: 2rem;
-      color: #404040;
+      color: ${({ theme }) => theme.colors.grey_5};
     }
   }
   .empty {

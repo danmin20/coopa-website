@@ -35,6 +35,7 @@ const Content = styled.div`
     border-radius: 1.2rem;
   }
   .title {
+    color:${({ theme }) => theme.colors.black_1};
     font-size: 2.4rem;
     font-weight: 500;
     margin-top: 2.8rem;
@@ -57,7 +58,7 @@ const Content = styled.div`
     overflow: hidden;
     word-wrap: normal;
     word-break: break-all;
-    color: #999999;
+    color: ${({ theme }) => theme.colors.grey_5};
   }
   .profile {
     display: flex;
@@ -67,7 +68,7 @@ const Content = styled.div`
     &__author {
       margin-left: 1rem;
       font-size: 1.6rem;
-      color: #999999;
+      color: ${({ theme }) => theme.colors.grey_5}
     }
     &__favicon {
       width: 4.2rem;

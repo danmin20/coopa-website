@@ -1,13 +1,16 @@
 import { css } from "styled-components";
 
 const colors = {
-  orange: "#ff7134",
+  cookieOrange: "#ff7134",
+  grey_1: "#f9f9f9",
+  grey_2: "#f3f3f3",
+  grey_3: "#dddddd",
+  grey_4: "#c2c2c2",
+  grey_5: "#999999",
+  grey_6: "#555555",
   black: "#000000",
+  black_1: "#333333",
   black_2: "#222222",
-  black_3: "#333333",
-  lightGray: "#c2c2c2",
-  mediumGray: "#c4c4c4",
-  homeBoardGray: "#eaeaea",
   white: "#ffffff",
 };
 // how to use : ${({ theme }) => theme.colors.orange};
