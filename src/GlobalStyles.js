@@ -3,7 +3,7 @@ import reset from "styled-reset";
 
 export default createGlobalStyle`
     html{
-        font-size: 10px;
+        font-size: 7px;
     }
     body{
         font-family: 'Spoqa Han Sans Neo','sans-serif';
