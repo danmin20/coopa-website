@@ -17,7 +17,7 @@ function App() {
           <Route path="/" exact>
             {isLoggined ? <LoginPage /> : <MainPage />}
           </Route>
-          <Route path="/directory/:dirId/:userId" exact>
+          <Route path="/directory/:userId/:dirId" exact>
             <DirDetail />
           </Route>
           <Route path="/mypage/:userId" exact>
