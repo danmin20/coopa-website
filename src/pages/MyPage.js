@@ -3,10 +3,9 @@ import styled from "styled-components";
 import userProfile from "../assets/img/user_profile.svg";
 import editIcon from "../assets/img/editIcon.svg";
 import editIconWhite from "../assets/img/editIcon_white.svg";
-import cookieIconRotate from "../assets/img/cookie_icon_rotate.svg";
 import cookieIconOrange from "../assets/img/cookie_icon_orange.svg";
 import googleLogo from "../assets/img/google_logo.svg";
-import helpPopup from "../assets/img/mp_help_popup_box.svg";
+import helpPopupImg from "../assets/img/mp_help_popup.svg";
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
@@ -55,13 +54,7 @@ export default () => {
       <EnvSetInfo>
         <div className="env">
           환경 설정
-          <PopupHelp isHover={isHover}>
-            <img className="pp-div" src={helpPopup} alt="popup" />
-            <div className="pp-content">
-              <img className="pp-content__icon"src={cookieIconRotate} alt="cookieIcon" />
-              <div className="pp-content__desc"><strong>크롬 우측 상단 아이콘 우클릭 - 옵션 - 토글버튼ON/OFF</strong>로 변경할 수 있습니다.</div>
-            </div>
-          </PopupHelp>
+          <PopupHelpImg src={helpPopupImg} isHover={isHover} />
         </div>
         <div className="env-newtab">
           <div className="env-newtab__title">새 탭에서 열기</div>
@@ -310,30 +303,11 @@ const EnvSetInfo = styled.div`
   }
 `;
 
-const PopupHelp = styled.div`
-  display: ${(props) => (props.isHover ? "flex" : "none")};
+const PopupHelpImg = styled.img`
+  display: ${(props) => (props.isHover ? "block" : "none")};
   position: absolute;
   top: -20%;
   left: 10.5%;
-  .pp-div {
-    position: relative;
-  }
-  .pp-content {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: ${({ theme }) => theme.colors.white};
-    font-size: 2rem;
-    line-height: 2.4rem;
-    letter-spacing: -0.02em;
-    white-space: nowrap;
-    &__desc{
-      margin-left: 1rem;
-    }
-  }
 `;
 
 const ServiceInfo = styled.div`
