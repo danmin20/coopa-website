@@ -29,7 +29,7 @@ export default withStyles((theme) => ({
   },
   track: {
     borderRadius: 39 / 2,
-    backgroundColor: styledTheme.colors.grey_3,
+    backgroundColor: styledTheme.colors.gray_3,
     opacity: 1,
     transition: theme.transitions.create(["background-color", "border"]),
   },

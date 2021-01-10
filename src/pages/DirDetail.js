@@ -75,7 +75,7 @@ const Container = styled.div`
     }
     &__share {
       cursor: pointer;
-      border: 2px solid #ff7034;
+      border: 2px solid ${({ theme }) => theme.colors.cookieOrange};
       border-radius: 0.8rem;
       width: 21rem;
       height: 5.6rem;
@@ -126,7 +126,7 @@ const Container = styled.div`
       width: 3.2rem;
       height: 3.2rem;
       border-radius: 3.2rem;
-      background-color: #efefef;
+      background-color: #efefef; // google profile will here
       /* background: profile url here */
     }
     &__name {
@@ -144,7 +144,7 @@ const Container = styled.div`
       cursor: pointer;
       width: 2.8rem;
       height: 2.8rem;
-      background: ${({ theme }) => theme.colors.grey_4};
+      background: ${({ theme }) => theme.colors.gray_4};
       border-radius: 2.8rem;
       display: flex;
       justify-content: center;
@@ -156,7 +156,7 @@ const Container = styled.div`
     &__title {
       margin: 0 1.5rem 0 0.8rem;
       font-size: 2rem;
-      color: ${({ theme }) => theme.colors.grey_5};
+      color: ${({ theme }) => theme.colors.gray_5};
     }
   }
   .empty {

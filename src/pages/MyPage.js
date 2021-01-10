@@ -35,7 +35,7 @@ export default () => {
       <CookieInfo>
         <img alt="" className="cookie-icon" src={cookieIconOrange} />
         <div className="cookie-info">
-          <span className="cookie-info__num">1328</span>개의 쿠키를
+          지금까지 쿠키&nbsp;<span className="cookie-info__num">1328</span>개를
           파킹했고&nbsp;
           <span className="cookie-info__visit">178</span>번 읽었어요!
         </div>
@@ -116,22 +116,20 @@ const UserInfo = styled.div`
     flex-direction: column;
     width: 71.4rem;
     &__name {
-      /* font-family: Spoqa Han Sans Neo; */
       font-style: normal;
       font-weight: bold;
       font-size: 4rem;
       line-height: 4.8rem;
       margin-bottom: 1.8rem;
 
-      color: #222222;
+      color: ${({ theme }) => theme.colors.black_2};
     }
     &__info {
-      /* font-family: Spoqa Han Sans Neo; */
       font-style: normal;
       font-weight: normal;
       font-size: 2rem;
       line-height: 3.2rem;
-      color: #979797;
+      color: ${({ theme }) => theme.colors.gray_6};
     }
     &__edit {
       cursor: pointer;
@@ -163,13 +161,12 @@ const UserInfo = styled.div`
         border: none;
       }
 
-      /* font-family: Spoqa Han Sans Neo; */
       font-style: normal;
       font-weight: normal;
       font-size: 2.3rem;
       line-height: 2.8rem;
 
-      color: #ff7134;
+      color: ${({ theme }) => theme.colors.cookieOrange};
     }
   }
 `;
@@ -187,7 +184,6 @@ const CookieInfo = styled.div`
     margin-right: 2.1rem;
   }
   .cookie-info {
-    /* font-family: Spoqa Han Sans Neo; */
     display: flex;
     align-items: center;
     font-style: normal;
@@ -198,7 +194,6 @@ const CookieInfo = styled.div`
     color: #222222;
     &__num,
     &__visit {
-      /* font-family: Spoqa Han Sans Neo; */
       font-style: normal;
       font-weight: bold;
       font-size: 3.2rem;
@@ -225,7 +220,7 @@ const AccountInfo = styled.div`
     line-height: 4.3rem;
     color: ${({ theme }) => theme.colors.black_2};
     padding-bottom: 2rem;
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey_4};
+    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray_4};
   }
   .email {
     display: flex;
@@ -239,13 +234,13 @@ const AccountInfo = styled.div`
     &__content {
       display: flex;
       align-items: center;
-      color: ${({ theme }) => theme.colors.grey_5};
+      color: ${({ theme }) => theme.colors.gray_5};
       font-size: 2.4rem;
       font-weight: 500;
       line-height: 2.9rem;
       width: 61.8rem;
       height: 7.6rem;
-      background: ${({ theme }) => theme.colors.grey_2};
+      background: ${({ theme }) => theme.colors.gray_2};
       border-radius: 1rem;
       margin-left: 25.5rem;
     }
@@ -267,7 +262,7 @@ const EnvSetInfo = styled.div`
     font-weight: 500;
     line-height: 4.3rem;
     padding-bottom: 2rem;
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey_4};
+    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray_4};
   }
   .env-newtab {
     margin-top: 5.1rem;
@@ -288,7 +283,7 @@ const EnvSetInfo = styled.div`
       height: 2.8rem;
       border-radius: 2.8rem;
       color: ${({ theme }) => theme.colors.white};
-      background: ${({ theme }) => theme.colors.grey_4};
+      background: ${({ theme }) => theme.colors.gray_4};
       margin-left: 1rem;
       font-size: 2rem;
       font-weight: 500;
@@ -299,7 +294,7 @@ const EnvSetInfo = styled.div`
     font-size: 2rem;
     line-height: 2.4rem;
     font-weight: normal;
-    color: ${({ theme }) => theme.colors.grey_5};
+    color: ${({ theme }) => theme.colors.gray_5};
   }
 `;
 
@@ -330,7 +325,7 @@ const ServiceInfo = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    border-top: solid 0.1rem ${({ theme }) => theme.colors.grey_4};
+    border-top: solid 0.1rem ${({ theme }) => theme.colors.gray_4};
     &-sort {
       margin-top: 2.8rem;
       min-width: 48.8rem;
@@ -340,7 +335,7 @@ const ServiceInfo = styled.div`
       font-size: 2.6rem;
       line-height: 3.1rem;
 
-      color: #999999;
+      color: ${({ theme }) => theme.colors.gray_6};
     }
   }
   .logout {
@@ -355,10 +350,10 @@ const ServiceInfo = styled.div`
       font-size: 2.4rem;
       font-weight: 500;
       line-height: 2.9rem;
-      color: ${({ theme }) => theme.colors.grey_6};
+      color: ${({ theme }) => theme.colors.gray_6};
       width: 22.5rem;
       height: 7.2rem;
-      background: ${({ theme }) => theme.colors.grey_2};
+      background: ${({ theme }) => theme.colors.gray_2};
       border-radius: 1.2rem;
     }
   }
