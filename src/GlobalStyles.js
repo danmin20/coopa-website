@@ -6,7 +6,6 @@ export default createGlobalStyle`
         font-size: 10px;
     }
     body{
-        // Todo: font-family setting
-        /* font-family: popins, Spoqa Han Sans Neo; */
+        font-family: 'Spoqa Han Sans Neo','sans-serif';
     }
 `;

@@ -2,51 +2,67 @@ import React from "react";
 import styled from "styled-components";
 import updateIconBk from "../assets/img/update_dir_icon_bk.svg";
 import shareIcon from "../assets/img/share_icon.svg";
+import shareIconW from "../assets/img/share_icon_white.svg";
 import cookieIcon from "../assets/img/cookie_icon.svg";
-import GlobalStyles from '../GlobalStyles';
+import Swtich from "../components/Switch";
+import Card from "../components/Card";
 
-const DirDetaill = () => {
+export default () => {
+  const handleToggle = () => {};
   return (
-    <>
-      <GlobalStyles/>
-      <Container>
-        <div className="header">
-          <div className="header__title">캐릭터/일러스트레이션</div>
-          <div className="header__update-icon"></div>
-          <div className="empty"></div>
-          <div className="header__share">
-            <img className="icon" src={shareIcon} />
-            <div className="desc">디렉토리 공유</div>
-          </div>
+    <Container>
+      <div className="header">
+        <div className="header__title">캐릭터/일러스트레이션</div>
+        <div className="header__update-icon"></div>
+        <div className="empty"></div>
+        <div className="header__share">
+          <div className="icon"></div>
+          <div className="desc">디렉토리 공유</div>
         </div>
-        <div className="info">
-          <img alt="" className="info__icon" src={cookieIcon} />
-          <div className="info__cookie-num">37개</div>
+      </div>
+      <div className="info">
+        <img alt="" className="info__icon" src={cookieIcon} />
+        <div className="info__cookie-num">37개</div>
+      </div>
+      <div className="mid">
+        <div className="mid__profile"></div>
+        <div className="mid__name">Jeongin Lee</div>
+        <div className="empty"></div>
+        <div className="toggle">
+          <div className="toggle__help">?</div>
+          <div className="toggle__title">안 읽은 쿠키 모아보기</div>
+          <Swtich />
         </div>
-        <div className="mid">
-          <div className="mid__profile"></div>
-          <div className="mid__name">Jeongin Lee</div>
-          <div className="empty"></div>
-          <div className="toggle">
-            <div className="toggle__help">?</div>
-            <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-            {/* 여기 스위치가 와야 해 */}
-          </div>
-        </div>
-      </Container>
-    </>
+      </div>
+      <CardContainer>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </CardContainer>
+    </Container>
   );
 };
 
-export default DirDetaill;
+const CardContainer = styled.div`
+  max-width: 100vw;
+  margin-top: 5.2rem;
+  margin-bottom: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3.2rem;
+`;
 
 const Container = styled.div`
-  margin-top: 10rem;
+  margin: 10rem 19.2rem 0;
   .header {
     display: flex;
     align-items: center;
     &__title {
       font-weight: bold;
+      line-height: 3.6rem;
       font-size: 3.8rem;
       color: ${({ theme }) => theme.colors.black_2};
     }
@@ -58,19 +74,36 @@ const Container = styled.div`
       background: url(${updateIconBk}) center center / cover no-repeat;
     }
     &__share {
-      border: 2px solid #ff7034;
+      cursor: pointer;
+      border: 2px solid ${({ theme }) => theme.colors.cookieOrange};
       border-radius: 0.8rem;
       width: 21rem;
       height: 5.6rem;
       background-color: ${({ theme }) => theme.colors.white};
-      color: ${({ theme }) => theme.colors.orange};
+      color: ${({ theme }) => theme.colors.cookieOrange};
       display: flex;
       justify-content: center;
       align-items: center;
+      .icon {
+        width: 1.8rem;
+        height: 2rem;
+        background: url(${shareIcon}) center center / cover no-repeat;
+      }
       .desc {
         margin-left: 1.1rem;
         font-size: 2rem;
         font-weight: 500;
+        letter-spacing: -0.02em;
+        line-height: 2.6rem;
+      }
+      :hover {
+        transition: color 0.5s;
+        transition: background 0.5s;
+        .icon {
+          background: url(${shareIconW}) center center / cover no-repeat;
+        }
+        color: ${({ theme }) => theme.colors.white};
+        background-color: ${({ theme }) => theme.colors.cookieOrange};
       }
     }
   }
@@ -81,22 +114,26 @@ const Container = styled.div`
       margin-left: 1.4rem;
       font-size: 2.6rem;
       font-weight: 500;
+      color: ${({ theme }) => theme.colors.black_2};
     }
   }
 
   .mid {
     margin-top: 6.4rem;
     display: flex;
+    align-items: center;
     &__profile {
       width: 3.2rem;
       height: 3.2rem;
       border-radius: 3.2rem;
-      background-color: ${({ theme }) => theme.colors.lightGray};
+      background-color: #efefef; // google profile will here
       /* background: profile url here */
     }
     &__name {
-      font-size: 2.2.rem;
+      margin-left: 1.4rem;
+      font-size: 2.2rem;
       font-weight: 500;
+      color: ${({ theme }) => theme.colors.black_2};
     }
   }
 
@@ -107,7 +144,7 @@ const Container = styled.div`
       cursor: pointer;
       width: 2.8rem;
       height: 2.8rem;
-      background: ${({ theme }) => theme.colors.mediumGray};
+      background: ${({ theme }) => theme.colors.gray_4};
       border-radius: 2.8rem;
       display: flex;
       justify-content: center;
@@ -117,9 +154,9 @@ const Container = styled.div`
       font-weight: 500;
     }
     &__title {
+      margin: 0 1.5rem 0 0.8rem;
       font-size: 2rem;
-      color: #404040;
-      margin-left: 0.8rem;
+      color: ${({ theme }) => theme.colors.gray_5};
     }
   }
   .empty {
