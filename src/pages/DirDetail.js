@@ -5,10 +5,13 @@ import shareIcon from "../assets/img/share_icon.svg";
 import shareIconW from "../assets/img/share_icon_white.svg";
 import cookieIcon from "../assets/img/cookie_icon.svg";
 import Swtich from "../components/Switch";
-import Card from "../components/Card";
-import { getDirCookies } from "../lib/api";
+import { getDirCookies, getDirAll } from "../lib/api";
 import { withRouter } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { DirState, SearchState } from "../states/atom";
+import SharedCard from "../components/SharedCard";
+import MyCard from "../components/MyCard";
 
 // 로그인 구현되면 지우기
 const token = {
@@ -19,15 +22,21 @@ const token = {
 export default withRouter(({ history }) => {
   const [loading, setLoading] = useState(true);
   const [cookies, setCookies] = useState(null);
+  const [dirState, setDirState] = useRecoilState(DirState);
+  const [directory, setDirectory] = useState(null);
 
   useEffect(() => {
     (async () => {
       const dirId = history.location.pathname.split("/")[2];
       const result = await getDirCookies(token, dirId);
+      const dirResult = await getDirAll(token);
       setCookies(result.data.cookies);
+      setDirectory(result.data.directoryInfo);
+      setDirState(dirResult.data);
       setLoading(false);
     })();
   }, []);
+
   return (
     <Container>
       <div className="header">
@@ -41,7 +50,7 @@ export default withRouter(({ history }) => {
       </div>
       <div className="info">
         <img alt="" className="info__icon" src={cookieIcon} />
-        <div className="info__cookie-num">37개</div>
+        <div className="info__cookie-num">{cookies.length}개</div>
       </div>
       <div className="mid">
         <div className="mid__profile"></div>
@@ -57,9 +66,13 @@ export default withRouter(({ history }) => {
         <Loading />
       ) : (
         <CardContainer>
-          {cookies.map((cookie, index) => (
-            <Card cookie={cookie} key={index} />
-          ))}
+          {cookies.map((cookie, index) =>
+            history.location.pathname.split("/")[1] === "directory" ? (
+              <MyCard cookies={cookie} key={index} directory={directory} />
+            ) : (
+              <SharedCard cookies={cookie} key={index} />
+            )
+          )}
         </CardContainer>
       )}
     </Container>
