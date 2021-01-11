@@ -111,6 +111,7 @@ const Container = styled.div`
       }
       .desc {
         margin-left: 1.1rem;
+        margin-top: 0.3rem;
         font-size: 2rem;
         font-weight: 500;
         letter-spacing: -0.02em;
