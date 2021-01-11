@@ -2,17 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import defaultImg from "../assets/img/img_default.svg";
 
-export default ({ cookie }) => {
-  console.log(cookie);
+export default ({ cookies }) => {
   return (
     <Container>
-      <Content thumbnail={cookie.thumbnail}>
+      <Content thumbnail={cookies.thumbnail}>
         <div className="thumbnail" />
-        <div className="title">{cookie.title}</div>
-        <div className="content">{cookie.content}</div>
+        <div className="title">{cookies.title}</div>
+        <div className="content">{cookies.content}</div>
         <div className="profile">
-          <img className="profile__favicon" src={cookie.favicon} />
-          <div className="profile__author">{cookie.provider}</div>
+          <img className="profile__favicon" src={cookies.favicon} />
+          <div className="profile__author">{cookies.provider}</div>
         </div>
       </Content>
     </Container>
