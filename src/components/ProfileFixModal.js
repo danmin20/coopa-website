@@ -3,19 +3,19 @@ import styled from "styled-components";
 import useInput from '../hooks/useInput';
 import GlobalStyles from '../GlobalStyles';
 
-export default () => {
+export default ({isProfileClicked, setIsProfileClicked}) => {
     const [isCancleHover, setIsCancleHover] = useState(false);
     const [isFixHover, setIsFixHover] = useState(false);
-    const [isClose, setIsClose] = useState(false);
     const nickInput = useInput("원래 닉네임");
     const introInput = useInput("원래 한 줄 소개");
 
     const handleClick = () => {
-        setIsClose(true);
+        setIsProfileClicked(false);
     };
 
     const handleFixClick = async () => {
         // 프로필 편집 추가하기
+        setIsProfileClicked(false);
     };
 
     const handleCancleMouseMove = () => {
@@ -38,8 +38,8 @@ export default () => {
     return(
         <>
             <GlobalStyles />
-            <Wrap onClick={handleClick} isClose={isClose} />
-            <ModalWrap isClose={isClose}>
+            <Wrap onClick={handleClick} />
+            <ModalWrap>
                 <Text>프로필 편집</Text>
                 <DetailWrap>
                     <SmallText color={'#333333'}>닉네임</SmallText>
