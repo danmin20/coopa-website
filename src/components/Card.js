@@ -3,10 +3,10 @@ import styled from "styled-components";
 import defaultImg from "../assets/img/img_default.svg";
 
 export default ({ cookie }) => {
+  console.log(cookie);
   return (
-    <Container thumbnail={cookie.thumbnail}>
-      {/* thumbnail에 이미지 받아오기 cookies.image */}
-      <Content>
+    <Container>
+      <Content thumbnail={cookie.thumbnail}>
         <div className="thumbnail" />
         <div className="title">{cookie.title}</div>
         <div className="content">{cookie.content}</div>
