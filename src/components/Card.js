@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import defaultImg from "../assets/img/img_default.svg";
 
-export default () => {
+export default ({ cookie }) => {
   return (
-    <Container thumbnail={defaultImg}>
+    <Container thumbnail={cookie.thumbnail}>
       {/* thumbnail에 이미지 받아오기 cookies.image */}
       <Content>
-        <div className="thumbnail"></div>
-        <div className="title">title</div>
-        <div className="content">content</div>
+        <div className="thumbnail" />
+        <div className="title">{cookie.title}</div>
+        <div className="content">{cookie.content}</div>
         <div className="profile">
-          <img className="profile__favicon" />
-          <div className="profile__author">provider</div>
+          <img className="profile__favicon" src={cookie.favicon} />
+          <div className="profile__author">{cookie.provider}</div>
         </div>
       </Content>
     </Container>
