@@ -6,9 +6,18 @@ import editIconWhite from "../assets/img/editIcon_white.svg";
 import cookieIconOrange from "../assets/img/cookie_icon_orange.svg";
 import googleLogo from "../assets/img/google_logo.svg";
 import helpPopupImg from "../assets/img/mp_help_popup.svg";
+import {useRecoilState} from 'recoil';
+import { ProfileClickedState } from '../states/atom';
+import ProfileFixModal from '../components/ProfileFixModal';
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
+  const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(ProfileClickedState);
+
+  const handleProfileBtnClick = () => {
+    setIsProfileBtnClicked(true);
+  }
+
   const handleMouseEnter = () => {
     setIsHover(true);
   };
@@ -26,7 +35,7 @@ export default () => {
             전이라면 “자기 소개를 입력해주세요. (70자 이내)”가 들어갈
             예정입니다.
           </div>
-          <div className="user-intro__edit">
+          <div className="user-intro__edit" onClick={handleProfileBtnClick}>
             <div className="icon"></div>
             <div style={{ marginLeft: "0.9rem" }}>프로필 편집</div>
           </div>
@@ -35,9 +44,24 @@ export default () => {
       <CookieInfo>
         <img alt="" className="cookie-icon" src={cookieIconOrange} />
         <div className="cookie-info">
-          지금까지 쿠키&nbsp;<span className="cookie-info__num">1328</span>개를
+          지금까지 쿠키&nbsp;
+          <CookieNumWrap>
+            <CookieNumBox>
+              <CookieInfoNum number={1328}/>
+              <CookieNumPlus>+</CookieNumPlus>
+            </CookieNumBox>
+            <CookieNumUnderLine width={String(1328).length}/>
+          </CookieNumWrap>
+          개를
           파킹했고&nbsp;
-          <span className="cookie-info__visit">178</span>번 읽었어요!
+          <CookieNumWrap>
+            <CookieNumBox>
+              <CookieVisitNum number={178}/>
+              <CookieNumPlus>+</CookieNumPlus>
+            </CookieNumBox>
+            <CookieNumUnderLineTwo width={String(178).length}/>
+          </CookieNumWrap>
+          번 읽었어요!
         </div>
       </CookieInfo>
       <AccountInfo>
@@ -83,6 +107,7 @@ export default () => {
           <div className="logout__btn">로그아웃</div>
         </div>
       </ServiceInfo>
+      {isProfileBtnClicked && <ProfileFixModal isProfileClicked={isProfileBtnClicked} setIsProfileClicked={setIsProfileBtnClicked}/>}
     </Container>
   );
 };
@@ -140,6 +165,7 @@ const UserInfo = styled.div`
       width: 22.5rem;
       height: 5.8rem;
       margin-top: 2.7rem;
+      transition-duration: 0.5s;
 
       border: 0.2rem solid ${({ theme }) => theme.colors.cookieOrange};
       box-sizing: border-box;
@@ -149,10 +175,9 @@ const UserInfo = styled.div`
         background: url(${editIcon}) center center / cover no-repeat;
         width: 2.2rem;
         height: 2.2rem;
+        transition-duration: 0.5s;
       }
       :hover {
-        transition: color 0.5s;
-        transition: background 0.5s;
         .icon {
           background: url(${editIconWhite}) center center / cover no-repeat;
         }
@@ -192,7 +217,7 @@ const CookieInfo = styled.div`
     line-height: 2.8rem;
 
     color: #222222;
-    &__num,
+    
     &__visit {
       font-style: normal;
       font-weight: bold;
@@ -204,6 +229,133 @@ const CookieInfo = styled.div`
     }
   }
 `;
+
+const CookieNumWrap = styled.span`
+  /* height: 3rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translate(0, 15%);
+  margin-right: 0.5rem;
+`;
+
+const CookieNumBox = styled.span`
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  z-index: 3;
+`;
+
+const CookieNumUnderLine = styled.span`
+  position: relative;
+  z-index: 1;
+  width: ${props=>(props.width+1)*2}rem;
+  height: 1.8rem;
+  background: #FBDFD2;
+  border-radius: 3rem;
+  transform: translate(0, -90%);
+
+  animation: stretch 1.5s;
+  @keyframes stretch {
+    from {
+      width: 0;
+    }
+    to {
+      width: ${props=>(props.width+1)*2}rem;
+    }
+  }
+`;
+
+const CookieNumUnderLineTwo = styled.span`
+  position: relative;
+  z-index: 1;
+  width: ${props=>(props.width+1)*2}rem;
+  height: 1.8rem;
+  background: #FBDFD2;
+  border-radius: 3rem;
+  transform: translate(0, -90%);
+
+  animation: stretchTwo 1.5s;
+  @keyframes stretchTwo {
+    from {
+      width: 0;
+    }
+    to {
+      width: ${props=>(props.width+1)*2}rem;
+    }
+  }
+`;
+
+const CookieNumPlus = styled.span`
+  font-weight: 700;
+  font-size: 2.8rem;
+  line-height: 3.36rem;
+  color: #FF7134;
+`;
+
+const CookieInfoNum = styled.span`
+  font-weight: 700;
+  font-size: 2.8rem;
+  line-height: 3.36rem;
+  color: #FF7134;
+
+  @property --num {
+    syntax: "<integer>";
+    initial-value: ${props=>props.number};
+    inherits: false;
+  }
+
+  animation: counterOne 1.5s ease-out;
+  counter-reset: num var(--num);
+  /* color: #222222; */
+  /* font: 500 23px system-ui; */
+  
+  ::after {
+    content: counter(num);
+  }
+
+  @keyframes counterOne {
+    from {
+      --num: 0;
+    }
+    to {
+      --num: ${props=>props.number};
+    }
+  }
+`;
+
+const CookieVisitNum = styled.span`
+  font-weight: 700;
+  font-size: 2.8rem;
+  line-height: 3.36rem;
+  color: #FF7134;
+
+  @property --numTwo {
+    syntax: "<integer>";
+    initial-value: ${props=>props.number};
+    inherits: false;
+  }
+
+  animation: counterTwo 1.5s ease-out;
+  counter-reset: numTwo var(--numTwo);
+  /* color: #222222; */
+  /* font: 500 23px system-ui; */
+  
+  ::after {
+    content: counter(numTwo);
+  }
+
+  @keyframes counterTwo {
+    from {
+      --numTwo: 0;
+    }
+    to {
+      --numTwo: ${props=>props.number};
+    }
+  }
+`;
+
 
 const AccountInfo = styled.div`
   display: flex;
@@ -223,6 +375,10 @@ const AccountInfo = styled.div`
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray_4};
   }
   .email {
+    img{
+      width: 5.6rem;
+      height: 5.6rem;
+    }
     display: flex;
     align-items: center;
     &__title {
@@ -299,10 +455,12 @@ const EnvSetInfo = styled.div`
 `;
 
 const PopupHelpImg = styled.img`
+  width: 74.7rem;
+  height: 12.4rem;
   display: ${(props) => (props.isHover ? "block" : "none")};
   position: absolute;
-  top: -20%;
-  left: 10.5%;
+  top: -2rem;
+  left: 10.6rem;
 `;
 
 const ServiceInfo = styled.div`

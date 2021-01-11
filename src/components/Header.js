@@ -33,8 +33,18 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     margin-left: 2.2rem;
+
+    &__img{
+      width: 20rem;
+      height: 3.8rem; 
+    }
   }
   .profile {
     margin-right: 2.2rem;
+
+    &__img{
+      width: 3.8rem;
+      height: 3.8rem;
+    }
   }
 `;
