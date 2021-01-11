@@ -478,10 +478,12 @@ const EnvSetInfo = styled.div`
 `;
 
 const PopupHelpImg = styled.img`
+  width: 74.7rem;
+  height: 12.4rem;
   display: ${(props) => (props.isHover ? "block" : "none")};
   position: absolute;
-  top: -7rem;
-  left: 7.75rem;
+  top: -2rem;
+  left: 10.6rem;
 `;
 
 const ServiceInfo = styled.div`
