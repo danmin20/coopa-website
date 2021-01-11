@@ -141,6 +141,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     &__help {
+      font-family: "Poppins", sans-serif;
       cursor: pointer;
       width: 2.8rem;
       height: 2.8rem;
