@@ -36,7 +36,7 @@ export default () => {
           </div>
           <div className="user-intro__edit">
             <div className="icon"></div>
-            <div style={{ marginLeft: "0.9rem" }}>프로필 편집</div>
+            <div style={{ marginLeft: "0.9rem" }} onClick={handleProfileBtnClick}>프로필 편집</div>
           </div>
         </div>
       </UserInfo>
@@ -172,6 +172,7 @@ const UserInfo = styled.div`
       width: 22.5rem;
       height: 5.8rem;
       margin-top: 2.7rem;
+      transition-duration: 0.5s;
 
       border: 0.2rem solid ${({ theme }) => theme.colors.cookieOrange};
       box-sizing: border-box;
@@ -181,10 +182,9 @@ const UserInfo = styled.div`
         background: url(${editIcon}) center center / cover no-repeat;
         width: 2.2rem;
         height: 2.2rem;
+        transition-duration: 0.5s;
       }
       :hover {
-        transition: color 0.5s;
-        transition: background 0.5s;
         .icon {
           background: url(${editIconWhite}) center center / cover no-repeat;
         }
