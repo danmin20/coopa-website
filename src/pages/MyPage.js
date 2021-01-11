@@ -43,9 +43,24 @@ export default () => {
       <CookieInfo>
         <img alt="" className="cookie-icon" src={cookieIconOrange} />
         <div className="cookie-info">
-          지금까지 쿠키&nbsp;<CookieInfoNum number={1328}/>개를
+          지금까지 쿠키&nbsp;
+          <CookieNumWrap>
+            <CookieNumBox>
+              <CookieInfoNum number={1328}/>
+              <CookieNumPlus>+</CookieNumPlus>
+            </CookieNumBox>
+            <CookieNumUnderLine width={String(1328).length}/>
+          </CookieNumWrap>
+          개를
           파킹했고&nbsp;
-          <CookieVisitNum number={178}/>번 읽었어요!
+          <CookieNumWrap>
+            <CookieNumBox>
+              <CookieVisitNum number={178}/>
+              <CookieNumPlus>+</CookieNumPlus>
+            </CookieNumBox>
+            <CookieNumUnderLineTwo width={String(178).length}/>
+          </CookieNumWrap>
+          번 읽었어요!
         </div>
       </CookieInfo>
       <AccountInfo>
@@ -237,6 +252,70 @@ const CookieInfo = styled.div`
   }
 `;
 
+const CookieNumWrap = styled.span`
+  /* height: 3rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translate(0, 15%);
+  margin-right: 0.5rem;
+`;
+
+const CookieNumBox = styled.span`
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  z-index: 3;
+`;
+
+const CookieNumUnderLine = styled.span`
+  position: relative;
+  z-index: 1;
+  width: ${props=>(props.width+1)*2}rem;
+  height: 1.8rem;
+  background: #FBDFD2;
+  border-radius: 3rem;
+  transform: translate(0, -90%);
+
+  animation: stretch 1.5s;
+  @keyframes stretch {
+    from {
+      width: 0;
+    }
+    to {
+      width: ${props=>(props.width+1)*2}rem;
+    }
+  }
+`;
+
+const CookieNumUnderLineTwo = styled.span`
+  position: relative;
+  z-index: 1;
+  width: ${props=>(props.width+1)*2}rem;
+  height: 1.8rem;
+  background: #FBDFD2;
+  border-radius: 3rem;
+  transform: translate(0, -90%);
+
+  animation: stretchTwo 1.5s;
+  @keyframes stretchTwo {
+    from {
+      width: 0;
+    }
+    to {
+      width: ${props=>(props.width+1)*2}rem;
+    }
+  }
+`;
+
+const CookieNumPlus = styled.span`
+  font-weight: 700;
+  font-size: 2.8rem;
+  line-height: 3.36rem;
+  color: #FF7134;
+`;
+
 const CookieInfoNum = styled.span`
   font-weight: 700;
   font-size: 2.8rem;
@@ -318,6 +397,10 @@ const AccountInfo = styled.div`
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray_4};
   }
   .email {
+    img{
+      width: 5.6rem;
+      height: 5.6rem;
+    }
     display: flex;
     align-items: center;
     &__title {
@@ -397,8 +480,8 @@ const EnvSetInfo = styled.div`
 const PopupHelpImg = styled.img`
   display: ${(props) => (props.isHover ? "block" : "none")};
   position: absolute;
-  top: -2rem;
-  left: 10.65rem;
+  top: -7rem;
+  left: 7.75rem;
 `;
 
 const ServiceInfo = styled.div`
