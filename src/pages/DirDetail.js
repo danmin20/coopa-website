@@ -50,7 +50,7 @@ export default withRouter(({ history }) => {
       </div>
       <div className="info">
         <img alt="" className="info__icon" src={cookieIcon} />
-        <div className="info__cookie-num">{cookies.length}개</div>
+        <div className="info__cookie-num">{cookies ? cookies.length : 0}개</div>
       </div>
       <div className="mid">
         <div className="mid__profile"></div>
