@@ -34,18 +34,18 @@ export default () => {
             전이라면 “자기 소개를 입력해주세요. (70자 이내)”가 들어갈
             예정입니다.
           </div>
-          <div className="user-intro__edit">
+          <div className="user-intro__edit" onClick={handleProfileBtnClick}>
             <div className="icon"></div>
-            <div style={{ marginLeft: "0.9rem" }} onClick={handleProfileBtnClick}>프로필 편집</div>
+            <div style={{ marginLeft: "0.9rem" }}>프로필 편집</div>
           </div>
         </div>
       </UserInfo>
       <CookieInfo>
         <img alt="" className="cookie-icon" src={cookieIconOrange} />
         <div className="cookie-info">
-          지금까지 쿠키&nbsp;<span className="cookie-info__num">1328</span>개를
+          지금까지 쿠키&nbsp;<CookieInfoNum number={1328}/>개를
           파킹했고&nbsp;
-          <span className="cookie-info__visit">178</span>번 읽었어요!
+          <CookieVisitNum number={178}/>번 읽었어요!
         </div>
       </CookieInfo>
       <AccountInfo>
@@ -224,7 +224,7 @@ const CookieInfo = styled.div`
     line-height: 2.8rem;
 
     color: #222222;
-    &__num,
+    
     &__visit {
       font-style: normal;
       font-weight: bold;
@@ -236,6 +236,69 @@ const CookieInfo = styled.div`
     }
   }
 `;
+
+const CookieInfoNum = styled.span`
+  font-weight: 700;
+  font-size: 2.8rem;
+  line-height: 3.36rem;
+  color: #FF7134;
+
+  @property --num {
+    syntax: "<integer>";
+    initial-value: ${props=>props.number};
+    inherits: false;
+  }
+
+  animation: counterOne 1.5s ease-out;
+  counter-reset: num var(--num);
+  /* color: #222222; */
+  /* font: 500 23px system-ui; */
+  
+  ::after {
+    content: counter(num);
+  }
+
+  @keyframes counterOne {
+    from {
+      --num: 0;
+    }
+    to {
+      --num: ${props=>props.number};
+    }
+  }
+`;
+
+const CookieVisitNum = styled.span`
+  font-weight: 700;
+  font-size: 2.8rem;
+  line-height: 3.36rem;
+  color: #FF7134;
+
+  @property --numTwo {
+    syntax: "<integer>";
+    initial-value: ${props=>props.number};
+    inherits: false;
+  }
+
+  animation: counterTwo 1.5s ease-out;
+  counter-reset: numTwo var(--numTwo);
+  /* color: #222222; */
+  /* font: 500 23px system-ui; */
+  
+  ::after {
+    content: counter(numTwo);
+  }
+
+  @keyframes counterTwo {
+    from {
+      --numTwo: 0;
+    }
+    to {
+      --numTwo: ${props=>props.number};
+    }
+  }
+`;
+
 
 const AccountInfo = styled.div`
   display: flex;
