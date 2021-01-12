@@ -23,7 +23,7 @@ function App() {
             <Route path="/directory/:dirId" exact>
               <DirDetail />
             </Route>
-            <Route path="/mypage/:userId" exact>
+            <Route path="/mypage" exact>
               <MyPage />
             </Route>
             <Route path="/landing" exact>
