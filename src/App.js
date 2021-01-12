@@ -12,7 +12,7 @@ function App() {
     <>
       <GlobalStyles />
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Switch>
           <Route path="/" exact>
             {isLoggined ? <LoginPage /> : <MainPage />}
