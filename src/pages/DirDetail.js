@@ -19,6 +19,7 @@ import MyCard from "../components/MyCard";
 import DirFixModal from "../components/DirFixModal";
 import ToastMsg from "../components/ToastMsg";
 import helpPopup from "../assets/img/cookies_img_help.svg";
+import Header from "../components/Header";
 
 // 로그인 구현되면 지우기
 const token = {
@@ -66,55 +67,60 @@ export default withRouter(({ history }) => {
   };
 
   return (
-    <Container>
-      <div className="header">
-        <div className="header__title">{dirInfo && dirInfo.name}</div>
-        <div
-          className="header__update-icon"
-          onClick={handleClickUpdateIcon}
-        ></div>
-        <div className="header__share">
-          <div className="icon"></div>
-          <div className="desc">디렉토리 공유</div>
-        </div>
-      </div>
-      <div className="info">
-        <img alt="" className="info__icon" src={cookieIcon} />
-        <div className="info__cookie-num">{cookies ? cookies.length : 0}개</div>
-      </div>
-      <div className="mid">
-        {history.location.pathname.split("/")[1] === "share" && (
-          <div>
-            <div className="mid__profile"></div>
-            <div className="mid__name">Jeongin Lee</div>
-          </div>
-        )}
-        <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
-        <div className="toggle">
+    <>
+      <Header />
+      <Container>
+        <div className="header">
+          <div className="header__title">{dirInfo && dirInfo.name}</div>
           <div
-            className="toggle__help"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            ?
+            className="header__update-icon"
+            onClick={handleClickUpdateIcon}
+          ></div>
+          <div className="header__share">
+            <div className="icon"></div>
+            <div className="desc">디렉토리 공유</div>
           </div>
-          <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-          <Swtich />
         </div>
-      </div>
-      {loading || !cookies ? (
-        <Loading />
-      ) : (
-        <CardContainer>
-          {cookies.map((cookie, index) =>
-            history.location.pathname.split("/")[1] === "directory" ? (
-              <MyCard cookies={cookie} key={index} />
-            ) : (
-              <SharedCard cookies={cookie} key={index} />
-            )
+        <div className="info">
+          <img alt="" className="info__icon" src={cookieIcon} />
+          <div className="info__cookie-num">
+            {cookies ? cookies.length : 0}개
+          </div>
+        </div>
+        <div className="mid">
+          {history.location.pathname.split("/")[1] === "share" && (
+            <div>
+              <div className="mid__profile"></div>
+              <div className="mid__name">Jeongin Lee</div>
+            </div>
           )}
-        </CardContainer>
-      )}
+          <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
+          <div className="toggle">
+            <div
+              className="toggle__help"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              ?
+            </div>
+            <div className="toggle__title">안 읽은 쿠키 모아보기</div>
+            <Swtich />
+          </div>
+        </div>
+        {loading || !cookies ? (
+          <Loading />
+        ) : (
+          <CardContainer>
+            {cookies.map((cookie, index) =>
+              history.location.pathname.split("/")[1] === "directory" ? (
+                <MyCard cookies={cookie} key={index} />
+              ) : (
+                <SharedCard cookies={cookie} key={index} />
+              )
+            )}
+          </CardContainer>
+        )}
+      </Container>
       {isOpen && (
         <DirFixModal
           setData={setData}
@@ -125,7 +131,7 @@ export default withRouter(({ history }) => {
       )}
       {ShareClick && <ToastMsg msg="링크가 복사되었어요!" />}
       {DeleteCookieClick && <ToastMsg msg="쿠키를 삭제했어요!" />}
-    </Container>
+    </>
   );
 });
 
