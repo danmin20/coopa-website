@@ -47,6 +47,7 @@ export default withRouter(({ history }) => {
   const [ShareDirLink, setShareDirLink] = useState(null);
   const DirShareClick = useRecoilValue(DirShareClickState);
   const setDirShareClick = useSetRecoilState(DirShareClickState);
+  const [userInfo, setUserInfo] = useState(null);
 
   const setMyData = async () => {
     const dirId = history.location.pathname.split("/")[2];
@@ -61,6 +62,7 @@ export default withRouter(({ history }) => {
     const shareToken = history.location.pathname.split("/")[2];
     const result = await getShareToken(token, shareToken);
     setCookies(result.data.cookies);
+    setUserInfo(result.data.userInfo);
     setDirInfo(result.data.directoryInfo);
   };
 
@@ -105,17 +107,19 @@ export default withRouter(({ history }) => {
       <Container>
         <div className="header">
           <div className="header__title">{dirInfo && dirInfo.name}</div>
-          <div
-            className="header__update-icon"
-            onClick={handleClickUpdateIcon}
-          ></div>
           {history.location.pathname.split("/")[1] === "directory" && (
-            <CopyToClipboard text={ShareDirLink} onCopy={onCopy}>
-              <div className="header__share">
-                <div className="icon"></div>
-                <div className="desc">디렉토리 공유</div>
-              </div>
-            </CopyToClipboard>
+            <>
+              <div
+                className="header__update-icon"
+                onClick={handleClickUpdateIcon}
+              />
+              <CopyToClipboard text={ShareDirLink} onCopy={onCopy}>
+                <div className="header__share">
+                  <div className="icon"></div>
+                  <div className="desc">디렉토리 공유</div>
+                </div>
+              </CopyToClipboard>
+            </>
           )}
         </div>
         <div className="info">
@@ -125,10 +129,14 @@ export default withRouter(({ history }) => {
           </div>
         </div>
         <div className="mid">
-          {history.location.pathname.split("/")[1] === "share" && (
-            <div>
-              <div className="mid__profile"></div>
-              <div className="mid__name">Jeongin Lee</div>
+          {history.location.pathname.split("/")[1] === "share" && userInfo && (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img
+                alt=""
+                src={userInfo.profileImage}
+                className="mid__profile"
+              ></img>
+              <div className="mid__name">{userInfo.email}</div>
             </div>
           )}
           <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
@@ -245,6 +253,7 @@ const Container = styled.div`
       }
     }
   }
+
   .info {
     display: flex;
     align-items: center;
