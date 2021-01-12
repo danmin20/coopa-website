@@ -24,7 +24,7 @@ export default () => {
           src={naviImgLogo}
           style={{ marginTop: "1.4rem", marginLeft: "2.8rem" }}
         />
-        <Fade right delay={500} duration={2000}>
+        <Fade right delay={500} duration={1500} enter>
           <img className="d3" src={duribun3} />
         </Fade>
         <div className="content">
@@ -43,14 +43,14 @@ export default () => {
             <div className="chrome__desc">크롬 웹스토어 바로가기</div>
           </div>
         </div>
-        <Fade bottom delay={300} duration={2000}>
+        <Fade bottom delay={300} duration={1500}>
           <img className="d1" src={duribun1} />
           <img className="d2" src={duribun2} />
         </Fade>
       </ContainerOne>
       <ContainerTwo>
         <div className="content">
-          <Fade bottom delay={100} duration={2000}>
+          <Fade bottom delay={100} duration={1500}>
             <div className="content__h1">
               <span style={{ fontWeight: "400" }}>한 번의 클릭으로</span>
               <br />
@@ -62,19 +62,19 @@ export default () => {
             <br />
             좋은 콘텐츠들을 한곳에 모아봐요
           </div>
-          <Fade bottom delay={100} duration={2000}>
+          <Fade bottom delay={100} duration={1500}>
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
           </Fade>
         </div>
       </ContainerTwo>
       <ContainerThree>
-        <Fade delay={300} duration={2000}>
+        <Fade delay={100} duration={1500}>
           <img className="i1" src={lp3Img1} />
         </Fade>
-        <Fade delay={400} duration={2000}>
+        <Fade delay={200} duration={1500}>
           <img className="i2" src={lp3Img2} />
         </Fade>
-        <Fade bottom delay={500} duration={2000}>
+        <Fade bottom delay={300} duration={1500}>
           <img className="i3" src={duribun31} />
         </Fade>
         <div className="content">
@@ -93,13 +93,13 @@ export default () => {
         </div>
       </ContainerThree>
       <ContainerFour>
-        <Fade delay={300} duration={2000}>
+        <Fade delay={100} duration={1500}>
           <img className="i1" src={lp4Img1} />
         </Fade>
-        <Fade delay={400} duration={2000}>
+        <Fade delay={200} duration={1500}>
           <img className="i2" src={lp4Img2} />
         </Fade>
-        <Fade bottom delay={500} duration={2000}>
+        <Fade bottom delay={300} duration={1500}>
           <img className="i3" src={duribun41} />
         </Fade>
         <div className="content">
@@ -122,7 +122,7 @@ export default () => {
       </ContainerFour>
       <ContainerFive>
         <div className="content">
-          <Fade bottom delay={100} duration={2000}>
+          <Fade bottom delay={100} duration={1500}>
             <div className="content__h1">
               새 탭에서 <br />
               매일 쿠키파킹
@@ -136,11 +136,11 @@ export default () => {
             <img className="chrome__icon" src={chromeIcon} />
             <div className="chrome__desc">크롬 웹스토어 바로가기</div>
           </div>
-          <Fade bottom delay={100} duration={2000}>
+          <Fade bottom delay={100} duration={1500}>
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
           </Fade>
         </div>
-        <Fade bottom delay={200} duration={2000}>
+        <Fade bottom delay={200} duration={1500}>
           <img className="i1" src={lp5Img} />
         </Fade>
       </ContainerFive>
@@ -158,6 +158,8 @@ const ContainerFive = styled.div`
   .i1 {
     position: absolute;
     bottom: 0;
+    width: 169.4rem;
+    height: 72.7rem;
   }
   .content {
     padding-top: 14rem;
@@ -219,18 +221,24 @@ const ContainerFour = styled.div`
     right: 19.2rem;
     bottom: 19.8rem;
     z-index: 1;
+    width: 76.4rem;
+    height: 44.4rem;
   }
   .i2 {
     position: absolute;
     right: 29.2rem;
     bottom: 29.1rem;
     z-index: 2;
+    width: 90.5rem;
+    height: 56.4rem;
   }
   .i3 {
     position: absolute;
     right: 22.3rem;
     bottom: 16.3rem;
     z-index: 3;
+    width: 16rem;
+    height: 16rem;
   }
   .content {
     padding-top: 31.5rem;
@@ -270,18 +278,24 @@ const ContainerThree = styled.div`
     z-index: 3;
     bottom: 20.5rem;
     left: 67rem;
+    width: 32.1rem;
+    height: 43.9rem;
   }
   .i2 {
     position: absolute;
     z-index: 2;
     bottom: 24.4rem;
     left: 49rem;
+    width: 36rem;
+    height: 51.2rem;
   }
   .i3 {
     position: absolute;
     z-index: 3;
     bottom: 18.8rem;
     left: 30.3rem;
+    width: 24.4rem;
+    height: 24.4rem;
   }
   .content {
     position: absolute;
@@ -343,7 +357,23 @@ const ContainerOne = styled.div`
   .d3 {
     position: absolute;
     margin-top: 15.3rem;
+    right: 0rem;
+    width: 26.1rem;
+    height: 24.4rem;
+  }
+  .d1 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 67.8rem;
+    height: 33.9rem;
+  }
+  .d2 {
+    position: absolute;
     right: 0;
+    bottom: 0;
+    width: 70.4rem;
+    height: 32.4rem;
   }
   .content {
     margin-top: 32.4rem;
@@ -383,15 +413,5 @@ const ContainerOne = styled.div`
         font-weight: 500;
       }
     }
-  }
-  .d1 {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
-  .d2 {
-    position: absolute;
-    right: 0;
-    bottom: 0;
   }
 `;
