@@ -33,6 +33,8 @@ export default () => {
     setIsHover(false);
   };
   return (
+    <>
+    <Header/>
     <Container>
       <UserInfo>
         <img className="user-img" alt="" src={userProfile} />
@@ -124,6 +126,7 @@ export default () => {
       </ServiceInfo>
       {isProfileBtnClicked && <ProfileFixModal isProfileClicked={isProfileBtnClicked} setIsProfileClicked={setIsProfileBtnClicked}/>}
     </Container>
+    </>
   );
 };
 

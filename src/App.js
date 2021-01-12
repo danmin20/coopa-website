@@ -6,7 +6,8 @@ import { RecoilRoot } from "recoil";
 // import ProfileFixModal from "./components/ProfileFixModal";
 
 function App() {
-  const isLoggined = true;
+  const isLogin = JSON.parse(localStorage.getItem('isLogin'));
+  console.log(isLogin);
 
   return (
     <>
