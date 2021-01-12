@@ -7,17 +7,18 @@ import { RecoilRoot } from "recoil";
 // import ProfileFixModal from "./components/ProfileFixModal";
 
 function App() {
-  const isLoggined = true;
+  const isLogin = JSON.parse(localStorage.getItem('isLogin'));
+  console.log(isLogin);
 
   return (
     <>
       <GlobalStyles />
       <RecoilRoot>
         <Router>
-          <Header />
+          {/* <Header /> 'loginpage에도 헤더가 뜹니다...' */}
           <Switch>
             <Route path="/" exact>
-              {isLoggined ? <LoginPage /> : <MainPage />}
+              {isLogin ? <MainPage /> : <LoginPage /> }
             </Route>
             <Route path="/shared/:key" exact>
               <DirDetail />

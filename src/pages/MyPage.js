@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import {useRecoilState} from 'recoil';
+import { ProfileClickedState } from '../states/atom';
+import ProfileFixModal from '../components/ProfileFixModal';
 import userProfile from "../assets/img/user_profile.svg";
 import editIcon from "../assets/img/editIcon.svg";
 import editIconWhite from "../assets/img/editIcon_white.svg";
@@ -7,10 +10,17 @@ import cookieIconOrange from "../assets/img/cookie_icon_orange.svg";
 import googleLogo from "../assets/img/google_logo.svg";
 import helpPopupImg from "../assets/img/mp_help_popup.svg";
 import meerkatLogout from "../assets/img/meerkat_logout.svg";
+import Header from "../components/Header";
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
   const [isBtnHover, setIsBtnHover] = useState(false);
+  const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(ProfileClickedState);
+
+  const handleProfileBtnClick = () => {
+    setIsProfileBtnClicked(true);
+  }
+
   const handleMouseEnterBtn = () => {
     setIsBtnHover(true);
   };
@@ -24,6 +34,8 @@ export default () => {
     setIsHover(false);
   };
   return (
+    <>
+    <Header/>
     <Container>
       <UserInfo>
         <img className="user-img" alt="" src={userProfile} />
@@ -115,6 +127,7 @@ export default () => {
       </ServiceInfo>
       {isProfileBtnClicked && <ProfileFixModal isProfileClicked={isProfileBtnClicked} setIsProfileClicked={setIsProfileBtnClicked}/>}
     </Container>
+    </>
   );
 };
 

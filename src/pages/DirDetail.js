@@ -12,6 +12,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { DirState, SearchState } from "../states/atom";
 import SharedCard from "../components/SharedCard";
 import MyCard from "../components/MyCard";
+import Header from "../components/Header";
 
 // 로그인 구현되면 지우기
 const token = {
@@ -38,6 +39,8 @@ export default withRouter(({ history }) => {
   }, []);
 
   return (
+    <>
+    <Header/>
     <Container>
       <div className="header">
         <div className="header__title">캐릭터/일러스트레이션</div>
@@ -76,6 +79,7 @@ export default withRouter(({ history }) => {
         </CardContainer>
       )}
     </Container>
+    </>
   );
 });
 
