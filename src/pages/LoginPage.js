@@ -4,54 +4,56 @@ import React from "react";
 import styled from "styled-components";
 import loginLogo from "../assets/img/login_img_logo.svg";
 import google_logo from "../assets/img/google_logo.svg";
-import img_up from '../assets/img/login_img_meerkat.svg';
+import img_up from "../assets/img/login_img_meerkat.svg";
 import img_under from "../assets/img/login_img_parkinglot.svg";
-import { GoogleLogin } from 'react-google-login';
-import loginAPI from '../lib/loginApi';
+import { GoogleLogin } from "react-google-login";
+import loginAPI from "../lib/loginApi";
 
-const clientId = '428359515091-knafnj35m26iqbta2ddnmkgj5vjoc5bt.apps.googleusercontent.com';
+const clientId =
+  "428359515091-knafnj35m26iqbta2ddnmkgj5vjoc5bt.apps.googleusercontent.com";
 // const token = {
 //   'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc"
 // }
-const ExtensionId = 'cbhojlcdebllghjcagdkncmpdaimfkmm';
+const ExtensionId = "lbgdcjefhogocimkajjkcibodjcnlghj";
 const url = "https://www.cookieparking.com";
 
 const LoginPage = () => {
-  const handleSuccess = async response => {
+  const handleSuccess = async (response) => {
     console.log(response);
     let token = {
-      'x-access-token': response.accessToken
-    }
+      "x-access-token": response.accessToken,
+    };
     let data = {
-      'name': response.profileObj.name,
-      'email': response.profileObj.email,
-      'googleId': response.profileObj.googleId,
-      'profileImage': response.profileObj.imageUrl
-    }
+      name: response.profileObj.name,
+      email: response.profileObj.email,
+      googleId: response.profileObj.googleId,
+      profileImage: response.profileObj.imageUrl,
+    };
     // console.log(data);
     // console.log(token);
     const Response = loginAPI.postLogin(token, data);
-      Response.then((res) => {
-        console.log(res);
-        localStorage.setItem('userToken', res.data.jwt);
-        localStorage.setItem('isLogin', true);
-        console.log(JSON.parse(localStorage.getItem('isLogin')))
-        chrome.runtime.sendMessage(ExtensionId, {openUrlInEditor: url},
-          function(response) {
-            if (!response.success)
-              console.log('fail');
-        });
-        // window.postMessage("hey");
-        // window.open('chrome-extension://cbhojlcdebllghjcagdkncmpdaimfkmm/newtab.html', '_self');
-      })
+    Response.then((res) => {
+      console.log(res);
+      localStorage.setItem("userToken", res.data.jwt);
+      localStorage.setItem("isLogin", true);
+      console.log(JSON.parse(localStorage.getItem("isLogin")));
+      chrome.runtime.sendMessage(
+        ExtensionId,
+        { openUrlInEditor: url },
+        function (response) {
+          if (!response.success) console.log("fail");
+        }
+      );
+      // window.postMessage("hey");
+      // window.open('chrome-extension://cbhojlcdebllghjcagdkncmpdaimfkmm/newtab.html', '_self');
+    });
     // localStorage.setItem('userToken', Response.data.jwt);
     // localStorage.setItem('isLogin', true);
   };
 
-  const handleFailure = error => {
+  const handleFailure = (error) => {
     console.log(error);
   };
-
 
   return (
     <Wrap>
@@ -63,30 +65,29 @@ const LoginPage = () => {
             <br />
             가장 간편한 콘텐츠 파킹랏
           </div>
-          <GoogleLogin 
-            clientId={clientId} 
-            responseType={'id_token'}
-            render={renderProps => (
+          <GoogleLogin
+            clientId={clientId}
+            responseType={"id_token"}
+            render={(renderProps) => (
               <LoginBtn onClick={renderProps.onClick}>
-                <LoginLogo src={google_logo}/>
-                <LoginText>
-                  Google 계정으로 로그인
-                </LoginText>
+                <LoginLogo src={google_logo} />
+                <LoginText>Google 계정으로 로그인</LoginText>
               </LoginBtn>
-            )} 
-            onSuccess={handleSuccess} 
-            onFailure={handleFailure} 
+            )}
+            onSuccess={handleSuccess}
+            onFailure={handleFailure}
           />
           <div className="login__policy">
-            로그인은 개인 정보 보호 정책 및 서비스 약관에 동의하는 것을 의미하며,
+            로그인은 개인 정보 보호 정책 및 서비스 약관에 동의하는 것을
+            의미하며,
             <br />
             서비스 이용을 위해 이메일과 이름, 프로필 이미지를 수집합니다.
           </div>
         </div>
       </Container>
       <ImgWrap>
-        <ImgUp src={img_up}/>
-        <ImgUnder src={img_under}/>
+        <ImgUp src={img_up} />
+        <ImgUnder src={img_under} />
       </ImgWrap>
     </Wrap>
   );

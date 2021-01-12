@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { ShareClickState, DeleteCookieClickState, DelToastState, createDirClickState, updateDirClickState } from '../states/atom';
-import { useSetRecoilState } from 'recoil';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import {
+  ShareClickState,
+  DeleteCookieClickState,
+  DelToastState,
+  createDirClickState,
+  updateDirClickState,
+  DirShareClickState,
+} from "../states/atom";
+import { useSetRecoilState } from "recoil";
 
 export default ({ msg }) => {
   const [isFlex, setIsFlex] = useState(true);
   const setDelToastState = useSetRecoilState(DelToastState);
   const setShareClick = useSetRecoilState(ShareClickState);
   const setDeleteCookieClick = useSetRecoilState(DeleteCookieClickState);
+  const setDirShareClick = useSetRecoilState(DirShareClickState);
   const setCreateDirClick = useSetRecoilState(createDirClickState);
   const setUpdateDirClick = useSetRecoilState(updateDirClickState);
 
@@ -15,6 +23,7 @@ export default ({ msg }) => {
     setTimeout(() => {
       setIsFlex(false);
       setShareClick(false);
+      setDirShareClick(false);
       setDeleteCookieClick(false);
       setDelToastState(false);
       setCreateDirClick(false);
@@ -39,7 +48,7 @@ const Wrap = styled.div`
   top: 85vh;
   left: 50%;
   transform: translate(-50%, 0);
-  display: ${props => (props.isFlex ? 'flex' : 'none')};
+  display: ${(props) => (props.isFlex ? "flex" : "none")};
   align-items: center;
   justify-content: center;
   opacity: 0;
