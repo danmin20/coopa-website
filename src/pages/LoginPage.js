@@ -14,7 +14,7 @@ const clientId =
 // const token = {
 //   'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc"
 // }
-const ExtensionId = "lbgdcjefhogocimkajjkcibodjcnlghj";
+const ExtensionId = 'lbgdcjefhogocimkajjkcibodjcnlghj';
 const url = "https://www.cookieparking.com";
 
 const LoginPage = () => {
@@ -39,13 +39,15 @@ const LoginPage = () => {
       console.log(JSON.parse(localStorage.getItem("isLogin")));
       chrome.runtime.sendMessage(
         ExtensionId,
-        { openUrlInEditor: url },
+        { isLogin: true,
+          userToken: res.data.jwt
+        },
         function (response) {
           if (!response.success) console.log("fail");
         }
       );
       // window.postMessage("hey");
-      // window.open('chrome-extension://cbhojlcdebllghjcagdkncmpdaimfkmm/newtab.html', '_self');
+      window.open('chrome-extension://lbgdcjefhogocimkajjkcibodjcnlghj/newtab.html', '_self');
     });
     // localStorage.setItem('userToken', Response.data.jwt);
     // localStorage.setItem('isLogin', true);
