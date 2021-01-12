@@ -24,9 +24,6 @@ export default () => {
           src={naviImgLogo}
           style={{ marginTop: "1.4rem", marginLeft: "2.8rem" }}
         />
-        <Fade right delay={500} duration={1500} enter>
-          <img className="d3" src={duribun3} />
-        </Fade>
         <div className="content">
           <div className="content__h1">
             스쳐간 콘텐츠가
@@ -43,14 +40,17 @@ export default () => {
             <div className="chrome__desc">크롬 웹스토어 바로가기</div>
           </div>
         </div>
-        <Fade bottom delay={300} duration={1500}>
+        <Fade distance="5.5rem" right delay={1050} duration={700} enter>
+          <img className="d3" src={duribun3} />
+        </Fade>
+        <Fade distance="3rem" bottom delay={500} duration={700}>
           <img className="d1" src={duribun1} />
           <img className="d2" src={duribun2} />
         </Fade>
       </ContainerOne>
       <ContainerTwo>
         <div className="content">
-          <Fade bottom delay={100} duration={1500}>
+          <Fade distance="2rem" bottom delay={500} duration={700}>
             <div className="content__h1">
               <span style={{ fontWeight: "400" }}>한 번의 클릭으로</span>
               <br />
@@ -62,23 +62,23 @@ export default () => {
             <br />
             좋은 콘텐츠들을 한곳에 모아봐요
           </div>
-          <Fade bottom delay={100} duration={1500}>
+          <Fade distance="1.5rem" bottom delay={500} duration={700}>
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
           </Fade>
         </div>
       </ContainerTwo>
       <ContainerThree>
-        <Fade delay={100} duration={1500}>
+        <Fade delay={1100} duration={700}>
           <img className="i1" src={lp3Img1} />
         </Fade>
-        <Fade delay={200} duration={1500}>
+        <Fade delay={850} duration={700}>
           <img className="i2" src={lp3Img2} />
         </Fade>
-        <Fade bottom delay={300} duration={1500}>
+        <Fade distance="2.6rem" bottom delay={1100} duration={700}>
           <img className="i3" src={duribun31} />
         </Fade>
         <div className="content">
-          <Fade bottom>
+          <Fade distance="2.1rem" bottom delay={500} duration={700}>
             <div className="content__h1">
               <span style={{ fontWeight: "400" }}>손쉬운 분류로</span>
               <br />
@@ -93,17 +93,17 @@ export default () => {
         </div>
       </ContainerThree>
       <ContainerFour>
-        <Fade delay={100} duration={1500}>
+        <Fade distance="3.8rem" right delay={850} duration={700}>
           <img className="i1" src={lp4Img1} />
         </Fade>
-        <Fade delay={200} duration={1500}>
+        <Fade distance="3.8rem" right delay={1100} duration={700}>
           <img className="i2" src={lp4Img2} />
         </Fade>
-        <Fade bottom delay={300} duration={1500}>
+        <Fade distance="2.6rem" bottom delay={1100} duration={700}>
           <img className="i3" src={duribun41} />
         </Fade>
         <div className="content">
-          <Fade>
+          <Fade distance="2rem" bottom delay={500} duration={700}>
             <div className="content__h1">
               <span style={{ fontWeight: "400" }}>좋은 콘텐츠들은</span>
               <br />
@@ -115,14 +115,14 @@ export default () => {
             <br />
             누구에게나 손쉽게 공유해요
           </div>
-          <Fade>
+          <Fade distance="1.5rem" bottom delay={500} duration={700}>
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
           </Fade>
         </div>
       </ContainerFour>
       <ContainerFive>
         <div className="content">
-          <Fade bottom delay={100} duration={1500}>
+          <Fade distance="2rem" bottom delay={500} duration={700}>
             <div className="content__h1">
               새 탭에서 <br />
               매일 쿠키파킹
@@ -136,11 +136,11 @@ export default () => {
             <img className="chrome__icon" src={chromeIcon} />
             <div className="chrome__desc">크롬 웹스토어 바로가기</div>
           </div>
-          <Fade bottom delay={100} duration={1500}>
+          <Fade distance="2rem" bottom delay={500} duration={700}>
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
           </Fade>
         </div>
-        <Fade bottom delay={200} duration={1500}>
+        <Fade distance="3rem" bottom delay={850} duration={700}>
           <img className="i1" src={lp5Img} />
         </Fade>
       </ContainerFive>
@@ -159,7 +159,8 @@ const ContainerFive = styled.div`
     position: absolute;
     bottom: 0;
     width: 169.4rem;
-    height: 72.7rem;
+    /* height: 72.7rem; */
+    height: auto;
   }
   .content {
     padding-top: 14rem;
@@ -170,13 +171,13 @@ const ContainerFive = styled.div`
     align-items: center;
     &__h1 {
       font-size: 5.8rem;
-      line-height: 7.2rem;
+      line-height: 8.2rem;
       font-weight: 700;
     }
     &__h2 {
       margin-top: 4rem;
       font-size: 2.4rem;
-      line-height: 2.8rem;
+      line-height: 3.8rem;
     }
     .chrome {
       cursor: pointer;
@@ -192,7 +193,7 @@ const ContainerFive = styled.div`
         margin-left: 1.6rem;
         color: ${({ theme }) => theme.colors.black_1};
         font-size: 2.5rem;
-        line-height: 3rem;
+        line-height: 4rem;
         font-weight: 500;
       }
     }
@@ -206,7 +207,7 @@ const ContainerFive = styled.div`
       height: 5.5rem;
       font-size: 2.4rem;
       font-weight: 500;
-      line-height: 3rem;
+      line-height: 4rem;
       color: ${({ theme }) => theme.colors.white};
     }
   }
@@ -222,7 +223,8 @@ const ContainerFour = styled.div`
     bottom: 19.8rem;
     z-index: 1;
     width: 76.4rem;
-    height: 44.4rem;
+    /* height: 44.4rem; */
+    height: auto;
   }
   .i2 {
     position: absolute;
@@ -230,7 +232,8 @@ const ContainerFour = styled.div`
     bottom: 29.1rem;
     z-index: 2;
     width: 90.5rem;
-    height: 56.4rem;
+    /* height: 56.4rem; */
+    height: auto;
   }
   .i3 {
     position: absolute;
@@ -238,20 +241,21 @@ const ContainerFour = styled.div`
     bottom: 16.3rem;
     z-index: 3;
     width: 16rem;
-    height: 16rem;
+    /* height: 16rem; */
+    height: auto;
   }
   .content {
     padding-top: 31.5rem;
     margin-left: 32.3rem;
     &__h1 {
       font-size: 5.4rem;
-      line-height: 7.2rem;
+      line-height: 8.2rem;
       color: ${({ theme }) => theme.colors.black_2};
     }
     &__h2 {
       margin-top: 4rem;
       font-size: 2.4rem;
-      line-height: 2.8rem;
+      line-height: 3.8rem;
       color: ${({ theme }) => theme.colors.gray_6};
     }
     &__h3 {
@@ -263,7 +267,7 @@ const ContainerFour = styled.div`
       height: 5.5rem;
       font-size: 2.4rem;
       font-weight: 500;
-      line-height: 3rem;
+      line-height: 4rem;
       color: ${({ theme }) => theme.colors.cookieOrange};
     }
   }
@@ -279,7 +283,8 @@ const ContainerThree = styled.div`
     bottom: 20.5rem;
     left: 67rem;
     width: 32.1rem;
-    height: 43.9rem;
+    /* height: 43.9rem; */
+    height: auto;
   }
   .i2 {
     position: absolute;
@@ -287,7 +292,8 @@ const ContainerThree = styled.div`
     bottom: 24.4rem;
     left: 49rem;
     width: 36rem;
-    height: 51.2rem;
+    /* height: 51.2rem; */
+    height: auto;
   }
   .i3 {
     position: absolute;
@@ -295,7 +301,8 @@ const ContainerThree = styled.div`
     bottom: 18.8rem;
     left: 30.3rem;
     width: 24.4rem;
-    height: 24.4rem;
+    /* height: 24.4rem; */
+    height: auto;
   }
   .content {
     position: absolute;
@@ -303,13 +310,13 @@ const ContainerThree = styled.div`
     right: 32.3rem;
     &__h1 {
       font-size: 5.4rem;
-      line-height: 7.2rem;
+      line-height: 8.2rem;
       color: ${({ theme }) => theme.colors.black_2};
     }
     &__h2 {
       margin-top: 4rem;
       font-size: 2.4rem;
-      line-height: 2.8rem;
+      line-height: 3.8rem;
       color: ${({ theme }) => theme.colors.gray_6};
     }
   }
@@ -326,13 +333,13 @@ const ContainerTwo = styled.div`
     &__h1 {
       padding-top: 30.7rem;
       font-size: 5.8rem;
-      line-height: 7.8rem;
+      line-height: 8.8rem;
       color: ${({ theme }) => theme.colors.black_2};
     }
     &__h2 {
       margin-top: 3rem;
       font-size: 2.4rem;
-      line-height: 3rem;
+      line-height: 4rem;
       color: ${({ theme }) => theme.colors.gray_6};
     }
     &__h3 {
@@ -344,7 +351,7 @@ const ContainerTwo = styled.div`
       height: 5.5rem;
       font-size: 2.4rem;
       font-weight: 500;
-      line-height: 3rem;
+      line-height: 4rem;
       color: ${({ theme }) => theme.colors.cookieOrange};
     }
   }
@@ -356,24 +363,25 @@ const ContainerOne = styled.div`
   position: relative;
   .d3 {
     position: absolute;
-    margin-top: 15.3rem;
-    right: 0rem;
+    /* margin-top: 15.3rem; */
+    top: 15.3rem;
+    right: 0;
     width: 26.1rem;
-    height: 24.4rem;
+    height: auto;
   }
   .d1 {
     position: absolute;
     left: 0;
     bottom: 0;
     width: 67.8rem;
-    height: 33.9rem;
+    height: auto;
   }
   .d2 {
     position: absolute;
     right: 0;
     bottom: 0;
     width: 70.4rem;
-    height: 32.4rem;
+    height: auto;
   }
   .content {
     margin-top: 32.4rem;
@@ -383,7 +391,7 @@ const ContainerOne = styled.div`
     justify-content: center;
     &__h1 {
       font-size: 6.5rem;
-      line-height: 8.6rem;
+      line-height: 9.6rem;
       font-weight: 700;
       color: ${({ theme }) => theme.colors.black_2};
       text-align: center;
@@ -391,7 +399,7 @@ const ContainerOne = styled.div`
     &__h2 {
       margin-top: 4rem;
       font-size: 2.4rem;
-      line-height: 3rem;
+      line-height: 4rem;
       color: ${({ theme }) => theme.colors.gray_6};
       text-align: center;
     }
@@ -409,7 +417,7 @@ const ContainerOne = styled.div`
         margin-left: 1.6rem;
         color: ${({ theme }) => theme.colors.black_1};
         font-size: 2.5rem;
-        line-height: 3rem;
+        line-height: 4rem;
         font-weight: 500;
       }
     }
