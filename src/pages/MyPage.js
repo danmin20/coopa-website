@@ -6,18 +6,21 @@ import editIconWhite from "../assets/img/editIcon_white.svg";
 import cookieIconOrange from "../assets/img/cookie_icon_orange.svg";
 import googleLogo from "../assets/img/google_logo.svg";
 import helpPopupImg from "../assets/img/mp_help_popup.svg";
-import {useRecoilState} from 'recoil';
-import { ProfileClickedState } from '../states/atom';
-import ProfileFixModal from '../components/ProfileFixModal';
+import { useRecoilState } from "recoil";
+import { ProfileClickedState } from "../states/atom";
+import ProfileFixModal from "../components/ProfileFixModal";
 import meerkatLogout from "../assets/img/meerkat_logout.svg";
+import { Header } from "../components";
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
-  const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(ProfileClickedState);
+  const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(
+    ProfileClickedState
+  );
 
   const handleProfileBtnClick = () => {
     setIsProfileBtnClicked(true);
-  }
+  };
 
   const [isBtnHover, setIsBtnHover] = useState(false);
   const handleMouseEnterBtn = () => {
@@ -34,98 +37,102 @@ export default () => {
   };
   return (
     <>
-    <Header/>
-    <Container>
-      <UserInfo>
-        <img className="user-img" alt="" src={userProfile} />
-        <div className="user-intro">
-          <div className="user-intro__name">김쿠키</div>
-          <div className="user-intro__info">
-            이 곳에는 사용자의 자기 소개를 입력하는 곳입니다. 만약 사용자가 입력
-            전이라면 “자기 소개를 입력해주세요. (70자 이내)”가 들어갈
-            예정입니다.
+      <Header />
+      <Container>
+        <UserInfo>
+          <img className="user-img" alt="" src={userProfile} />
+          <div className="user-intro">
+            <div className="user-intro__name">김쿠키</div>
+            <div className="user-intro__info">
+              이 곳에는 사용자의 자기 소개를 입력하는 곳입니다. 만약 사용자가
+              입력 전이라면 “자기 소개를 입력해주세요. (70자 이내)”가 들어갈
+              예정입니다.
+            </div>
+            <div className="user-intro__edit" onClick={handleProfileBtnClick}>
+              <div className="icon"></div>
+              <div style={{ marginLeft: "0.9rem" }}>프로필 편집</div>
+            </div>
           </div>
-          <div className="user-intro__edit" onClick={handleProfileBtnClick}>
-            <div className="icon"></div>
-            <div style={{ marginLeft: "0.9rem" }}>프로필 편집</div>
+        </UserInfo>
+        <CookieInfo>
+          <img alt="" className="cookie-icon" src={cookieIconOrange} />
+          <div className="cookie-info">
+            지금까지 쿠키&nbsp;
+            <CookieNumWrap>
+              <CookieNumBox>
+                <CookieInfoNum number={1328} />
+                <CookieNumPlus>+</CookieNumPlus>
+              </CookieNumBox>
+              <CookieNumUnderLine width={String(1328).length} />
+            </CookieNumWrap>
+            개를 파킹했고&nbsp;
+            <CookieNumWrap>
+              <CookieNumBox>
+                <CookieVisitNum number={178} />
+                <CookieNumPlus>+</CookieNumPlus>
+              </CookieNumBox>
+              <CookieNumUnderLineTwo width={String(178).length} />
+            </CookieNumWrap>
+            번 읽었어요!
           </div>
-        </div>
-      </UserInfo>
-      <CookieInfo>
-        <img alt="" className="cookie-icon" src={cookieIconOrange} />
-        <div className="cookie-info">
-          지금까지 쿠키&nbsp;
-          <CookieNumWrap>
-            <CookieNumBox>
-              <CookieInfoNum number={1328}/>
-              <CookieNumPlus>+</CookieNumPlus>
-            </CookieNumBox>
-            <CookieNumUnderLine width={String(1328).length}/>
-          </CookieNumWrap>
-          개를
-          파킹했고&nbsp;
-          <CookieNumWrap>
-            <CookieNumBox>
-              <CookieVisitNum number={178}/>
-              <CookieNumPlus>+</CookieNumPlus>
-            </CookieNumBox>
-            <CookieNumUnderLineTwo width={String(178).length}/>
-          </CookieNumWrap>
-          번 읽었어요!
-        </div>
-      </CookieInfo>
-      <AccountInfo>
-        <div className="account-header">계정 설정</div>
-        <div className="email">
-          <div className="email__title">이메일</div>
-          <div className="email__content">
-            <div style={{ marginLeft: "2.7rem" }}>dlwjddls963@gmail.com</div>
-            <div className="empty"></div>
-            <img src={googleLogo} style={{ marginRight: "1.5rem" }} />
+        </CookieInfo>
+        <AccountInfo>
+          <div className="account-header">계정 설정</div>
+          <div className="email">
+            <div className="email__title">이메일</div>
+            <div className="email__content">
+              <div style={{ marginLeft: "2.7rem" }}>dlwjddls963@gmail.com</div>
+              <div className="empty"></div>
+              <img src={googleLogo} style={{ marginRight: "1.5rem" }} />
+            </div>
           </div>
-        </div>
-      </AccountInfo>
-      <EnvSetInfo>
-        <div className="env">
-          환경 설정
-          <PopupHelpImg src={helpPopupImg} isHover={isHover} />
-        </div>
-        <div className="env-newtab">
-          <div className="env-newtab__title">새 탭에서 열기</div>
-          <div
-            className="env-newtab__help"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouserLeave}
-          >
-            ?
+        </AccountInfo>
+        <EnvSetInfo>
+          <div className="env">
+            환경 설정
+            <PopupHelpImg src={helpPopupImg} isHover={isHover} />
           </div>
-        </div>
-        <div className="desc">
-          매일 새 탭을 열 때마다 쿠키파킹과 함께하세요!
-        </div>
-      </EnvSetInfo>
-      <ServiceInfo>
-        <div className="service-header">서비스 정보</div>
-        <div className="service">
-          <div className="service-sort">서비스 피드백</div>
-          <div className="service-sort">이용약관</div>
-          <div className="service-sort">개인정보보호 정책</div>
-          <div className="service-sort">제휴 및 광고 문의</div>
-          {/* <div className="service-sort">회원 탈퇴</div> */}
-        </div>
-        <div className="logout">
-          <div
-            className="logout__btn"
-            onMouseEnter={handleMouseEnterBtn}
-            onMouseLeave={handleMouseLeaveBtn}
-          >
-            로그아웃
+          <div className="env-newtab">
+            <div className="env-newtab__title">새 탭에서 열기</div>
+            <div
+              className="env-newtab__help"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouserLeave}
+            >
+              ?
+            </div>
           </div>
-          <LogoutBtn isBtnHover={isBtnHover} src={meerkatLogout}></LogoutBtn>
-        </div>
-      </ServiceInfo>
-      {isProfileBtnClicked && <ProfileFixModal isProfileClicked={isProfileBtnClicked} setIsProfileClicked={setIsProfileBtnClicked}/>}
-    </Container>
+          <div className="desc">
+            매일 새 탭을 열 때마다 쿠키파킹과 함께하세요!
+          </div>
+        </EnvSetInfo>
+        <ServiceInfo>
+          <div className="service-header">서비스 정보</div>
+          <div className="service">
+            <div className="service-sort">서비스 피드백</div>
+            <div className="service-sort">이용약관</div>
+            <div className="service-sort">개인정보보호 정책</div>
+            <div className="service-sort">제휴 및 광고 문의</div>
+            {/* <div className="service-sort">회원 탈퇴</div> */}
+          </div>
+          <div className="logout">
+            <div
+              className="logout__btn"
+              onMouseEnter={handleMouseEnterBtn}
+              onMouseLeave={handleMouseLeaveBtn}
+            >
+              로그아웃
+            </div>
+            <LogoutBtn isBtnHover={isBtnHover} src={meerkatLogout}></LogoutBtn>
+          </div>
+        </ServiceInfo>
+        {isProfileBtnClicked && (
+          <ProfileFixModal
+            isProfileClicked={isProfileBtnClicked}
+            setIsProfileClicked={setIsProfileBtnClicked}
+          />
+        )}
+      </Container>
     </>
   );
 };
@@ -251,7 +258,7 @@ const CookieInfo = styled.div`
     line-height: 2.8rem;
 
     color: #222222;
-    
+
     &__visit {
       font-style: normal;
       font-weight: bold;
@@ -284,9 +291,9 @@ const CookieNumBox = styled.span`
 const CookieNumUnderLine = styled.span`
   position: relative;
   z-index: 1;
-  width: ${props=>(props.width+1)*2}rem;
+  width: ${(props) => (props.width + 1) * 2}rem;
   height: 1.8rem;
-  background: #FBDFD2;
+  background: #fbdfd2;
   border-radius: 3rem;
   transform: translate(0, -90%);
 
@@ -296,7 +303,7 @@ const CookieNumUnderLine = styled.span`
       width: 0;
     }
     to {
-      width: ${props=>(props.width+1)*2}rem;
+      width: ${(props) => (props.width + 1) * 2}rem;
     }
   }
 `;
@@ -304,9 +311,9 @@ const CookieNumUnderLine = styled.span`
 const CookieNumUnderLineTwo = styled.span`
   position: relative;
   z-index: 1;
-  width: ${props=>(props.width+1)*2}rem;
+  width: ${(props) => (props.width + 1) * 2}rem;
   height: 1.8rem;
-  background: #FBDFD2;
+  background: #fbdfd2;
   border-radius: 3rem;
   transform: translate(0, -90%);
 
@@ -316,7 +323,7 @@ const CookieNumUnderLineTwo = styled.span`
       width: 0;
     }
     to {
-      width: ${props=>(props.width+1)*2}rem;
+      width: ${(props) => (props.width + 1) * 2}rem;
     }
   }
 `;
@@ -325,18 +332,18 @@ const CookieNumPlus = styled.span`
   font-weight: 700;
   font-size: 2.8rem;
   line-height: 3.36rem;
-  color: #FF7134;
+  color: #ff7134;
 `;
 
 const CookieInfoNum = styled.span`
   font-weight: 700;
   font-size: 2.8rem;
   line-height: 3.36rem;
-  color: #FF7134;
+  color: #ff7134;
 
   @property --num {
     syntax: "<integer>";
-    initial-value: ${props=>props.number};
+    initial-value: ${(props) => props.number};
     inherits: false;
   }
 
@@ -344,7 +351,7 @@ const CookieInfoNum = styled.span`
   counter-reset: num var(--num);
   /* color: #222222; */
   /* font: 500 23px system-ui; */
-  
+
   ::after {
     content: counter(num);
   }
@@ -354,7 +361,7 @@ const CookieInfoNum = styled.span`
       --num: 0;
     }
     to {
-      --num: ${props=>props.number};
+      --num: ${(props) => props.number};
     }
   }
 `;
@@ -363,11 +370,11 @@ const CookieVisitNum = styled.span`
   font-weight: 700;
   font-size: 2.8rem;
   line-height: 3.36rem;
-  color: #FF7134;
+  color: #ff7134;
 
   @property --numTwo {
     syntax: "<integer>";
-    initial-value: ${props=>props.number};
+    initial-value: ${(props) => props.number};
     inherits: false;
   }
 
@@ -375,7 +382,7 @@ const CookieVisitNum = styled.span`
   counter-reset: numTwo var(--numTwo);
   /* color: #222222; */
   /* font: 500 23px system-ui; */
-  
+
   ::after {
     content: counter(numTwo);
   }
@@ -385,11 +392,10 @@ const CookieVisitNum = styled.span`
       --numTwo: 0;
     }
     to {
-      --numTwo: ${props=>props.number};
+      --numTwo: ${(props) => props.number};
     }
   }
 `;
-
 
 const AccountInfo = styled.div`
   display: flex;
@@ -409,7 +415,7 @@ const AccountInfo = styled.div`
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray_4};
   }
   .email {
-    img{
+    img {
       width: 5.6rem;
       height: 5.6rem;
     }
