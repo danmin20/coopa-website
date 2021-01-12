@@ -125,7 +125,7 @@ export default ({ cookies, setParkingState, directory }) => {
         }}
       >
         <div className="dir-sort">
-          {directory ? directory.name : "All Cookies"}
+          {cookies.directory ? cookies.directory.name : "All Cookies"}
         </div>
         <img alt="" src={dropdwnImg} style={{ marginLeft: "1.3rem" }} />
       </Directory>

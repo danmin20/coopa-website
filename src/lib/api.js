@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://www.cookieparking.com/api";
+const baseURL = "https://api.cookieparking.com/";
 
 export const getDirCookies = async (headers, dirId) => {
   try {

@@ -23,7 +23,6 @@ export default withRouter(({ history }) => {
   const [loading, setLoading] = useState(true);
   const [cookies, setCookies] = useState(null);
   const [dirState, setDirState] = useRecoilState(DirState);
-  const [directory, setDirectory] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -31,7 +30,6 @@ export default withRouter(({ history }) => {
       const result = await getDirCookies(token, dirId);
       const dirResult = await getDirAll(token);
       setCookies(result.data.cookies);
-      setDirectory(result.data.directoryInfo);
       setDirState(dirResult.data);
       setLoading(false);
     })();
@@ -68,7 +66,7 @@ export default withRouter(({ history }) => {
         <CardContainer>
           {cookies.map((cookie, index) =>
             history.location.pathname.split("/")[1] === "directory" ? (
-              <MyCard cookies={cookie} key={index} directory={directory} />
+              <MyCard cookies={cookie} key={index} />
             ) : (
               <SharedCard cookies={cookie} key={index} />
             )

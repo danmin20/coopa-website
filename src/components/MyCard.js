@@ -16,7 +16,7 @@ const token = {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
 };
 
-export default ({ cookies, idx, directory }) => {
+export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
   const [parkingState, setParkingState] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
@@ -60,14 +60,15 @@ export default ({ cookies, idx, directory }) => {
           cookies={cookies}
           idx={idx}
           setParkingState={setParkingState}
-          directory={directory}
         />
       )}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">
           {parkingState && (
             <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
-              <div className="parking--title">{directory.name}</div>
+              <div className="parking--title">
+                {cookies.directory ? cookies.name : "All Cookies"}
+              </div>
               <ParkingLogoWrap>
                 <ParkingLogo src={logo} />
                 <ParkingText>파킹했습니다!</ParkingText>
