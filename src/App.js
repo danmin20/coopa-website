@@ -14,7 +14,7 @@ function App() {
       <GlobalStyles />
       <RecoilRoot>
         <Router>
-          <Header />
+          {/* <Header /> */}
           <Switch>
             <Route path="/" exact>
               {isLoggined ? <LoginPage /> : <MainPage />}
@@ -29,7 +29,7 @@ function App() {
               <MyPage />
             </Route>
             <Route path="/landing" exact>
-                <LandingPage />
+              <LandingPage />
             </Route>
           </Switch>
         </Router>
