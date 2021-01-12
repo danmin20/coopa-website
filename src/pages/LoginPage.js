@@ -47,7 +47,7 @@ const LoginPage = () => {
         }
       );
       // window.postMessage("hey");
-      // window.open('chrome-extension://cbhojlcdebllghjcagdkncmpdaimfkmm/newtab.html', '_self');
+      window.open('chrome-extension://lbgdcjefhogocimkajjkcibodjcnlghj/newtab.html', '_self');
     });
     // localStorage.setItem('userToken', Response.data.jwt);
     // localStorage.setItem('isLogin', true);
