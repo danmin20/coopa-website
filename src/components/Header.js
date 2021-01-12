@@ -5,10 +5,6 @@ import profileIcon from "../assets/img/profile_icon.svg";
 import { withRouter } from "react-router-dom";
 
 export default withRouter(({ history }) => {
-  const handleRefresh = () => {
-    // 라우팅 하여 메인페이지로 이동
-    // history.push()
-  };
   return (
     <Container>
       <div className="main-logo" onClick={() => history.push("/")}>
@@ -18,13 +14,17 @@ export default withRouter(({ history }) => {
           src={mainLogo}
         />
       </div>
-      <div className="profile">
+      <div
+        className="profile"
+        onClick={() =>
+          window.open("https://www.cookieparking.com/mypage", "_self")
+        }
+      >
         <img
           style={{ width: "3.6rem", height: "3.6rem" }}
           className="profile__img"
           src={profileIcon}
         />
-        {/* Todo : mypage link 걸기 */}
       </div>
     </Container>
   );
@@ -50,6 +50,7 @@ const Container = styled.div`
   }
   .profile {
     margin-right: 2.2rem;
+    cursor: pointer;
 
     &__img {
       width: 3.8rem;

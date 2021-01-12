@@ -10,7 +10,7 @@ import { useRecoilState } from "recoil";
 import { ProfileClickedState } from "../states/atom";
 import ProfileFixModal from "../components/ProfileFixModal";
 import meerkatLogout from "../assets/img/meerkat_logout.svg";
-import { Header } from "../components";
+import Header from "../components/Header";
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
