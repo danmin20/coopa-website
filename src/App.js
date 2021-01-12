@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { LoginPage, MainPage, DirDetail, MyPage } from "./pages";
+import { LoginPage, MainPage, DirDetail, MyPage, LandingPage } from "./pages";
 import GlobalStyles from "./GlobalStyles";
 import Header from "./components/Header";
 import { RecoilRoot } from "recoil";
@@ -27,6 +27,9 @@ function App() {
             </Route>
             <Route path="/mypage/:userId" exact>
               <MyPage />
+            </Route>
+            <Route path="/landing" exact>
+                <LandingPage />
             </Route>
           </Switch>
         </Router>

@@ -19,7 +19,7 @@ const List = ({ dir, cookies, setParkingState }) => {
   const ListItemClick = async (e) => {
     e.stopPropagation();
 
-    const newCookie = cookieState.map((c) =>
+    const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
             ...c,
@@ -85,7 +85,7 @@ const ListItemBtn = styled.div`
   background: ${({ theme }) => theme.colors.cookieOrange};
 `;
 
-export default ({ cookies, setParkingState, directory }) => {
+export default ({ cookies, setParkingState }) => {
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
   const inputText = useInput("");
@@ -99,15 +99,13 @@ export default ({ cookies, setParkingState, directory }) => {
     const response = postDir(token, body);
     response.then((res) => {
       const newDir = {
-        directory: {
-          cookieCnt: 0,
-          createAt: "unknown",
-          description: "디버그 마스터 봉채륀~",
-          id: res.data.directoryId,
-          name: inputText.value,
-          updateAt: "unknown",
-          userId: 1,
-        },
+        cookieCnt: 0,
+        createAt: "unknown",
+        description: "디버그 마스터 봉채륀~",
+        id: res.data.directoryId,
+        name: inputText.value,
+        updateAt: "unknown",
+        userId: 1,
         thumbnail: null,
       };
       const newDirList = dirState.concat(newDir);
@@ -127,17 +125,16 @@ export default ({ cookies, setParkingState, directory }) => {
         <div className="dir-sort">
           {cookies.directory ? cookies.directory.name : "All Cookies"}
         </div>
-        <img alt="" src={dropdwnImg} style={{ marginLeft: "1.3rem" }} />
+        <img src={dropdwnImg} style={{ marginLeft: "1.3rem" }} />
       </Directory>
       {drop && (
         <ListWrap>
           <DirList>
             <div className="list-div">
-              {/* <div className="list-sort">모든 디렉토리</div> */}
               {dirState.map((dir) => (
                 <List
-                  dir={dir.directory}
-                  key={dir.directory.id}
+                  dir={dir}
+                  key={dir.id}
                   cookies={cookies}
                   setParkingState={setParkingState}
                 />

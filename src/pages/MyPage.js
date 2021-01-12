@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import userProfile from "../assets/img/user_profile.svg";
 import editIcon from "../assets/img/editIcon.svg";
 import editIconWhite from "../assets/img/editIcon_white.svg";
@@ -9,6 +9,7 @@ import helpPopupImg from "../assets/img/mp_help_popup.svg";
 import {useRecoilState} from 'recoil';
 import { ProfileClickedState } from '../states/atom';
 import ProfileFixModal from '../components/ProfileFixModal';
+import meerkatLogout from "../assets/img/meerkat_logout.svg";
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
@@ -18,6 +19,13 @@ export default () => {
     setIsProfileBtnClicked(true);
   }
 
+  const [isBtnHover, setIsBtnHover] = useState(false);
+  const handleMouseEnterBtn = () => {
+    setIsBtnHover(true);
+  };
+  const handleMouseLeaveBtn = () => {
+    setIsBtnHover(false);
+  };
   const handleMouseEnter = () => {
     setIsHover(true);
   };
@@ -104,13 +112,36 @@ export default () => {
           {/* <div className="service-sort">회원 탈퇴</div> */}
         </div>
         <div className="logout">
-          <div className="logout__btn">로그아웃</div>
+          <div
+            className="logout__btn"
+            onMouseEnter={handleMouseEnterBtn}
+            onMouseLeave={handleMouseLeaveBtn}
+          >
+            로그아웃
+          </div>
+          <LogoutBtn isBtnHover={isBtnHover} src={meerkatLogout}></LogoutBtn>
         </div>
       </ServiceInfo>
       {isProfileBtnClicked && <ProfileFixModal isProfileClicked={isProfileBtnClicked} setIsProfileClicked={setIsProfileBtnClicked}/>}
     </Container>
   );
 };
+
+const LogoutBtn = styled.img`
+  position: absolute;
+  transition-property: bottom display;
+  transition-duration: 0.5s;
+  bottom: 0rem;
+  right: 7.75rem;
+  z-index: -1;
+  width: 7.75rem;
+  height: 7.75rem;
+  ${(props) =>
+    props.isBtnHover &&
+    css`
+      bottom: 5rem;
+    `}
+`;
 
 const Container = styled.div`
   display: flex;
@@ -431,6 +462,7 @@ const EnvSetInfo = styled.div`
       color: ${({ theme }) => theme.colors.gray_6};
     }
     &__help {
+      font-family: "Poppins", sans-serif;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -460,7 +492,7 @@ const PopupHelpImg = styled.img`
   display: ${(props) => (props.isHover ? "block" : "none")};
   position: absolute;
   top: -2rem;
-  left: 10.6rem;
+  left: 10.65rem;
 `;
 
 const ServiceInfo = styled.div`
@@ -497,6 +529,7 @@ const ServiceInfo = styled.div`
     }
   }
   .logout {
+    position: relative;
     display: flex;
     justify-content: flex-end;
     margin-top: 13.4rem;

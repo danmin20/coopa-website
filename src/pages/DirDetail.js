@@ -9,9 +9,16 @@ import { getDirCookies, getDirAll } from "../lib/api";
 import { withRouter } from "react-router-dom";
 import Loading from "../components/Loading";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { DirState, SearchState } from "../states/atom";
+import {
+  DirState,
+  DeleteCookieClickState,
+  ShareClickState,
+} from "../states/atom";
 import SharedCard from "../components/SharedCard";
 import MyCard from "../components/MyCard";
+import DirFixModal from "../components/DirFixModal";
+import ToastMsg from "../components/ToastMsg";
+import helpPopup from "../assets/img/cookies_img_help.svg";
 
 // 로그인 구현되면 지우기
 const token = {
@@ -23,24 +30,49 @@ export default withRouter(({ history }) => {
   const [loading, setLoading] = useState(true);
   const [cookies, setCookies] = useState(null);
   const [dirState, setDirState] = useRecoilState(DirState);
+  const [isOpen, setIsOpen] = useState(false);
+  const [dirInfo, setDirInfo] = useState(null);
+  const [isDelOpen, setIsDelOpen] = useState(false);
+  const ShareClick = useRecoilValue(ShareClickState);
+  const [isHover, setIsHover] = useState(false);
+  const DeleteCookieClick = useRecoilValue(DeleteCookieClickState);
+
+  const setData = async () => {
+    const dirId = history.location.pathname.split("/")[2];
+    const result = await getDirCookies(token, dirId);
+    const dirResult = await getDirAll(token);
+    setCookies(result.data.cookies);
+    setDirInfo(result.data.directoryInfo);
+    setDirState(dirResult.data);
+  };
 
   useEffect(() => {
     (async () => {
-      const dirId = history.location.pathname.split("/")[2];
-      const result = await getDirCookies(token, dirId);
-      const dirResult = await getDirAll(token);
-      setCookies(result.data.cookies);
-      setDirState(dirResult.data);
+      setData();
       setLoading(false);
     })();
   }, []);
 
+  const handleClickUpdateIcon = (e) => {
+    e.stopPropagation();
+    setIsOpen(true);
+    e.stopPropagation();
+  };
+  const handleMouseEnter = () => {
+    setIsHover(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHover(false);
+  };
+
   return (
     <Container>
       <div className="header">
-        <div className="header__title">캐릭터/일러스트레이션</div>
-        <div className="header__update-icon"></div>
-        <div className="empty"></div>
+        <div className="header__title">{dirInfo && dirInfo.name}</div>
+        <div
+          className="header__update-icon"
+          onClick={handleClickUpdateIcon}
+        ></div>
         <div className="header__share">
           <div className="icon"></div>
           <div className="desc">디렉토리 공유</div>
@@ -51,16 +83,26 @@ export default withRouter(({ history }) => {
         <div className="info__cookie-num">{cookies ? cookies.length : 0}개</div>
       </div>
       <div className="mid">
-        <div className="mid__profile"></div>
-        <div className="mid__name">Jeongin Lee</div>
-        <div className="empty"></div>
+        {history.location.pathname.split("/")[1] === "share" && (
+          <div>
+            <div className="mid__profile"></div>
+            <div className="mid__name">Jeongin Lee</div>
+          </div>
+        )}
+        <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
         <div className="toggle">
-          <div className="toggle__help">?</div>
+          <div
+            className="toggle__help"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            ?
+          </div>
           <div className="toggle__title">안 읽은 쿠키 모아보기</div>
           <Swtich />
         </div>
       </div>
-      {loading ? (
+      {loading || !cookies ? (
         <Loading />
       ) : (
         <CardContainer>
@@ -73,6 +115,16 @@ export default withRouter(({ history }) => {
           )}
         </CardContainer>
       )}
+      {isOpen && (
+        <DirFixModal
+          setData={setData}
+          setIsOpen={setIsOpen}
+          setIsDelOpen={setIsDelOpen}
+          dir={dirInfo}
+        />
+      )}
+      {ShareClick && <ToastMsg msg="링크가 복사되었어요!" />}
+      {DeleteCookieClick && <ToastMsg msg="쿠키를 삭제했어요!" />}
     </Container>
   );
 });
@@ -84,6 +136,15 @@ const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(32rem, auto));
   grid-gap: 3.2rem;
+`;
+
+const PopupHelp = styled.img`
+  display: ${(props) => (props.isHover ? "block" : "none")};
+  position: absolute;
+  width: 54.8rem;
+  height: 11.2rem;
+  top: -10rem;
+  right: 34rem;
 `;
 
 const Container = styled.div`
@@ -105,6 +166,8 @@ const Container = styled.div`
       background: url(${updateIconBk}) center center / cover no-repeat;
     }
     &__share {
+      display: flex;
+      margin-left: auto;
       cursor: pointer;
       border: 2px solid ${({ theme }) => theme.colors.cookieOrange};
       border-radius: 0.8rem;
@@ -112,7 +175,6 @@ const Container = styled.div`
       height: 5.6rem;
       background-color: ${({ theme }) => theme.colors.white};
       color: ${({ theme }) => theme.colors.cookieOrange};
-      display: flex;
       justify-content: center;
       align-items: center;
       .icon {
@@ -172,7 +234,9 @@ const Container = styled.div`
   .toggle {
     display: flex;
     align-items: center;
+    margin-left: auto;
     &__help {
+      font-family: "Poppins", sans-serif;
       cursor: pointer;
       width: 2.8rem;
       height: 2.8rem;
@@ -190,8 +254,5 @@ const Container = styled.div`
       font-size: 2rem;
       color: ${({ theme }) => theme.colors.gray_5};
     }
-  }
-  .empty {
-    flex: 1;
   }
 `;

@@ -33,9 +33,7 @@ const Content = styled.div`
       !props.thumbnail
         ? "calc((160 / 360) * 100%)"
         : "calc((220 / 360) * 100%)"};
-    background: url(${(props) =>
-        !props.thumbnail ? defaultImg : props.thumbnail})
-      center center / cover no-repeat;
+    background: url(${(props) =>!props.thumbnail ? defaultImg : props.thumbnail})center center / cover no-repeat;
     border-radius: 1.2rem;
   }
   .title {
