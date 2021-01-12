@@ -4,7 +4,7 @@ import { Header } from "../components";
 const MainPage = () => {
   return (
     <div>
-      <Header /> login
+      <Header /> aaaaaaaaaa
     </div>
   );
 };
