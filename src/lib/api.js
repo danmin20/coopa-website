@@ -114,3 +114,20 @@ export const getDirAll = async (headers) => {
     return e;
   }
 };
+
+export const updateDir = async (headers, body, id) => {
+  try {
+    const { data } = await axios({
+      baseURL,
+      url: `/directories/${id}`,
+      method: "put",
+      headers,
+      data: body,
+    });
+    console.log("[SUCCESS] UPDATE DIRECTORIES", data);
+    return data;
+  } catch (e) {
+    console.error("[FAIL] UPDATE DIRECTORIES", e);
+    return e;
+  }
+};
