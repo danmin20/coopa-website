@@ -55,6 +55,11 @@ export const ShareClickState = atom({
   default: false,
 });
 
+export const DirShareClickState = atom({
+  key: "DirShareClickState",
+  default: false,
+});
+
 export const DeleteCookieClickState = atom({
   key: "DeleteClickState",
   default: false,

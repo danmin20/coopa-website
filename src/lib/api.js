@@ -131,3 +131,36 @@ export const updateDir = async (headers, body, id) => {
     return e;
   }
 };
+
+export const postShareToken = async (headers, body) => {
+  try {
+    const { data } = await axios({
+      baseURL,
+      url: "/share",
+      method: "post",
+      headers,
+      data: body,
+    });
+    console.log("[SUCCESS] POST SHARE TOKEN", data);
+    return data;
+  } catch (e) {
+    console.error("[FAIL] POST SHARE TOKEN", e);
+    return e;
+  }
+};
+
+export const getShareToken = async (headers, token) => {
+  try {
+    const { data } = await axios({
+      baseURL,
+      url: `/share/${token}`,
+      method: "get",
+      headers,
+    });
+    console.log("[SUCCESS] GET SHARE TOKEN", data);
+    return data;
+  } catch (e) {
+    console.error("[FAIL] GET SHARE TOKEN", e);
+    return e;
+  }
+};

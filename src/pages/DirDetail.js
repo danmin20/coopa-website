@@ -5,14 +5,20 @@ import shareIcon from "../assets/img/share_icon.svg";
 import shareIconW from "../assets/img/share_icon_white.svg";
 import cookieIcon from "../assets/img/cookie_icon.svg";
 import Swtich from "../components/Switch";
-import { getDirCookies, getDirAll } from "../lib/api";
+import {
+  getDirCookies,
+  getDirAll,
+  postShareToken,
+  getShareToken,
+} from "../lib/api";
 import { withRouter } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   DirState,
   DeleteCookieClickState,
   ShareClickState,
+  DirShareClickState,
 } from "../states/atom";
 import SharedCard from "../components/SharedCard";
 import MyCard from "../components/MyCard";
@@ -20,6 +26,7 @@ import DirFixModal from "../components/DirFixModal";
 import ToastMsg from "../components/ToastMsg";
 import helpPopup from "../assets/img/cookies_img_help.svg";
 import Header from "../components/Header";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // 로그인 구현되면 지우기
 const token = {
@@ -37,8 +44,11 @@ export default withRouter(({ history }) => {
   const ShareClick = useRecoilValue(ShareClickState);
   const [isHover, setIsHover] = useState(false);
   const DeleteCookieClick = useRecoilValue(DeleteCookieClickState);
+  const [ShareDirLink, setShareDirLink] = useState(null);
+  const DirShareClick = useRecoilValue(DirShareClickState);
+  const setDirShareClick = useSetRecoilState(DirShareClickState);
 
-  const setData = async () => {
+  const setMyData = async () => {
     const dirId = history.location.pathname.split("/")[2];
     const result = await getDirCookies(token, dirId);
     const dirResult = await getDirAll(token);
@@ -47,9 +57,17 @@ export default withRouter(({ history }) => {
     setDirState(dirResult.data);
   };
 
+  const setShareData = async () => {
+    const shareToken = history.location.pathname.split("/")[2];
+    const result = await getShareToken(token, shareToken);
+    setCookies(result.data.cookies);
+    setDirInfo(result.data.directoryInfo);
+  };
+
   useEffect(() => {
     (async () => {
-      setData();
+      history.location.pathname.split("/")[1] === "directory" && setMyData();
+      history.location.pathname.split("/")[1] === "share" && setShareData();
       setLoading(false);
     })();
   }, []);
@@ -66,6 +84,21 @@ export default withRouter(({ history }) => {
     setIsHover(false);
   };
 
+  const shareDir = async (e) => {
+    setDirShareClick(true);
+    await postShareToken(token, { directoryId: dirInfo.id }).then((r) => {
+      setShareDirLink(
+        `https://www.cookieparking.com/share/${r.data.shareToken}`
+      );
+    });
+  };
+
+  const onCopy = async (e) => {
+    await shareDir().then(() => {
+      return { copied: true };
+    });
+  };
+
   return (
     <>
       <Header />
@@ -76,10 +109,14 @@ export default withRouter(({ history }) => {
             className="header__update-icon"
             onClick={handleClickUpdateIcon}
           ></div>
-          <div className="header__share">
-            <div className="icon"></div>
-            <div className="desc">디렉토리 공유</div>
-          </div>
+          {history.location.pathname.split("/")[1] === "directory" && (
+            <CopyToClipboard text={ShareDirLink} onCopy={onCopy}>
+              <div className="header__share">
+                <div className="icon"></div>
+                <div className="desc">디렉토리 공유</div>
+              </div>
+            </CopyToClipboard>
+          )}
         </div>
         <div className="info">
           <img alt="" className="info__icon" src={cookieIcon} />
@@ -113,7 +150,7 @@ export default withRouter(({ history }) => {
           <CardContainer>
             {cookies.map((cookie, index) =>
               history.location.pathname.split("/")[1] === "directory" ? (
-                <MyCard cookies={cookie} key={index} />
+                <MyCard setData={setMyData} cookies={cookie} key={index} />
               ) : (
                 <SharedCard cookies={cookie} key={index} />
               )
@@ -123,7 +160,7 @@ export default withRouter(({ history }) => {
       </Container>
       {isOpen && (
         <DirFixModal
-          setData={setData}
+          setData={setMyData}
           setIsOpen={setIsOpen}
           setIsDelOpen={setIsDelOpen}
           dir={dirInfo}
@@ -131,6 +168,7 @@ export default withRouter(({ history }) => {
       )}
       {ShareClick && <ToastMsg msg="링크가 복사되었어요!" />}
       {DeleteCookieClick && <ToastMsg msg="쿠키를 삭제했어요!" />}
+      {DirShareClick && <ToastMsg msg="공유 링크가 생성되었어요!" />}
     </>
   );
 });
