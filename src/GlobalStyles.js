@@ -8,5 +8,6 @@ export default createGlobalStyle`
     body{
         font-family: 'Spoqa Han Sans Neo','sans-serif';
         letter-spacing: -0.02em;
+        box-sizing: border-box;
     }
 `;
