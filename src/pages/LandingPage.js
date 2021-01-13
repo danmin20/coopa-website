@@ -14,16 +14,13 @@ import duribun41 from "../assets/img/Lp_4_duribun.svg";
 import lp5Img from "../assets/img/Lp_5_img.svg";
 import cookieIcon from "../assets/img/cookie_icon_white.svg";
 import Fade from "react-reveal/Fade";
+// 박스영역 그려달라해서, 그 박스를 수평축에 걸리게 한 다음, 그 박스를 부모요소로 두고 이미지를 그걸 기준으로 absolute 위치 잡기
 
 export default () => {
   return (
     <>
       <ContainerOne>
-        <img
-          className="navlogo"
-          src={naviImgLogo}
-          style={{ marginTop: "1.4rem", marginLeft: "2.8rem" }}
-        />
+        <img className="navlogo" src={naviImgLogo} />
         <div className="content">
           <div className="content__h1">
             스쳐간 콘텐츠가
@@ -68,15 +65,17 @@ export default () => {
         </div>
       </ContainerTwo>
       <ContainerThree>
-        <Fade delay={1100} duration={700}>
-          <img className="i1" src={lp3Img1} />
-        </Fade>
-        <Fade delay={850} duration={700}>
-          <img className="i2" src={lp3Img2} />
-        </Fade>
-        <Fade distance="2.6rem" bottom delay={1100} duration={700}>
-          <img className="i3" src={duribun31} />
-        </Fade>
+        <div className="img">
+          <Fade distance="2.6rem" bottom delay={1100} duration={700}>
+            <img className="img__i3" src={duribun31} />
+          </Fade>
+          <Fade delay={850} duration={700}>
+            <img className="img__i2" src={lp3Img2} />
+          </Fade>
+          <Fade delay={1100} duration={700}>
+            <img className="img__i1" src={lp3Img1} />
+          </Fade>
+        </div>
         <div className="content">
           <Fade distance="2.1rem" bottom delay={500} duration={700}>
             <div className="content__h1">
@@ -93,15 +92,6 @@ export default () => {
         </div>
       </ContainerThree>
       <ContainerFour>
-        <Fade distance="3.8rem" right delay={850} duration={700}>
-          <img className="i1" src={lp4Img1} />
-        </Fade>
-        <Fade distance="3.8rem" right delay={1100} duration={700}>
-          <img className="i2" src={lp4Img2} />
-        </Fade>
-        <Fade distance="2.6rem" bottom delay={1100} duration={700}>
-          <img className="i3" src={duribun41} />
-        </Fade>
         <div className="content">
           <Fade distance="2rem" bottom delay={500} duration={700}>
             <div className="content__h1">
@@ -119,14 +109,31 @@ export default () => {
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
           </Fade>
         </div>
+        <div className="img">
+          <Fade distance="3.8rem" right delay={1100} duration={700}>
+            <img className="img__i2" src={lp4Img2}></img>
+          </Fade>
+          <Fade distance="3.8rem" right delay={850} duration={700}>
+            <img className="img__i1" src={lp4Img1} />
+          </Fade>
+          <Fade distance="2.6rem" bottom delay={1100} duration={700}>
+            <img className="img__i3" src={duribun41} />
+          </Fade>
+        </div>
       </ContainerFour>
       <ContainerFive>
         <div className="content">
           <Fade distance="2rem" bottom delay={500} duration={700}>
             <div className="content__h1">
-              새 탭에서 <br />
-              매일 쿠키파킹
-              <img src={cookieIcon} style={{ marginLeft: "1rem" }} />
+              <div>새 탭에서</div>
+              <div className="desc">
+                <div>매일 쿠키파킹</div>
+                <img
+                  className="icon"
+                  src={cookieIcon}
+                  style={{ marginLeft: "1rem" }}
+                />
+              </div>
             </div>
           </Fade>
           <div className="content__h2">
@@ -147,6 +154,7 @@ export default () => {
     </>
   );
 };
+
 const ContainerFive = styled.div`
   width: 100%;
   height: 100vh;
@@ -158,21 +166,30 @@ const ContainerFive = styled.div`
   .i1 {
     position: absolute;
     bottom: 0;
-    width: 169.4rem;
-    /* height: 72.7rem; */
-    height: auto;
+    height: 45vh;
   }
   .content {
-    padding-top: 14rem;
+    padding-top: 7rem;
     text-align: center;
     color: ${({ theme }) => theme.colors.white};
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     &__h1 {
+      text-align: center;
       font-size: 5.8rem;
-      line-height: 8.2rem;
+      line-height: 8.8rem;
       font-weight: 700;
+      .desc {
+        display: flex;
+        align-items: center;
+      }
+      .icon {
+        padding-bottom: 1rem;
+        width: 4rem;
+        height: 4rem;
+      }
     }
     &__h2 {
       margin-top: 4rem;
@@ -190,6 +207,7 @@ const ContainerFive = styled.div`
       justify-content: center;
       align-items: center;
       &__desc {
+        padding-top: 0.4rem;
         margin-left: 1.6rem;
         color: ${({ theme }) => theme.colors.black_1};
         font-size: 2.5rem;
@@ -216,37 +234,41 @@ const ContainerFour = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(255, 113, 52, 0.06);
-  position: relative;
-  .i1 {
-    position: absolute;
-    right: 19.2rem;
-    bottom: 19.8rem;
-    z-index: 1;
-    width: 76.4rem;
-    /* height: 44.4rem; */
-    height: auto;
-  }
-  .i2 {
-    position: absolute;
-    right: 29.2rem;
-    bottom: 29.1rem;
-    z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  .img {
+    position: relative;
+    display: flex;
+    justify-items: center;
     width: 90.5rem;
-    /* height: 56.4rem; */
-    height: auto;
-  }
-  .i3 {
-    position: absolute;
-    right: 22.3rem;
-    bottom: 16.3rem;
-    z-index: 3;
-    width: 16rem;
-    /* height: 16rem; */
-    height: auto;
+    height: 56.4rem;
+    &__i1 {
+      position: absolute;
+      width: 76.4rem;
+      height: auto;
+      right: 5.5rem;
+      bottom: 6.1rem;
+      z-index: 1;
+    }
+    &__i2 {
+      position: absolute;
+      width: 90.5rem;
+      height: auto;
+      right: 12.4rem;
+      bottom: 11.7rem;
+      z-index: 2;
+    }
+    &__i3 {
+      position: absolute;
+      width: 16rem;
+      height: auto;
+      right: 8.6rem;
+      bottom: 2.6rem;
+      z-index: 3;
+    }
   }
   .content {
-    padding-top: 31.5rem;
-    margin-left: 32.3rem;
     &__h1 {
       font-size: 5.4rem;
       line-height: 8.2rem;
@@ -277,37 +299,39 @@ const ContainerThree = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
-  .i1 {
-    position: absolute;
-    z-index: 3;
-    bottom: 20.5rem;
-    left: 67rem;
-    width: 32.1rem;
-    /* height: 43.9rem; */
-    height: auto;
-  }
-  .i2 {
-    position: absolute;
-    z-index: 2;
-    bottom: 24.4rem;
-    left: 49rem;
-    width: 36rem;
-    /* height: 51.2rem; */
-    height: auto;
-  }
-  .i3 {
-    position: absolute;
-    z-index: 3;
-    bottom: 18.8rem;
-    left: 30.3rem;
-    width: 24.4rem;
-    /* height: 24.4rem; */
-    height: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  .img {
+    position: relative;
+    width: 87.9rem;
+    height: 68.6rem;
+    &__i1 {
+      position: absolute;
+      width: 32.1rem;
+      height: auto;
+      right: 11.7rem;
+      bottom: 6.8rem;
+      z-index: 3;
+    }
+    &__i2 {
+      position: absolute;
+      width: 36rem;
+      height: auto;
+      left: 26.1rem;
+      bottom: 10.7rem;
+      z-index: 2;
+    }
+    &__i3 {
+      position: absolute;
+      left: 7.4rem;
+      bottom: 5.1rem;
+      width: 24.4rem;
+      height: auto;
+      z-index: 3;
+    }
   }
   .content {
-    position: absolute;
-    padding-top: 35rem;
-    right: 32.3rem;
     &__h1 {
       font-size: 5.4rem;
       line-height: 8.2rem;
@@ -326,12 +350,14 @@ const ContainerTwo = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .content {
     display: flex;
     flex-direction: column;
     margin-left: 32.3rem;
     &__h1 {
-      padding-top: 30.7rem;
       font-size: 5.8rem;
       line-height: 8.8rem;
       color: ${({ theme }) => theme.colors.black_2};
@@ -361,9 +387,17 @@ const ContainerOne = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .navlogo {
+    position: absolute;
+    top: 1.4rem;
+    left: 2.8rem;
+    width: 20.1rem;
+  }
   .d3 {
     position: absolute;
-    /* margin-top: 15.3rem; */
     top: 15.3rem;
     right: 0;
     width: 26.1rem;
@@ -384,7 +418,6 @@ const ContainerOne = styled.div`
     height: auto;
   }
   .content {
-    margin-top: 32.4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -414,6 +447,7 @@ const ContainerOne = styled.div`
       justify-content: center;
       align-items: center;
       &__desc {
+        padding-top: 0.4rem;
         margin-left: 1.6rem;
         color: ${({ theme }) => theme.colors.black_1};
         font-size: 2.5rem;
