@@ -1,10 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import defaultImg from "../assets/img/img_default.svg";
+import { postCookieRead } from "../lib/api";
+
+const token = {
+  "x-access-token":
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+};
 
 export default ({ cookies }) => {
+  const handleCookieClick = async () => {
+    window.open(cookies.link);
+    // 읽은 쿠키 표시
+    await postCookieRead(token, cookies.id);
+  };
+
   return (
-    <Container>
+    <Container onClick={handleCookieClick}>
       <Content thumbnail={cookies.thumbnail}>
         <div className="thumbnail" />
         <div className="title">{cookies.title}</div>
@@ -33,7 +45,9 @@ const Content = styled.div`
       !props.thumbnail
         ? "calc((160 / 360) * 100%)"
         : "calc((220 / 360) * 100%)"};
-    background: url(${(props) =>!props.thumbnail ? defaultImg : props.thumbnail})center center / cover no-repeat;
+    background: url(${(props) =>
+        !props.thumbnail ? defaultImg : props.thumbnail})
+      center center / cover no-repeat;
     border-radius: 1.2rem;
   }
   .title {
