@@ -4,7 +4,7 @@ import mainLogo from "../assets/img/main_logo.svg";
 import profileIcon from "../assets/img/profile_icon.svg";
 import { withRouter } from "react-router-dom";
 
-export default withRouter(({ history }) => {
+export default withRouter(({ history, isMine }) => {
   return (
     <Container>
       <div className="main-logo" onClick={() => history.push("/")}>
@@ -14,18 +14,20 @@ export default withRouter(({ history }) => {
           src={mainLogo}
         />
       </div>
-      <div
-        className="profile"
-        onClick={() =>
-          window.open("https://www.cookieparking.com/mypage", "_self")
-        }
-      >
-        <img
-          style={{ width: "3.6rem", height: "3.6rem" }}
-          className="profile__img"
-          src={profileIcon}
-        />
-      </div>
+      {isMine && (
+        <div
+          className="profile"
+          onClick={() =>
+            window.open("https://www.cookieparking.com/mypage", "_self")
+          }
+        >
+          <img
+            style={{ width: "3.6rem", height: "3.6rem" }}
+            className="profile__img"
+            src={profileIcon}
+          />
+        </div>
+      )}
     </Container>
   );
 });

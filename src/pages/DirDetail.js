@@ -4,12 +4,13 @@ import updateIconBk from "../assets/img/update_dir_icon_bk.svg";
 import shareIcon from "../assets/img/share_icon.svg";
 import shareIconW from "../assets/img/share_icon_white.svg";
 import cookieIcon from "../assets/img/cookie_icon.svg";
-import Swtich from "../components/Switch";
+import Switch from "../components/Switch";
 import {
   getDirCookies,
   getDirAll,
   postShareToken,
   getShareToken,
+  getCookiesUnRead,
 } from "../lib/api";
 import { withRouter } from "react-router-dom";
 import Loading from "../components/Loading";
@@ -48,11 +49,18 @@ export default withRouter(({ history }) => {
   const DirShareClick = useRecoilValue(DirShareClickState);
   const setDirShareClick = useSetRecoilState(DirShareClickState);
   const [userInfo, setUserInfo] = useState(null);
+  const [isToggled, setIsToggled] = useState(false);
 
   const setMyData = async () => {
     const dirId = history.location.pathname.split("/")[2];
+    // let cookieResult;
     const result = await getDirCookies(token, dirId);
     const dirResult = await getDirAll(token);
+
+    // 토글 구현 필요
+    // if(isToggled){
+    //   cookieResult = await getCookiesUnRead()
+    // }
     setCookies(result.data.cookies);
     setDirInfo(result.data.directoryInfo);
     setDirState(dirResult.data);
@@ -101,9 +109,16 @@ export default withRouter(({ history }) => {
     });
   };
 
+  const onToggleSwitch = (e) => {
+    if (e.target.checked) setIsToggled(true);
+    else setIsToggled(false);
+  };
+
   return (
     <>
-      <Header />
+      <Header
+        isMine={history.location.pathname.split("/")[1] === "directory"}
+      />
       <Container>
         <div className="header">
           <div className="header__title">{dirInfo && dirInfo.name}</div>
@@ -136,7 +151,7 @@ export default withRouter(({ history }) => {
                 src={userInfo.profileImage}
                 className="mid__profile"
               ></img>
-              <div className="mid__name">{userInfo.email}</div>
+              <div className="mid__name">{userInfo.name}</div>
             </div>
           )}
           <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
@@ -149,7 +164,7 @@ export default withRouter(({ history }) => {
               ?
             </div>
             <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-            <Swtich />
+            <Switch onChange={onToggleSwitch} />
           </div>
         </div>
         {loading || !cookies ? (
@@ -213,6 +228,7 @@ const Container = styled.div`
     &__update-icon {
       cursor: pointer;
       margin-left: 1.6rem;
+      margin-bottom: 0.75rem;
       width: 3rem;
       height: 3rem;
       background: url(${updateIconBk}) center center / cover no-repeat;

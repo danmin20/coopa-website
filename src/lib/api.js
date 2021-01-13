@@ -164,3 +164,19 @@ export const getShareToken = async (headers, token) => {
     return e;
   }
 };
+
+export const getCookiesUnRead = async (headers) => {
+  try {
+    const { data } = await axios({
+      baseURL,
+      url: "/cookies/unread",
+      method: "get",
+      headers,
+    });
+    console.log("[SUCCESS] GET COOKIES UNREAD", data);
+    return data;
+  } catch (e) {
+    console.error("[FAIL] GET COOKIES UNREAD", e);
+    return e;
+  }
+};
