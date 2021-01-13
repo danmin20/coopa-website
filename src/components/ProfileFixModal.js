@@ -2,19 +2,37 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import useInput from '../hooks/useInput';
 import GlobalStyles from '../GlobalStyles';
+import loginAPI from "../lib/loginApi";
+import { useRecoilState } from "recoil";
+import { UserDataState } from "../states/atom";
+
+// localStorage userToken 으로 바꾸기
+const token = {
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc'
+}
 
 export default ({isProfileClicked, setIsProfileClicked}) => {
     const [isCancleHover, setIsCancleHover] = useState(false);
     const [isFixHover, setIsFixHover] = useState(false);
-    const nickInput = useInput("원래 닉네임");
-    const introInput = useInput("원래 한 줄 소개");
+    const [userData, setUserData] = useRecoilState(UserDataState);
+    const nickInput = useInput(userData.name);
+    const introInput = useInput(userData.introduction);
 
     const handleClick = () => {
         setIsProfileClicked(false);
     };
 
     const handleFixClick = async () => {
-        // 프로필 편집 추가하기
+        const data ={
+          'name': nickInput,
+          'introduction': introInput
+        }
+        const response = await loginAPI.putUsers(token, data);
+        console.log(response);
+          // response.then((res) => {
+          //   console.log(res);
+          //   setUserData(res.data);
+          // })
         setIsProfileClicked(false);
     };
 
@@ -42,12 +60,12 @@ export default ({isProfileClicked, setIsProfileClicked}) => {
             <ModalWrap>
                 <Text>프로필 편집</Text>
                 <DetailWrap>
-                    <SmallText color={'#333333'}>닉네임</SmallText>
+                    <SmallText color={'#333333'}>{userData.name}</SmallText>
                     <SmallText color={'#999999'}>{nickInput.value.length}/20</SmallText>
                 </DetailWrap>
                 <InputBox value={nickInput.value} type="text" onChange={nickInput.onChange} height={'3.4rem'}/>
                 <DetailWrap>
-                    <SmallText color={'#333333'}>한 줄 소개</SmallText>
+                    <SmallText color={'#333333'}>{userData.introduction}</SmallText>
                     <SmallText color={'#999999'}>{introInput.value.length}/70</SmallText>
                 </DetailWrap>
                 <InputBox value={introInput.value} type="text" onChange={introInput.onChange} height={'7.2rem'}/>

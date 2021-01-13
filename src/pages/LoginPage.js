@@ -47,7 +47,7 @@ const LoginPage = () => {
         }
       );
       // window.postMessage("hey");
-      window.open('chrome-extension://lbgdcjefhogocimkajjkcibodjcnlghj/newtab.html', '_self');
+      // window.open('chrome-extension://lbgdcjefhogocimkajjkcibodjcnlghj/newtab.html', '_self');
     });
     // localStorage.setItem('userToken', Response.data.jwt);
     // localStorage.setItem('isLogin', true);
@@ -129,7 +129,7 @@ const Container = styled.div`
       margin-top: 2.5rem;
       font-weight: 500;
       font-size: 6.4rem;
-      line-height: 8rem;
+      line-height: 10rem;
     }
     &__policy {
       color: ${({ theme }) => theme.colors.gray_5};

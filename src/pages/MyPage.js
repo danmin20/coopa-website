@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import userProfile from "../assets/img/user_profile.svg";
 import editIcon from "../assets/img/editIcon.svg";
@@ -7,16 +7,23 @@ import cookieIconOrange from "../assets/img/cookie_icon_orange.svg";
 import googleLogo from "../assets/img/google_logo.svg";
 import helpPopupImg from "../assets/img/mp_help_popup.svg";
 import { useRecoilState } from "recoil";
-import { ProfileClickedState } from "../states/atom";
+import { ProfileClickedState, UserDataState } from "../states/atom";
 import ProfileFixModal from "../components/ProfileFixModal";
 import meerkatLogout from "../assets/img/meerkat_logout.svg";
 import Header from "../components/Header";
+import loginAPI from '../lib/loginApi';
+
+// localStorage userToken 으로 바꾸기
+const token = {
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc'
+}
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
   const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(
     ProfileClickedState
   );
+  const [userData, setUserData] = useRecoilState(UserDataState);
 
   const handleProfileBtnClick = () => {
     setIsProfileBtnClicked(true);
@@ -35,6 +42,14 @@ export default () => {
   const handleMouserLeave = () => {
     setIsHover(false);
   };
+
+  useEffect(() => {
+    const response = loginAPI.getUsers(token);
+      response.then((res)=>{
+        setUserData(res.data);
+      })
+  }, [])
+
   return (
     <>
       <Header />
@@ -42,11 +57,9 @@ export default () => {
         <UserInfo>
           <img className="user-img" alt="" src={userProfile} />
           <div className="user-intro">
-            <div className="user-intro__name">김쿠키</div>
+            <div className="user-intro__name">{userData.name}</div>
             <div className="user-intro__info">
-              이 곳에는 사용자의 자기 소개를 입력하는 곳입니다. 만약 사용자가
-              입력 전이라면 “자기 소개를 입력해주세요. (70자 이내)”가 들어갈
-              예정입니다.
+              {userData.introduction}
             </div>
             <div className="user-intro__edit" onClick={handleProfileBtnClick}>
               <div className="icon"></div>
@@ -60,18 +73,18 @@ export default () => {
             지금까지 쿠키&nbsp;
             <CookieNumWrap>
               <CookieNumBox>
-                <CookieInfoNum number={1328} />
+                <CookieInfoNum number={userData.allCookies} />
                 <CookieNumPlus>+</CookieNumPlus>
               </CookieNumBox>
-              <CookieNumUnderLine width={String(1328).length} />
+              <CookieNumUnderLine width={String(userData.allCookies).length} />
             </CookieNumWrap>
             개를 파킹했고&nbsp;
             <CookieNumWrap>
               <CookieNumBox>
-                <CookieVisitNum number={178} />
+                <CookieVisitNum number={userData.readCount} />
                 <CookieNumPlus>+</CookieNumPlus>
               </CookieNumBox>
-              <CookieNumUnderLineTwo width={String(178).length} />
+              <CookieNumUnderLineTwo width={String(userData.readCount).length} />
             </CookieNumWrap>
             번 읽었어요!
           </div>
@@ -81,7 +94,7 @@ export default () => {
           <div className="email">
             <div className="email__title">이메일</div>
             <div className="email__content">
-              <div style={{ marginLeft: "2.7rem" }}>dlwjddls963@gmail.com</div>
+              <div style={{ marginLeft: "2.7rem" }}>{userData.email}</div>
               <div className="empty"></div>
               <img src={googleLogo} style={{ marginRight: "1.5rem" }} />
             </div>
