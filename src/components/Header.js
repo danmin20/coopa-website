@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import mainLogo from "../assets/img/main_logo.svg";
-import profileIcon from "../assets/img/profile_icon.svg";
+import mainLogo from "../assets/img/navi_img_logo.svg";
+import onboardingIcon from "../assets/img/icon_onboarding.svg";
+import mypageIcon from "../assets/img/icon_mypage.svg";
+import alarmLogo from "../assets/img/icon_alarm.svg";
 import { withRouter } from "react-router-dom";
 
 export default withRouter(({ history, isMine }) => {
@@ -14,20 +16,18 @@ export default withRouter(({ history, isMine }) => {
           src={mainLogo}
         />
       </div>
-      {isMine && (
-        <div
-          className="profile"
+      <div className="profile">
+        <img className="profile__img" src={onboardingIcon} />
+        <img className="profileimg" src={alarmLogo} />
+        <img
+          style={{ marginRight: "2rem" }}
+          className="profileImg"
+          src={mypageIcon}
           onClick={() =>
             window.open("https://www.cookieparking.com/mypage", "_self")
           }
-        >
-          <img
-            style={{ width: "3.6rem", height: "3.6rem" }}
-            className="profile__img"
-            src={profileIcon}
-          />
-        </div>
-      )}
+        />
+      </div>
     </Container>
   );
 });
@@ -35,7 +35,7 @@ export default withRouter(({ history, isMine }) => {
 const Container = styled.div`
   width: 100%;
   height: 6.5rem;
-  background-color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,9 +54,10 @@ const Container = styled.div`
     margin-right: 2.2rem;
     cursor: pointer;
 
-    &__img {
-      width: 3.8rem;
-      height: 3.8rem;
+    img {
+      margin-left: 1.6rem;
+      width: 4.4rem;
+      height: 4.4rem;
     }
   }
 `;

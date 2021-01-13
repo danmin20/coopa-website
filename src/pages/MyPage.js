@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import userProfile from "../assets/img/user_profile.svg";
-import editIcon from "../assets/img/editIcon.svg";
-import editIconWhite from "../assets/img/editIcon_white.svg";
+import editIcon from "../assets/img/icon_profileedit.svg";
+import editIconWhite from "../assets/img/icon_profileedit_white.svg";
 import cookieIconOrange from "../assets/img/cookie_icon_orange.svg";
 import googleLogo from "../assets/img/google_logo.svg";
 import helpPopupImg from "../assets/img/mp_help_popup.svg";
@@ -11,6 +11,7 @@ import { ProfileClickedState } from "../states/atom";
 import ProfileFixModal from "../components/ProfileFixModal";
 import meerkatLogout from "../assets/img/meerkat_logout.svg";
 import Header from "../components/Header";
+import helpIcon from "../assets/img/icon_help.svg";
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
@@ -50,7 +51,9 @@ export default () => {
             </div>
             <div className="user-intro__edit" onClick={handleProfileBtnClick}>
               <div className="icon"></div>
-              <div style={{ marginLeft: "0.9rem" }}>프로필 편집</div>
+              <div style={{ marginLeft: "0.9rem", marginRight: "0.3rem" }}>
+                프로필 편집
+              </div>
             </div>
           </div>
         </UserInfo>
@@ -83,7 +86,9 @@ export default () => {
             <div className="email__content">
               <div style={{ marginLeft: "2.7rem" }}>dlwjddls963@gmail.com</div>
               <div className="empty"></div>
-              <img src={googleLogo} style={{ marginRight: "1.5rem" }} />
+              <div className="email__icon">
+                <img src={googleLogo} />
+              </div>
             </div>
           </div>
         </AccountInfo>
@@ -98,9 +103,7 @@ export default () => {
               className="env-newtab__help"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouserLeave}
-            >
-              ?
-            </div>
+            ></div>
           </div>
           <div className="desc">
             매일 새 탭을 열 때마다 쿠키파킹과 함께하세요!
@@ -141,11 +144,13 @@ const LogoutBtn = styled.img`
   position: absolute;
   transition-property: bottom display;
   transition-duration: 0.5s;
-  bottom: 0rem;
+  bottom: -1rem;
   right: 7.75rem;
   z-index: -1;
-  width: 7.75rem;
-  height: 7.75rem;
+  /* width: 7.75rem;
+  height: 7.75rem; */
+  width: 9rem;
+  height: 9rem;
   ${(props) =>
     props.isBtnHover &&
     css`
@@ -210,21 +215,21 @@ const UserInfo = styled.div`
 
       border: 0.2rem solid ${({ theme }) => theme.colors.cookieOrange};
       box-sizing: border-box;
-      filter: drop-shadow(0px 0px 1.2rem rgba(0, 0, 0, 0.13));
+      /* filter: drop-shadow(0px 0px 1.2rem rgba(0, 0, 0, 0.13)); */
       border-radius: 1rem;
       .icon {
         background: url(${editIcon}) center center / cover no-repeat;
-        width: 2.2rem;
-        height: 2.2rem;
+        width: 3.2rem;
+        height: 3.2rem;
         transition-duration: 0.5s;
       }
       :hover {
         .icon {
           background: url(${editIconWhite}) center center / cover no-repeat;
         }
+
         background: ${({ theme }) => theme.colors.cookieOrange};
         color: ${({ theme }) => theme.colors.white};
-        border: none;
       }
 
       font-style: normal;
@@ -415,9 +420,19 @@ const AccountInfo = styled.div`
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray_4};
   }
   .email {
-    img {
+    &__icon {
+      margin-right: 1.6rem;
       width: 5.6rem;
       height: 5.6rem;
+      border-radius: 0.8rem;
+      background-color: ${({ theme }) => theme.colors.white};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    img {
+      width: 3.2rem;
+      height: 3.2rem;
     }
     display: flex;
     align-items: center;
@@ -426,6 +441,7 @@ const AccountInfo = styled.div`
       line-height: 3.1rem;
       font-weight: normal;
       letter-spacing: -0.02em;
+      color: ${({ theme }) => theme.colors.gray_6};
     }
     &__content {
       display: flex;
@@ -450,7 +466,7 @@ const EnvSetInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 94.4rem;
-  margin-top: 6rem;
+  margin-top: 8rem;
   color: ${({ theme }) => theme.colors.black_2};
   .env {
     position: relative;
@@ -469,21 +485,14 @@ const EnvSetInfo = styled.div`
       line-height: 3.1rem;
       letter-spacing: -0.02em;
       color: ${({ theme }) => theme.colors.gray_6};
+      margin-top: 0.3rem;
     }
     &__help {
-      font-family: "Poppins", sans-serif;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.8rem;
-      height: 2.8rem;
-      border-radius: 2.8rem;
-      color: ${({ theme }) => theme.colors.white};
-      background: ${({ theme }) => theme.colors.gray_4};
-      margin-left: 1rem;
-      font-size: 2rem;
-      font-weight: 500;
+      width: 4rem;
+      height: 4rem;
+      background-image: url(${helpIcon});
+      background-size: contain;
+      margin-left: 0.5rem;
     }
   }
   .desc {
@@ -508,7 +517,7 @@ const ServiceInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 94.4rem;
-  margin-top: 6.4rem;
+  margin-top: 8rem;
   .service-header {
     width: 100%;
     height: 4.3rem;
@@ -542,7 +551,9 @@ const ServiceInfo = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-top: 13.4rem;
+    border-bottom: 5rem solid white;
     &__btn {
+      box-sizing: content-box;
       cursor: pointer;
       display: flex;
       justify-content: center;
@@ -555,6 +566,7 @@ const ServiceInfo = styled.div`
       height: 7.2rem;
       background: ${({ theme }) => theme.colors.gray_2};
       border-radius: 1.2rem;
+      border-bottom: 0.3rem solid white;
     }
   }
 `;

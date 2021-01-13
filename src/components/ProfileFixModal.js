@@ -1,69 +1,87 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import useInput from '../hooks/useInput';
-import GlobalStyles from '../GlobalStyles';
+import useInput from "../hooks/useInput";
+import GlobalStyles from "../GlobalStyles";
 
-export default ({isProfileClicked, setIsProfileClicked}) => {
-    const [isCancleHover, setIsCancleHover] = useState(false);
-    const [isFixHover, setIsFixHover] = useState(false);
-    const nickInput = useInput("원래 닉네임");
-    const introInput = useInput("원래 한 줄 소개");
+export default ({ isProfileClicked, setIsProfileClicked }) => {
+  const [isCancleHover, setIsCancleHover] = useState(false);
+  const [isFixHover, setIsFixHover] = useState(false);
+  const nickInput = useInput("원래 닉네임");
+  const introInput = useInput("원래 한 줄 소개");
 
-    const handleClick = () => {
-        setIsProfileClicked(false);
-    };
+  const handleClick = () => {
+    setIsProfileClicked(false);
+  };
 
-    const handleFixClick = async () => {
-        // 프로필 편집 추가하기
-        setIsProfileClicked(false);
-    };
+  const handleFixClick = async () => {
+    // 프로필 편집 추가하기
+    setIsProfileClicked(false);
+  };
 
-    const handleCancleMouseMove = () => {
-        setIsCancleHover(true);
-    };
+  const handleCancleMouseMove = () => {
+    setIsCancleHover(true);
+  };
 
-    const handleCancleMouseLeave = () => {
-        setIsCancleHover(false);
-    };
+  const handleCancleMouseLeave = () => {
+    setIsCancleHover(false);
+  };
 
-    const handleFixMouseMove = () => {
-        setIsFixHover(true);
-    };
+  const handleFixMouseMove = () => {
+    setIsFixHover(true);
+  };
 
-    const handleFixMouseLeave = () => {
-        setIsFixHover(false);
-    };
+  const handleFixMouseLeave = () => {
+    setIsFixHover(false);
+  };
 
-
-    return(
-        <>
-            <GlobalStyles />
-            <Wrap onClick={handleClick} />
-            <ModalWrap>
-                <Text>프로필 편집</Text>
-                <DetailWrap>
-                    <SmallText color={'#333333'}>닉네임</SmallText>
-                    <SmallText color={'#999999'}>{nickInput.value.length}/20</SmallText>
-                </DetailWrap>
-                <InputBox value={nickInput.value} type="text" onChange={nickInput.onChange} height={'3.4rem'}/>
-                <DetailWrap>
-                    <SmallText color={'#333333'}>한 줄 소개</SmallText>
-                    <SmallText color={'#999999'}>{introInput.value.length}/70</SmallText>
-                </DetailWrap>
-                <InputBox value={introInput.value} type="text" onChange={introInput.onChange} height={'7.2rem'}/>
-                <BtnWrap>
-                    <Btn isHover={isCancleHover} onClick={handleClick} onMouseLeave={handleCancleMouseLeave} onMouseMove={handleCancleMouseMove}>
-                        취소
-                    </Btn>
-                    <Btn isHover={isFixHover} onClick={handleFixClick} onMouseLeave={handleFixMouseLeave} onMouseMove={handleFixMouseMove}>
-                        확인
-                    </Btn>
-                </BtnWrap>
-            </ModalWrap>
-        </>
-    )
-}
-
+  return (
+    <>
+      <GlobalStyles />
+      <Wrap onClick={handleClick} />
+      <ModalWrap>
+        <Text>프로필 편집</Text>
+        <DetailWrap>
+          <SmallText color={"#333333"}>닉네임</SmallText>
+          <SmallText color={"#999999"}>{nickInput.value.length}/20</SmallText>
+        </DetailWrap>
+        <InputBox
+          value={nickInput.value}
+          type="text"
+          onChange={nickInput.onChange}
+          height={"3.4rem"}
+          maxLength={20}
+        />
+        <DetailWrap>
+          <SmallText color={"#333333"}>한 줄 소개</SmallText>
+          <SmallText color={"#999999"}>{introInput.value.length}/70</SmallText>
+        </DetailWrap>
+        <TextAreaBox
+          value={introInput.value}
+          type="text"
+          onChange={introInput.onChange}
+          height={"7.2rem"}
+          maxLength={70}
+        />
+        <BtnWrap>
+          <CancelBtn
+            onClick={handleClick}
+            onMouseLeave={handleCancleMouseLeave}
+            onMouseMove={handleCancleMouseMove}
+          >
+            취소
+          </CancelBtn>
+          <ConfirmBtn
+            onClick={handleFixClick}
+            onMouseLeave={handleFixMouseLeave}
+            onMouseMove={handleFixMouseMove}
+          >
+            확인
+          </ConfirmBtn>
+        </BtnWrap>
+      </ModalWrap>
+    </>
+  );
+};
 
 const Wrap = styled.div`
   width: 100vw;
@@ -73,7 +91,7 @@ const Wrap = styled.div`
   top: 0%;
   left: 0%;
   background: rgba(0, 0, 0, 0.5);
-  display: ${props => (props.isClose ? 'none' : 'box')};
+  display: ${(props) => (props.isClose ? "none" : "box")};
   flex-direction: column;
 `;
 
@@ -88,7 +106,7 @@ const ModalWrap = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  display: ${props => (props.isClose ? 'none' : 'flex')};
+  display: ${(props) => (props.isClose ? "none" : "flex")};
   flex-direction: column;
 `;
 
@@ -110,13 +128,26 @@ const SmallText = styled.div`
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 3.6rem;
-  color: ${props=>props.color};
+  color: ${(props) => props.color};
   margin-bottom: 0.6rem;
 `;
 
 const InputBox = styled.input`
   width: 52.5rem;
-  height: ${props=>props.height};
+  height: ${(props) => props.height};
+  padding: 0.8rem 2.3rem;
+  border: 0.1rem solid #333333;
+  border-radius: 1rem;
+  font-size: 2rem;
+  font-weight: 400;
+  outline: none;
+  margin-bottom: 2rem;
+  color: #333333;
+`;
+const TextAreaBox = styled.textarea`
+  width: 52.5rem;
+  padding-top: 3rem;
+  height: ${(props) => props.height};
   padding: 0.8rem 2.3rem;
   border: 0.1rem solid #333333;
   border-radius: 1rem;
@@ -136,14 +167,31 @@ const BtnWrap = styled.div`
   align-items: center;
 `;
 
-const Btn = styled.div`
+const CancelBtn = styled.div`
+  cursor: pointer;
   width: 9rem;
   height: 5.2rem;
-  background: ${props => (props.isHover ? '#FF7134' : '#F3F3F4')};
-  color: ${props => (props.isHover ? 'white' : '#404040')};
+  background: ${(props) => (props.isHover ? "#FF7134" : "#F3F3F4")};
+  color: ${(props) => (props.isHover ? "white" : "#404040")};
   border-radius: 1rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 2.1rem;
+  line-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1.5rem;
+`;
+
+const ConfirmBtn = styled.div`
+  cursor: pointer;
+  width: 9rem;
+  height: 5.2rem;
+  background: ${({ theme }) => theme.colors.cookieOrange};
+  color: ${({ theme }) => theme.colors.white};
+  border-radius: 1rem;
+  font-weight: 400;
   font-size: 2.1rem;
   line-height: 2.6rem;
   display: flex;
