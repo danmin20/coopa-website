@@ -149,7 +149,7 @@ const LogoutBtn = styled.img`
   ${(props) =>
     props.isBtnHover &&
     css`
-      bottom: 5rem;
+      bottom: 5.5rem;
     `}
 `;
 
