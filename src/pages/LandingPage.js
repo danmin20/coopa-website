@@ -5,6 +5,9 @@ import duribun1 from "../assets/img/Lp_1_duribun_1.svg";
 import duribun2 from "../assets/img/Lp_1_duribun_2.svg";
 import duribun3 from "../assets/img/Lp_1_duribun_3.svg";
 import chromeIcon from "../assets/img/chrome_icon.svg";
+import duribun21 from "../assets/img/Lp_2_duribun.svg";
+import lp2Img1 from "../assets/img/Lp_2_img_web.svg";
+import lp2Img2 from "../assets/img/Lp_2_img_parking.svg";
 import duribun31 from "../assets/img/Lp_3_duribun.svg";
 import lp3Img1 from "../assets/img/Lp_3_img_1.svg";
 import lp3Img2 from "../assets/img/Lp_3_img_2.svg";
@@ -61,6 +64,17 @@ export default () => {
           </div>
           <Fade distance="1.5rem" bottom delay={500} duration={700}>
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
+          </Fade>
+        </div>
+        <div className="img">
+          <Fade distance="2.3rem" bottom delay={850} duration={700}>
+            <img className="img__i1" src={lp2Img1} />
+          </Fade>
+          <Fade delay={850} duration={700}>
+            <img className="img__i2" src={lp2Img2} />
+          </Fade>
+          <Fade bottom distance="3rem" delay={1050} duration={700}>
+            <img className="img__i3" src={duribun21} />
           </Fade>
         </div>
       </ContainerTwo>
@@ -269,6 +283,8 @@ const ContainerFour = styled.div`
     }
   }
   .content {
+    min-width: 42rem;
+    min-height: 46.4rem;
     &__h1 {
       font-size: 5.4rem;
       line-height: 8.2rem;
@@ -332,6 +348,8 @@ const ContainerThree = styled.div`
     }
   }
   .content {
+    min-width: 35.7rem;
+    min-height: 30rem;
     &__h1 {
       font-size: 5.4rem;
       line-height: 8.2rem;
@@ -351,12 +369,14 @@ const ContainerTwo = styled.div`
   height: 100vh;
   background-color: #f6f6f6;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
   .content {
     display: flex;
     flex-direction: column;
-    margin-left: 32.3rem;
+    /* margin-left: 32.3rem; */
+    min-width: 43rem;
+    min-height: 41.6rem;
     &__h1 {
       font-size: 5.8rem;
       line-height: 8.8rem;
@@ -379,6 +399,34 @@ const ContainerTwo = styled.div`
       font-weight: 500;
       line-height: 4rem;
       color: ${({ theme }) => theme.colors.cookieOrange};
+    }
+  }
+  .img {
+    position: relative;
+    min-width: 87.9rem;
+    min-height: 68.7rem;
+    &__i1 {
+      position: absolute;
+      top: 8.9rem;
+      right: 19.2rem;
+      width: 40.6rem;
+      height: 24.5rem;
+      z-index: 1;
+    }
+    &__i2 {
+      position: absolute;
+      z-index: 2;
+      left: 12.4rem;
+      bottom: 10.7rem;
+      width: 36rem;
+      height: 35.1rem;
+    }
+    &__i3 {
+      position: absolute;
+      bottom: 5.3rem;
+      right: 9.5rem;
+      width: 23.5rem;
+      height: 19.8rem;
     }
   }
 `;
