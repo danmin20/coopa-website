@@ -12,6 +12,8 @@ import ProfileFixModal from "../components/ProfileFixModal";
 import meerkatLogout from "../assets/img/meerkat_logout.svg";
 import Header from "../components/Header";
 import helpIcon from "../assets/img/icon_help.svg";
+import rewordJson from "../assets/img/cookieparking_mypage_reward_motion.json";
+import Lottie from "react-lottie";
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
@@ -36,6 +38,17 @@ export default () => {
   const handleMouserLeave = () => {
     setIsHover(false);
   };
+
+  const lottieOptions = {
+    animationData: rewordJson,
+    loop: false,
+    autoplay: false,
+    rendererSettings: {
+      className: "add-class", // svg에 적용
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
     <>
       <Header />
@@ -58,8 +71,17 @@ export default () => {
           </div>
         </UserInfo>
         <CookieInfo>
-          <img alt="" className="cookie-icon" src={cookieIconOrange} />
           <div className="cookie-info">
+            <Lottie
+              options={lottieOptions}
+              style={{ width: "12rem", height: "14rem" }}
+              eventListeners={[
+                {
+                  eventName: "complete",
+                  callback: () => console.log("the animation completed"),
+                },
+              ]}
+            />
             지금까지 쿠키&nbsp;
             <CookieNumWrap>
               <CookieNumBox>
