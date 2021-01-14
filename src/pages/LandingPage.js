@@ -23,9 +23,9 @@ export default () => {
         <img className="navlogo" src={naviImgLogo} />
         <div className="content">
           <div className="content__h1">
-            스쳐간 콘텐츠가
+            성장하는 사람들을 위한
             <br />
-            영감이 되는 곳
+            가장 간편한 컨텐츠 파킹랏
           </div>
           <div className="content__h2">
             그때 봤던 그 콘텐츠 어디있지?
@@ -423,6 +423,8 @@ const ContainerOne = styled.div`
     align-items: center;
     justify-content: center;
     &__h1 {
+      min-width: 70rem;
+      min-height: 19.2rem;
       font-size: 6.5rem;
       line-height: 9.6rem;
       font-weight: 700;
