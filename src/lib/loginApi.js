@@ -37,7 +37,7 @@ const getUsers = async (headers) => {
 
 const putUsers = async (headers, body) => {
     try{
-        const { data } = await axios({
+        const  data  = await axios({
             baseURL,
             url: `/users`,
             method: "put",

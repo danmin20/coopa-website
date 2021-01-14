@@ -8,7 +8,7 @@ import { UserDataState } from "../states/atom";
 
 // localStorage userToken 으로 바꾸기
 const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc'
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE'
 }
 
 export default ({isProfileClicked, setIsProfileClicked}) => {
@@ -16,13 +16,14 @@ export default ({isProfileClicked, setIsProfileClicked}) => {
     const [isFixHover, setIsFixHover] = useState(false);
     const [userData, setUserData] = useRecoilState(UserDataState);
     const nickInput = useInput(userData.name);
-    const introInput = useInput(userData.introduction);
+    const introInput = useInput(userData.introduction==null? '' : userData.introduction);
 
     const handleClick = () => {
         setIsProfileClicked(false);
     };
 
     const handleFixClick = async () => {
+      console.log("handle");
         const data ={
           'name': nickInput,
           'introduction': introInput

@@ -15,7 +15,7 @@ import loginAPI from '../lib/loginApi';
 
 // localStorage userToken 으로 바꾸기
 const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc'
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE'
 }
 
 export default () => {
@@ -46,6 +46,7 @@ export default () => {
   useEffect(() => {
     const response = loginAPI.getUsers(token);
       response.then((res)=>{
+        console.log(res.data.profileImage);
         setUserData(res.data);
       })
   }, [])
@@ -55,7 +56,8 @@ export default () => {
       <Header />
       <Container>
         <UserInfo>
-          <img className="user-img" alt="" src={userProfile} />
+          {/* <div className="user-img" alt=""/> */}
+          <UserImg userData={userData.profileImage}/>
           <div className="user-intro">
             <div className="user-intro__name">{userData.name}</div>
             <div className="user-intro__info">
@@ -175,6 +177,14 @@ const Container = styled.div`
   margin-bottom: 13.2rem;
 `;
 
+const UserImg = styled.div`
+    width: 23rem;
+    height: 23rem;
+    border-radius: 23rem;
+    margin-right: 6.3rem;
+    background: url(${props=>props.userData}) center center / cover no-repeat;
+`;
+
 const UserInfo = styled.div`
   display: flex;
   flex-direction: row;
@@ -182,14 +192,7 @@ const UserInfo = styled.div`
   align-items: center;
   width: 94.4rem;
   height: 23rem;
-  .user-img {
-    width: 23rem;
-    height: 23rem;
-    border-radius: 23rem;
-    margin-right: 6.3rem;
 
-    background: #f3f3f3;
-  }
   .user-intro {
     display: flex;
     flex-direction: column;
