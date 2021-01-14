@@ -7,23 +7,22 @@ import cookieIconOrange from "../assets/img/cookie_icon_orange.svg";
 import googleLogo from "../assets/img/google_logo.svg";
 import helpPopupImg from "../assets/img/mp_help_popup.svg";
 import { useRecoilState } from "recoil";
-import { ProfileClickedState, UserDataState } from "../states/atom";
+import { ProfileClickedState, UserDataState, UserTokenState } from "../states/atom";
 import ProfileFixModal from "../components/ProfileFixModal";
 import meerkatLogout from "../assets/img/meerkat_logout.svg";
 import Header from "../components/Header";
 import loginAPI from '../lib/loginApi';
 
 // localStorage userToken 으로 바꾸기
-const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE'
-}
+// const token = {
+//   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE'
+// }
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
-  const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(
-    ProfileClickedState
-  );
+  const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(ProfileClickedState);
   const [userData, setUserData] = useRecoilState(UserDataState);
+  const [userToken, setUserToken] = useRecoilState(UserTokenState);
 
   const handleProfileBtnClick = () => {
     setIsProfileBtnClicked(true);
@@ -43,7 +42,11 @@ export default () => {
     setIsHover(false);
   };
 
+
   useEffect(() => {
+    const token = {
+      'x-access-token': userToken
+    }
     const response = loginAPI.getUsers(token);
       response.then((res)=>{
         console.log(res.data.profileImage);
