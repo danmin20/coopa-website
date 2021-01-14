@@ -56,7 +56,6 @@ export default () => {
       <Header />
       <Container>
         <UserInfo>
-          {/* <div className="user-img" alt=""/> */}
           <UserImg userData={userData.profileImage}/>
           <div className="user-intro">
             <div className="user-intro__name">{userData.name}</div>

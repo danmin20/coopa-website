@@ -24,15 +24,17 @@ export default ({isProfileClicked, setIsProfileClicked}) => {
 
     const handleFixClick = async () => {
         const data ={
-          'name': nickInput,
-          'introduction': introInput
+          'name': nickInput.value,
+          'introduction': introInput.value
         }
         const response = await loginAPI.putUsers(token, data);
         console.log(response);
-          // response.then((res) => {
-          //   console.log(res);
-          //   setUserData(res.data);
-          // })
+        const newData = {
+          ...userData,
+          name : nickInput.value,
+          introduction: introInput.value
+        };
+        setUserData(newData);
         setIsProfileClicked(false);
     };
 
