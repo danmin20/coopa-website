@@ -23,7 +23,6 @@ export default ({isProfileClicked, setIsProfileClicked}) => {
     };
 
     const handleFixClick = async () => {
-      console.log("handle");
         const data ={
           'name': nickInput,
           'introduction': introInput
@@ -61,12 +60,12 @@ export default ({isProfileClicked, setIsProfileClicked}) => {
             <ModalWrap>
                 <Text>프로필 편집</Text>
                 <DetailWrap>
-                    <SmallText color={'#333333'}>{userData.name}</SmallText>
+                    <SmallText color={'#333333'}>닉네임</SmallText>
                     <SmallText color={'#999999'}>{nickInput.value.length}/20</SmallText>
                 </DetailWrap>
                 <InputBox value={nickInput.value} type="text" onChange={nickInput.onChange} height={'3.4rem'}/>
                 <DetailWrap>
-                    <SmallText color={'#333333'}>{userData.introduction}</SmallText>
+                    <SmallText color={'#333333'}>한 줄 소개</SmallText>
                     <SmallText color={'#999999'}>{introInput.value.length}/70</SmallText>
                 </DetailWrap>
                 <InputBox value={introInput.value} type="text" onChange={introInput.onChange} height={'7.2rem'}/>
