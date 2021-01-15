@@ -31,8 +31,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // 로그인 구현되면 지우기
 const token = {
-  "x-access-token":
-  localStorage.getItem('userToken')
+  "x-access-token": localStorage.getItem("userToken"),
 };
 
 export default withRouter(({ history }) => {

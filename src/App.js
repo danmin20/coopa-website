@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { LoginPage, MainPage, DirDetail, MyPage, LandingPage } from "./pages";
+import { LoginPage, DirDetail, MyPage, LandingPage } from "./pages";
 import GlobalStyles from "./GlobalStyles";
 import { RecoilRoot } from "recoil";
 // import ProfileFixModal from "./components/ProfileFixModal";
@@ -16,7 +16,7 @@ function App() {
         <Router>
           <Switch>
             <Route path="/" exact>
-              {!isLoggined ? <LoginPage /> : <MainPage />}
+              {!isLoggined ? <LoginPage /> : <LandingPage />}
             </Route>
             <Route path="/share/:key" exact>
               <DirDetail />

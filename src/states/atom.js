@@ -96,11 +96,11 @@ export const NewTabToggleState = atom({
 });
 
 export const UserDataState = atom({
-  key: 'UserDataState',
-  default: {}
+  key: "UserDataState",
+  default: {},
 });
 
 export const UserTokenState = atom({
-  key: 'UserTokenState',
-  default: ''
-})
+  key: "UserTokenState",
+  default: "",
+});
