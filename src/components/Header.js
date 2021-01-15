@@ -82,7 +82,7 @@ const Container = styled.div`
     }
     &__alarm {
       cursor: pointer;
-      width: 2.4rem;
+      width: 3.2rem;
       height: 3.2rem;
       margin-right: 3rem;
     }
