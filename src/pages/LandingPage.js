@@ -8,6 +8,7 @@ import chromeIcon from "../assets/img/chrome_icon.svg";
 import duribun21 from "../assets/img/Lp_2_duribun.svg";
 import lp2Img1 from "../assets/img/Lp_2_img_web.svg";
 import lp2Img2 from "../assets/img/Lp_2_img_parking.svg";
+import lpgif from "../assets/img/cookieparking_landing_motion.gif";
 import duribun31 from "../assets/img/Lp_3_duribun.svg";
 import lp3Img1 from "../assets/img/Lp_3_img_1.svg";
 import lp3Img2 from "../assets/img/Lp_3_img_2.svg";
@@ -66,17 +67,9 @@ export default () => {
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
           </Fade>
         </div>
-        <div className="img">
-          <Fade distance="2.3rem" bottom delay={850} duration={700}>
-            <img className="img__i1" src={lp2Img1} />
-          </Fade>
-          <Fade delay={850} duration={700}>
-            <img className="img__i2" src={lp2Img2} />
-          </Fade>
-          <Fade bottom distance="3rem" delay={1050} duration={700}>
-            <img className="img__i3" src={duribun21} />
-          </Fade>
-        </div>
+        <Fade delay={850} duration={700}>
+          <img className="img" src={lpgif} />
+        </Fade>
       </ContainerTwo>
       <ContainerThree>
         <div className="img">
@@ -255,8 +248,8 @@ const ContainerFour = styled.div`
     position: relative;
     display: flex;
     justify-items: center;
-    width: 90.5rem;
-    height: 56.4rem;
+    min-width: 90.5rem;
+    min-height: 56.4rem;
     &__i1 {
       position: absolute;
       width: 76.4rem;
@@ -320,8 +313,8 @@ const ContainerThree = styled.div`
   align-items: center;
   .img {
     position: relative;
-    width: 87.9rem;
-    height: 68.6rem;
+    min-width: 87.9rem;
+    min-height: 68.6rem;
     &__i1 {
       position: absolute;
       width: 32.1rem;
@@ -402,32 +395,8 @@ const ContainerTwo = styled.div`
     }
   }
   .img {
-    position: relative;
     min-width: 87.9rem;
     min-height: 68.7rem;
-    &__i1 {
-      position: absolute;
-      top: 8.9rem;
-      right: 19.2rem;
-      width: 40.6rem;
-      height: 24.5rem;
-      z-index: 1;
-    }
-    &__i2 {
-      position: absolute;
-      z-index: 2;
-      left: 12.4rem;
-      bottom: 10.7rem;
-      width: 36rem;
-      height: 35.1rem;
-    }
-    &__i3 {
-      position: absolute;
-      bottom: 5.3rem;
-      right: 9.5rem;
-      width: 23.5rem;
-      height: 19.8rem;
-    }
   }
 `;
 
@@ -448,21 +417,21 @@ const ContainerOne = styled.div`
     position: absolute;
     top: 15.3rem;
     right: 0;
-    width: 26.1rem;
+    min-width: 26.1rem;
     height: auto;
   }
   .d1 {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 67.8rem;
+    min-width: 67.8rem;
     height: auto;
   }
   .d2 {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 70.4rem;
+    min-width: 70.4rem;
     height: auto;
   }
   .content {
