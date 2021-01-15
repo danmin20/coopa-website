@@ -1,3 +1,4 @@
+/* global chrome */
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import userProfile from "../assets/img/user_profile.svg";
@@ -58,7 +59,7 @@ export default withRouter(({ history }) => {
     localStorage.removeItem("userToken");
     chrome.runtime.sendMessage(
       process.env.REACT_APP_EXTENSION_ID,
-      { isLogin: false, userToken: '' },
+      { isLogin: false, userToken: "" },
       function (response) {
         if (!response.success) console.log("fail");
       }
