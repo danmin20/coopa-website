@@ -119,7 +119,9 @@ export default withRouter(({ history }) => {
       <Header
         isMine={history.location.pathname.split("/")[1] === "directory"}
       />
-      <Container>
+      <Container
+        isMine={history.location.pathname.split("/")[1] === "directory"}
+      >
         <div className="header">
           <div className="header__title">{dirInfo && dirInfo.name}</div>
           {history.location.pathname.split("/")[1] === "directory" && (
@@ -293,6 +295,7 @@ const Container = styled.div`
   .info {
     display: flex;
     align-items: center;
+    margin-top: ${(props) => !props.isMine && "1.2rem"};
     &__cookie-num {
       margin-left: 1.4rem;
       font-size: 2.6rem;
