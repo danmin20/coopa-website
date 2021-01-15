@@ -26,7 +26,7 @@ import loginAPI from "../lib/loginApi";
 // }
 const userToken = localStorage.getItem("userToken");
 
-export default () => {
+export default ({ history }) => {
   const [isHover, setIsHover] = useState(false);
   const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(
     ProfileClickedState
@@ -50,6 +50,10 @@ export default () => {
   };
   const handleMouserLeave = () => {
     setIsHover(false);
+  };
+  const handleLogout = () => {
+    history.push("/");
+    localStorage.setItem("isLogin", false);
   };
 
   const lottieOptions = {
@@ -167,6 +171,7 @@ export default () => {
               className="logout__btn"
               onMouseEnter={handleMouseEnterBtn}
               onMouseLeave={handleMouseLeaveBtn}
+              onClick={handleLogout}
             >
               로그아웃
             </div>
@@ -214,7 +219,7 @@ const Container = styled.div`
 const UserImg = styled.div`
   width: 23rem;
   height: 23rem;
-  border-radius: 23rem;
+  border-radius: 50%;
   margin-right: 6.3rem;
   background: url(${(props) => props.userData}) center center / cover no-repeat;
 `;
