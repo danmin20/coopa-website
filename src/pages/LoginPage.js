@@ -7,21 +7,10 @@ import img_up from "../assets/img/login_img_meerkat.svg";
 import img_under from "../assets/img/login_img_parkinglot.svg";
 import { GoogleLogin } from "react-google-login";
 import loginAPI from "../lib/loginApi";
-import { useRecoilState } from "recoil";
-import { UserTokenState } from "../states/atom";
 
-// const clientId =
-//   "";
-// const token = {
-//   'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc"
-// }
-
-// const ExtensionId = "eekmldfnofahnpoifonnkmbnacbffkin";
 const url = "https://www.cookieparking.com";
 
 const LoginPage = () => {
-  // const [userToken, setUserToken] = useRecoilState(UserTokenState);
-  console.log("클라ID", process.env.REACT_APP_CLIENTID);
   const handleSuccess = async (response) => {
     console.log(response);
     let token = {
@@ -50,7 +39,6 @@ const LoginPage = () => {
         }
       );
       // window.postMessage("hey");
-      // window.open('chrome-extension://lbgdcjefhogocimkajjkcibodjcnlghj/newtab.html', '_self');
     });
     // localStorage.setItem('userToken', Response.data.jwt);
     // localStorage.setItem('isLogin', true);
