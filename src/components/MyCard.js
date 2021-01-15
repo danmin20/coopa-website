@@ -16,7 +16,7 @@ const token = {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
 };
 
-export default ({ cookies, idx, setData }) => {
+export default ({ history, cookies, idx, setData }) => {
   const [cardHover, setCardHover] = useState(false);
   const [parkingState, setParkingState] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
@@ -57,6 +57,7 @@ export default ({ cookies, idx, setData }) => {
     >
       {cardHover && !parkingState && (
         <CardHover
+          history={history}
           setData={setData}
           cookies={cookies}
           idx={idx}

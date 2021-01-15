@@ -1,47 +1,49 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import useInput from '../hooks/useInput';
-import GlobalStyles from '../GlobalStyles';
+import useInput from "../hooks/useInput";
+import GlobalStyles from "../GlobalStyles";
 import loginAPI from "../lib/loginApi";
 import { useRecoilState } from "recoil";
 import { UserDataState, UserTokenState } from "../states/atom";
 
 // localStorage userToken 으로 바꾸기
-// const token = {
-//   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE'
-// }
+const token = {
+  "x-access-token":
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE",
+};
 
-
-export default ({isProfileClicked, setIsProfileClicked}) => {
-    const [isCancleHover, setIsCancleHover] = useState(false);
-    const [isFixHover, setIsFixHover] = useState(false);
-    const [userData, setUserData] = useRecoilState(UserDataState);
-    const [userToken, setUserToken] = useRecoilState(UserTokenState);
-    const nickInput = useInput(userData.name);
-    const introInput = useInput(userData.introduction==null? '' : userData.introduction);
+export default ({ isProfileClicked, setIsProfileClicked }) => {
+  const [isCancleHover, setIsCancleHover] = useState(false);
+  const [isFixHover, setIsFixHover] = useState(false);
+  const [userData, setUserData] = useRecoilState(UserDataState);
+  const [userToken, setUserToken] = useRecoilState(UserTokenState);
+  const nickInput = useInput(userData.name);
+  const introInput = useInput(
+    userData.introduction == null ? "" : userData.introduction
+  );
 
   const handleClick = () => {
     setIsProfileClicked(false);
   };
 
-    const handleFixClick = async () => {
-        const data ={
-          'name': nickInput.value,
-          'introduction': introInput.value
-        }
-        const token = {
-          'x-access-token': userToken
-        }
-        const response = await loginAPI.putUsers(token, data);
-        console.log(response);
-        const newData = {
-          ...userData,
-          name : nickInput.value,
-          introduction: introInput.value
-        };
-        setUserData(newData);
-        setIsProfileClicked(false);
+  const handleFixClick = async () => {
+    const data = {
+      name: nickInput.value,
+      introduction: introInput.value,
     };
+    const token = {
+      "x-access-token": userToken,
+    };
+    const response = await loginAPI.putUsers(token, data);
+    console.log(response);
+    const newData = {
+      ...userData,
+      name: nickInput.value,
+      introduction: introInput.value,
+    };
+    setUserData(newData);
+    setIsProfileClicked(false);
+  };
 
   const handleCancleMouseMove = () => {
     setIsCancleHover(true);

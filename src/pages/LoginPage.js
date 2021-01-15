@@ -15,12 +15,12 @@ const clientId =
 // const token = {
 //   'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc"
 // }
-const ExtensionId = 'lbgdcjefhogocimkajjkcibodjcnlghj';
+const ExtensionId = "lbgdcjefhogocimkajjkcibodjcnlghj";
 const url = "https://www.cookieparking.com";
 
 const LoginPage = () => {
   const [userToken, setUserToken] = useRecoilState(UserTokenState);
-  
+
   const handleSuccess = async (response) => {
     console.log(response);
     let token = {
@@ -43,9 +43,7 @@ const LoginPage = () => {
       console.log(JSON.parse(localStorage.getItem("isLogin")));
       chrome.runtime.sendMessage(
         ExtensionId,
-        { isLogin: true,
-          userToken: res.data.jwt
-        },
+        { isLogin: true, userToken: res.data.jwt },
         function (response) {
           if (!response.success) console.log("fail");
         }

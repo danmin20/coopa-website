@@ -29,9 +29,13 @@ import helpPopup from "../assets/img/cookies_img_help.svg";
 import Header from "../components/Header";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-// 로그인 구현되면 지우기
+// const token = {
+//   "x-access-token": localStorage.getItem("userToken"),
+// };
+
 const token = {
-  "x-access-token": localStorage.getItem("userToken"),
+  "x-access-token":
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
 };
 
 export default withRouter(({ history }) => {
@@ -177,7 +181,12 @@ export default withRouter(({ history }) => {
                     <MyCard setData={setMyData} cookies={cookie} key={index} />
                   )
                 ) : (
-                  <MyCard setData={setMyData} cookies={cookie} key={index} />
+                  <MyCard
+                    history={history.location.pathname.split("/")[0]}
+                    setData={setMyData}
+                    cookies={cookie}
+                    key={index}
+                  />
                 )
               ) : (
                 <SharedCard cookies={cookie} key={index} />
@@ -215,8 +224,8 @@ const PopupHelp = styled.img`
   position: absolute;
   width: 54.8rem;
   height: 11.2rem;
-  top: -10rem;
-  right: 34rem;
+  top: 20rem;
+  right: 33.7rem;
 `;
 
 const Container = styled.div`

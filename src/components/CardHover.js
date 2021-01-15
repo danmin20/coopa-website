@@ -43,7 +43,7 @@ const EmptyWrap = styled.div`
   }
 `;
 
-const List = ({ dir, cookies, setParkingState, setData }) => {
+const List = ({ history, dir, cookies, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
 
@@ -68,7 +68,10 @@ const List = ({ dir, cookies, setParkingState, setData }) => {
     };
     addCookieToDir(token, body).then(() => {
       setParkingState(true);
-      window.open(`https://www.cookieparking.com/directory/${dir.id}`, "_self");
+      window.open(
+        `https://www.cookieparking.com/directory/${history}`,
+        "_self"
+      );
     });
   };
 
@@ -119,7 +122,7 @@ const ListItemBtn = styled.div`
   background: ${({ theme }) => theme.colors.cookieOrange};
 `;
 
-export default ({ cookies, setParkingState, setData }) => {
+export default ({ history, cookies, setParkingState, setData }) => {
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
   const inputText = useInput("");
@@ -168,6 +171,7 @@ export default ({ cookies, setParkingState, setData }) => {
               <div className="list-div">
                 {dirState.map((dir) => (
                   <List
+                    history={history}
                     setData={setData}
                     dir={dir}
                     key={dir.id}

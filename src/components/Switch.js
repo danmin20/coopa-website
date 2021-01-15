@@ -1,7 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
-import { default as styledTheme } from "../styles/theme";
+import { default as styledTheme } from "../assets/themes";
 
 export default withStyles((theme) => ({
   root: {
@@ -12,7 +12,7 @@ export default withStyles((theme) => ({
   switchBase: {
     padding: 1,
     "&$checked": {
-      transform: "translateX(1.7rem)",
+      transform: "translateX(1.9rem)",
       "& + $track": {
         backgroundColor: styledTheme.colors.cookieOrange,
         opacity: 1,
@@ -23,8 +23,8 @@ export default withStyles((theme) => ({
   thumb: {
     width: "2.7rem",
     height: "2.7rem",
-    marginTop: "0.47rem",
-    marginLeft: "0.65rem",
+    marginTop: "0.4rem",
+    marginLeft: "0.5rem",
     color: theme.palette.common.white,
   },
   track: {
