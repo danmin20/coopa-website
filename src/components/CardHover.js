@@ -47,7 +47,7 @@ const EmptyWrap = styled.div`
   }
 `;
 
-const List = ({ history, dir, cookies, setParkingState }) => {
+const List = ({ setData, dir, cookies, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
 
@@ -72,10 +72,7 @@ const List = ({ history, dir, cookies, setParkingState }) => {
     };
     addCookieToDir(token, body).then(() => {
       setParkingState(true);
-      window.open(
-        `https://www.cookieparking.com/directory/${history}`,
-        "_self"
-      );
+      setData();
     });
   };
 
