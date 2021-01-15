@@ -19,7 +19,7 @@ const token = {
   "x-access-token": localStorage.getItem("userToken"),
 };
 
-export default ({ setIsDelOpen, id }) => {
+export default ({ setIsDelOpen, id, setData }) => {
   const selectState = useRecoilValue(SelectState);
   const setDelToastState = useSetRecoilState(DelToastState);
   const [dirState, setDirState] = useRecoilState(DirState);
@@ -36,12 +36,11 @@ export default ({ setIsDelOpen, id }) => {
 
   const handleCookieDelClick = async (e) => {
     e.stopPropagation();
-    const newCookie = allCookie.filter((c) => c.id !== id);
-    setAllCookie(newCookie);
-
-    await deleteCookies(token, id);
-    setDeleteCookieClick(true);
-    setIsClose(true);
+    await deleteCookies(token, id).then(() => {
+      setData();
+      setDeleteCookieClick(true);
+      setIsClose(true);
+    });
   };
 
   const handleDelClick = async (e) => {
