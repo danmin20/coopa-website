@@ -3,17 +3,21 @@ import styled, { keyframes } from "styled-components";
 import defaultImg from "../assets/img/img_default.svg";
 import { postCookieRead } from "../lib/api";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import deleteicon from "../assets/img/cookiehover_icn_delete.svg";
-import shereicon from "../assets/img/cookiehover_icn_share.svg";
+import deleteicon from "../assets/img/icon_delete_hover.svg";
+import shereicon from "../assets/img/icon_share_hover.svg";
 import { listSelectState, ShareClickState } from "../states/atom";
 import CardHover from "./CardHover";
 import logo from "../assets/img/logo_white.svg";
 import DelCookieModal from "./DelCookieModal";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
+// const token = {
+//   "x-access-token":
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+// };
+
 const token = {
-  "x-access-token":
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+  "x-access-token": localStorage.getItem("userToken"),
 };
 
 export default ({ history, cookies, idx, setData }) => {
@@ -81,7 +85,11 @@ export default ({ history, cookies, idx, setData }) => {
             <DeleteIcon src={deleteicon} onClick={handleDelClick} />
           )}
           {isDelOpen && (
-            <DelCookieModal id={cookies.id} setIsDelOpen={setIsDelOpen} />
+            <DelCookieModal
+              setData={setData}
+              id={cookies.id}
+              setIsDelOpen={setIsDelOpen}
+            />
           )}
           {cardHover && !parkingState && (
             <CopyToClipboard text={cookies.link} onCopy={onCopy}>

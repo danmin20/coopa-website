@@ -7,20 +7,10 @@ import img_up from "../assets/img/login_img_meerkat.svg";
 import img_under from "../assets/img/login_img_parkinglot.svg";
 import { GoogleLogin } from "react-google-login";
 import loginAPI from "../lib/loginApi";
-import { useRecoilState } from "recoil";
-import { UserTokenState } from "../states/atom";
 
-const clientId =
-  "428359515091-knafnj35m26iqbta2ddnmkgj5vjoc5bt.apps.googleusercontent.com";
-// const token = {
-//   'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc"
-// }
-const ExtensionId = "lbgdcjefhogocimkajjkcibodjcnlghj";
 const url = "https://www.cookieparking.com";
 
 const LoginPage = () => {
-  const [userToken, setUserToken] = useRecoilState(UserTokenState);
-
   const handleSuccess = async (response) => {
     console.log(response);
     let token = {
@@ -39,17 +29,16 @@ const LoginPage = () => {
       console.log(res);
       localStorage.setItem("userToken", res.data.jwt);
       localStorage.setItem("isLogin", true);
-      setUserToken(res.data.jwt);
+      // setUserToken(res.data.jwt);
       console.log(JSON.parse(localStorage.getItem("isLogin")));
       chrome.runtime.sendMessage(
-        ExtensionId,
+        process.env.REACT_APP_EXTENSION_ID,
         { isLogin: true, userToken: res.data.jwt },
         function (response) {
           if (!response.success) console.log("fail");
         }
       );
       // window.postMessage("hey");
-      // window.open('chrome-extension://lbgdcjefhogocimkajjkcibodjcnlghj/newtab.html', '_self');
     });
     // localStorage.setItem('userToken', Response.data.jwt);
     // localStorage.setItem('isLogin', true);
@@ -70,7 +59,7 @@ const LoginPage = () => {
             가장 간편한 콘텐츠 파킹랏
           </div>
           <GoogleLogin
-            clientId={clientId}
+            clientId={process.env.REACT_APP_CLIENTID}
             responseType={"id_token"}
             render={(renderProps) => (
               <LoginBtn onClick={renderProps.onClick}>

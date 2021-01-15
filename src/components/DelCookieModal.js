@@ -10,12 +10,16 @@ import {
 } from "../states/atom";
 import { deleteCookies, deleteDir } from "../lib/api";
 
+// const token = {
+//   "x-access-token":
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+// };
+
 const token = {
-  "x-access-token":
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+  "x-access-token": localStorage.getItem("userToken"),
 };
 
-export default ({ setIsDelOpen, id }) => {
+export default ({ setIsDelOpen, id, setData }) => {
   const selectState = useRecoilValue(SelectState);
   const setDelToastState = useSetRecoilState(DelToastState);
   const [dirState, setDirState] = useRecoilState(DirState);
@@ -32,12 +36,11 @@ export default ({ setIsDelOpen, id }) => {
 
   const handleCookieDelClick = async (e) => {
     e.stopPropagation();
-    const newCookie = allCookie.filter((c) => c.id !== id);
-    setAllCookie(newCookie);
-
-    await deleteCookies(token, id);
-    setDeleteCookieClick(true);
-    setIsClose(true);
+    await deleteCookies(token, id).then(() => {
+      setData();
+      setDeleteCookieClick(true);
+      setIsClose(true);
+    });
   };
 
   const handleDelClick = async (e) => {

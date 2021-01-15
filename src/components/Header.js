@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import mainLogo from "../assets/img/navi_img_logo.svg";
 import onboardingIcon from "../assets/img/icon_onboarding.svg";
@@ -6,7 +6,20 @@ import mypageIcon from "../assets/img/icon_mypage.svg";
 import alarmLogo from "../assets/img/icon_alarm.svg";
 import { withRouter } from "react-router-dom";
 
-export default withRouter(({ history, isMine }) => {
+export default withRouter(({ history }) => {
+  const [isHover, setIsHover] = useState(false);
+  // const handleMouseEnter = () => {
+  //   setIsHover(true);
+  // };
+  // const handleMouseLeave = () => {
+  //   setIsHover(false);
+  // };
+  const handleClickMypage = () => {
+    window.open("https://www.cookieparking.com/mypage", "_self");
+  };
+  const handleClickAlarm = () => {
+    // setPrepareModalState(true);
+  };
   return (
     <Container>
       <div className="main-logo" onClick={() => history.push("/")}>
@@ -16,16 +29,23 @@ export default withRouter(({ history, isMine }) => {
           src={mainLogo}
         />
       </div>
-      <div className="profile">
-        <img className="profile__img" src={onboardingIcon} />
-        <img className="profileimg" src={alarmLogo} />
+      <div className="icon">
         <img
-          style={{ marginRight: "2rem" }}
-          className="profileImg"
+          className="icon__onboarding"
+          src={onboardingIcon}
+          // onClick={() => setOnboardingState(true)}
+          // onMouseEnter={handleMouseEnter}
+          // onMouseLeave={handleMouseLeave}
+        />
+        <img
+          className="icon__alarm"
+          src={alarmLogo}
+          onClick={handleClickAlarm}
+        />
+        <img
+          className="icon__mypage"
           src={mypageIcon}
-          onClick={() =>
-            window.open("https://www.cookieparking.com/mypage", "_self")
-          }
+          onClick={handleClickMypage}
         />
       </div>
     </Container>
@@ -50,14 +70,27 @@ const Container = styled.div`
       height: 3.8rem;
     }
   }
-  .profile {
-    margin-right: 2.2rem;
-    cursor: pointer;
-
-    img {
-      margin-left: 1.6rem;
-      width: 4.4rem;
-      height: 4.4rem;
+  .icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    &__onboarding {
+      cursor: pointer;
+      width: 3.2rem;
+      height: 3.2rem;
+      margin-right: 3rem;
+    }
+    &__alarm {
+      cursor: pointer;
+      width: 3.2rem;
+      height: 3.2rem;
+      margin-right: 3rem;
+    }
+    &__mypage {
+      cursor: pointer;
+      width: 3.2rem;
+      height: 3.2rem;
+      margin-right: 2.5rem;
     }
   }
 `;

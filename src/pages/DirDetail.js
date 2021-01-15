@@ -10,7 +10,6 @@ import {
   getDirAll,
   postShareToken,
   getShareToken,
-  getCookiesUnRead,
 } from "../lib/api";
 import { withRouter } from "react-router-dom";
 import Loading from "../components/Loading";
@@ -28,15 +27,17 @@ import ToastMsg from "../components/ToastMsg";
 import helpPopup from "../assets/img/cookies_img_help.svg";
 import Header from "../components/Header";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
-// const token = {
-//   "x-access-token": localStorage.getItem("userToken"),
-// };
+import helpIcon from "../assets/img/icon_help.svg";
+import meerkat from "../assets/img/meerkat_empty.svg";
 
 const token = {
-  "x-access-token":
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+  "x-access-token": localStorage.getItem("userToken"),
 };
+
+// const token = {
+//   "x-access-token":
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+// };
 
 export default withRouter(({ history }) => {
   const [loading, setLoading] = useState(true);
@@ -118,7 +119,9 @@ export default withRouter(({ history }) => {
       <Header
         isMine={history.location.pathname.split("/")[1] === "directory"}
       />
-      <Container>
+      <Container
+        isMine={history.location.pathname.split("/")[1] === "directory"}
+      >
         <div className="header">
           <div className="header__title">{dirInfo && dirInfo.name}</div>
           {history.location.pathname.split("/")[1] === "directory" && (
@@ -157,13 +160,13 @@ export default withRouter(({ history }) => {
             <>
               <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
               <div className="toggle">
-                <div
+                <img
+                  alt=""
+                  src={helpIcon}
                   className="toggle__help"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                >
-                  ?
-                </div>
+                />
                 <div className="toggle__title">안 읽은 쿠키 모아보기</div>
                 <Switch onChange={onToggleSwitch} />
               </div>
@@ -172,7 +175,7 @@ export default withRouter(({ history }) => {
         </div>
         {loading || !cookies ? (
           <Loading />
-        ) : (
+        ) : cookies.length !== 0 ? (
           <CardContainer>
             {cookies.map((cookie, index) =>
               history.location.pathname.split("/")[1] === "directory" ? (
@@ -193,6 +196,11 @@ export default withRouter(({ history }) => {
               )
             )}
           </CardContainer>
+        ) : (
+          <EmptyView className="emptyview">
+            <img className="empty-img" src={meerkat} />
+            <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
+          </EmptyView>
         )}
       </Container>
       {isOpen && (
@@ -225,7 +233,7 @@ const PopupHelp = styled.img`
   width: 54.8rem;
   height: 11.2rem;
   top: 20rem;
-  right: 33.7rem;
+  right: 33.9rem;
 `;
 
 const Container = styled.div`
@@ -287,6 +295,7 @@ const Container = styled.div`
   .info {
     display: flex;
     align-items: center;
+    margin-top: ${(props) => !props.isMine && "1.2rem"};
     &__cookie-num {
       margin-left: 1.4rem;
       font-size: 2.6rem;
@@ -319,23 +328,35 @@ const Container = styled.div`
     align-items: center;
     margin-left: auto;
     &__help {
-      font-family: "Poppins", sans-serif;
       cursor: pointer;
-      width: 2.8rem;
-      height: 2.8rem;
-      background: ${({ theme }) => theme.colors.gray_4};
-      border-radius: 2.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: ${({ theme }) => theme.colors.white};
-      font-size: 1.6rem;
-      font-weight: 500;
+      width: 3.5rem;
+      height: 3.5rem;
     }
     &__title {
       margin: 0 1.5rem 0 0.8rem;
       font-size: 2rem;
       color: ${({ theme }) => theme.colors.gray_5};
     }
+  }
+`;
+
+const EmptyView = styled.div`
+  margin-top: 17.2rem;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.gray_5};
+  .empty-img {
+    width: 18.2rem;
+    height: 15.4rem;
+    padding-right: 7rem;
+  }
+  .empty-desc {
+    margin-top: 3.6rem;
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 3.6rem;
   }
 `;

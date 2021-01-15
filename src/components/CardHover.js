@@ -8,9 +8,13 @@ import useInput from "../hooks/useInput";
 import { addCookieToDir, postDir } from "../lib/api";
 import emptyMeercat from "../assets/img/meerkat_empty.svg";
 
+// const token = {
+//   "x-access-token":
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+// };
+
 const token = {
-  "x-access-token":
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+  "x-access-token": localStorage.getItem("userToken"),
 };
 
 const EmptyDirView = () => {
@@ -43,7 +47,7 @@ const EmptyWrap = styled.div`
   }
 `;
 
-const List = ({ history, dir, cookies, setParkingState }) => {
+const List = ({ setData, dir, cookies, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
 
@@ -68,10 +72,7 @@ const List = ({ history, dir, cookies, setParkingState }) => {
     };
     addCookieToDir(token, body).then(() => {
       setParkingState(true);
-      window.open(
-        `https://www.cookieparking.com/directory/${history}`,
-        "_self"
-      );
+      setData();
     });
   };
 
