@@ -19,6 +19,7 @@ import helpIcon from "../assets/img/icon_help.svg";
 import rewordJson from "../assets/img/cookieparking_mypage_reward_motion.json";
 import Lottie from "react-lottie";
 import loginAPI from "../lib/loginApi";
+import { withRouter } from "react-router-dom";
 
 // localStorage userToken 으로 바꾸기
 // const token = {
@@ -26,7 +27,7 @@ import loginAPI from "../lib/loginApi";
 // }
 const userToken = localStorage.getItem("userToken");
 
-export default ({ history }) => {
+export default withRouter(({ history }) => {
   const [isHover, setIsHover] = useState(false);
   const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(
     ProfileClickedState
@@ -54,6 +55,7 @@ export default ({ history }) => {
   const handleLogout = () => {
     history.push("/");
     localStorage.setItem("isLogin", false);
+    localStorage.removeItem("userToken");
   };
 
   const lottieOptions = {
@@ -187,7 +189,7 @@ export default ({ history }) => {
       </Container>
     </>
   );
-};
+});
 
 const LogoutBtn = styled.img`
   position: absolute;
