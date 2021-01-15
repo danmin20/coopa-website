@@ -67,9 +67,7 @@ export default () => {
             <div className="content__h3">쿠키파킹은 이렇게 탄생했어요 ＞</div>
           </Fade>
         </div>
-        <Fade delay={850} duration={700}>
-          <img className="img" src={lpgif} />
-        </Fade>
+        <img className="img" src={lpgif} />
       </ContainerTwo>
       <ContainerThree>
         <div className="img">
