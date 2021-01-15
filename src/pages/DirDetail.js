@@ -57,10 +57,6 @@ export default withRouter(({ history }) => {
     const result = await getDirCookies(token, dirId);
     const dirResult = await getDirAll(token);
 
-    // 토글 구현 필요
-    // if(isToggled){
-    //   cookieResult = await getCookiesUnRead()
-    // }
     setCookies(result.data.cookies);
     setDirInfo(result.data.directoryInfo);
     setDirState(dirResult.data);
@@ -154,18 +150,22 @@ export default withRouter(({ history }) => {
               <div className="mid__name">{userInfo.name}</div>
             </div>
           )}
-          <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
-          <div className="toggle">
-            <div
-              className="toggle__help"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              ?
-            </div>
-            <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-            <Switch onChange={onToggleSwitch} />
-          </div>
+          {history.location.pathname.split("/")[1] === "directory" && (
+            <>
+              <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
+              <div className="toggle">
+                <div
+                  className="toggle__help"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  ?
+                </div>
+                <div className="toggle__title">안 읽은 쿠키 모아보기</div>
+                <Switch onChange={onToggleSwitch} />
+              </div>
+            </>
+          )}
         </div>
         {loading || !cookies ? (
           <Loading />
@@ -173,7 +173,13 @@ export default withRouter(({ history }) => {
           <CardContainer>
             {cookies.map((cookie, index) =>
               history.location.pathname.split("/")[1] === "directory" ? (
-                <MyCard setData={setMyData} cookies={cookie} key={index} />
+                isToggled ? (
+                  cookie.readCnt === 0 && (
+                    <MyCard setData={setMyData} cookies={cookie} key={index} />
+                  )
+                ) : (
+                  <MyCard setData={setMyData} cookies={cookie} key={index} />
+                )
               ) : (
                 <SharedCard cookies={cookie} key={index} />
               )
