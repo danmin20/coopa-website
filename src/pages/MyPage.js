@@ -54,7 +54,8 @@ export default withRouter(({ history }) => {
   };
   const handleLogout = () => {
     history.push("/");
-    localStorage.removeItem("isLogin");
+    localStorage.setItem("isLogin", false);
+    localStorage.removeItem("userToken");
   };
 
   const lottieOptions = {
