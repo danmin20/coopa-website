@@ -54,7 +54,7 @@ const LoginPage = () => {
         <div className="login">
           <div className="login__logo"></div>
           <div className="login__content">
-            성장하는 나를 위한
+            성장하는 사람들을 위한
             <br />
             가장 간편한 콘텐츠 파킹랏
           </div>
