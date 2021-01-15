@@ -173,7 +173,7 @@ export default withRouter(({ history }) => {
         </div>
         {loading || !cookies ? (
           <Loading />
-        ) : (
+        ) : cookies.length !== 0 ? (
           <CardContainer>
             {cookies.map((cookie, index) =>
               history.location.pathname.split("/")[1] === "directory" ? (
@@ -193,13 +193,12 @@ export default withRouter(({ history }) => {
                 <SharedCard cookies={cookie} key={index} />
               )
             )}
-            {cookies.length == 0 && (
-              <EmptyView className="emptyview">
-                <img className="empty-img" src={meerkat} />
-                <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
-              </EmptyView>
-            )}
           </CardContainer>
+        ) : (
+          <EmptyView className="emptyview">
+            <img className="empty-img" src={meerkat} />
+            <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
+          </EmptyView>
         )}
       </Container>
       {isOpen && (
@@ -341,6 +340,7 @@ const Container = styled.div`
 const EmptyView = styled.div`
   margin-top: 17.2rem;
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
