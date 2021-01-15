@@ -18,7 +18,7 @@ export default withRouter(({ history, isMine }) => {
       </div>
       <div className="profile">
         <img className="profile__img" src={onboardingIcon} />
-        <img className="profileimg" src={alarmLogo} />
+        <img className="profile" src={alarmLogo} />
         <img
           style={{ marginRight: "2rem" }}
           className="profileImg"
