@@ -53,7 +53,7 @@ export default withRouter(({ history }) => {
     setIsHover(false);
   };
   const handleLogout = () => {
-    history.push("/");
+    // history.push("/");
     localStorage.setItem("isLogin", false);
     localStorage.removeItem("userToken");
     window.open("https://www.cookieparking.com", _self);
