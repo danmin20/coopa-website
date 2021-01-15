@@ -11,9 +11,13 @@ import logo from "../assets/img/logo_white.svg";
 import DelCookieModal from "./DelCookieModal";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
+// const token = {
+//   "x-access-token":
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+// };
+
 const token = {
-  "x-access-token":
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+  "x-access-token": localStorage.getItem("userToken"),
 };
 
 export default ({ history, cookies, idx, setData }) => {

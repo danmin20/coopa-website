@@ -7,25 +7,32 @@ import cookieIconOrange from "../assets/img/cookie_icon_orange.svg";
 import googleLogo from "../assets/img/google_logo.svg";
 import helpPopupImg from "../assets/img/mp_help_popup.svg";
 import { useRecoilState } from "recoil";
-import { ProfileClickedState, UserDataState, UserTokenState } from "../states/atom";
+import {
+  ProfileClickedState,
+  UserDataState,
+  UserTokenState,
+} from "../states/atom";
 import ProfileFixModal from "../components/ProfileFixModal";
 import meerkatLogout from "../assets/img/meerkat_logout.svg";
 import Header from "../components/Header";
 import helpIcon from "../assets/img/icon_help.svg";
 import rewordJson from "../assets/img/cookieparking_mypage_reward_motion.json";
 import Lottie from "react-lottie";
-import loginAPI from '../lib/loginApi';
+import loginAPI from "../lib/loginApi";
 
 // localStorage userToken 으로 바꾸기
 // const token = {
 //   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE'
 // }
+const userToken = localStorage.getItem("userToken");
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
-  const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(ProfileClickedState);
+  const [isProfileBtnClicked, setIsProfileBtnClicked] = useRecoilState(
+    ProfileClickedState
+  );
   const [userData, setUserData] = useRecoilState(UserDataState);
-  const [userToken, setUserToken] = useRecoilState(UserTokenState);
+  // const [userToken, setUserToken] = useRecoilState(UserTokenState);
 
   const handleProfileBtnClick = () => {
     setIsProfileBtnClicked(true);
@@ -55,30 +62,26 @@ export default () => {
     },
   };
 
-
-
   useEffect(() => {
     const token = {
-      'x-access-token': userToken
-    }
+      "x-access-token": userToken,
+    };
     const response = loginAPI.getUsers(token);
-      response.then((res)=>{
-        console.log(res.data.profileImage);
-        setUserData(res.data);
-      })
-  }, [])
+    response.then((res) => {
+      console.log(res.data.profileImage);
+      setUserData(res.data);
+    });
+  }, []);
 
   return (
     <>
       <Header />
       <Container>
         <UserInfo>
-          <UserImg userData={userData.profileImage}/>
+          <UserImg userData={userData.profileImage} />
           <div className="user-intro">
             <div className="user-intro__name">{userData.name}</div>
-            <div className="user-intro__info">
-              {userData.introduction}
-            </div>
+            <div className="user-intro__info">{userData.introduction}</div>
             <div className="user-intro__edit" onClick={handleProfileBtnClick}>
               <div className="icon"></div>
               <div style={{ marginLeft: "0.9rem", marginRight: "0.3rem" }}>
@@ -113,7 +116,9 @@ export default () => {
                 <CookieVisitNum number={userData.readCount} />
                 <CookieNumPlus>+</CookieNumPlus>
               </CookieNumBox>
-              <CookieNumUnderLineTwo width={String(userData.readCount).length} />
+              <CookieNumUnderLineTwo
+                width={String(userData.readCount).length}
+              />
             </CookieNumWrap>
             번 읽었어요!
           </div>
@@ -207,11 +212,11 @@ const Container = styled.div`
 `;
 
 const UserImg = styled.div`
-    width: 23rem;
-    height: 23rem;
-    border-radius: 23rem;
-    margin-right: 6.3rem;
-    background: url(${props=>props.userData}) center center / cover no-repeat;
+  width: 23rem;
+  height: 23rem;
+  border-radius: 23rem;
+  margin-right: 6.3rem;
+  background: url(${(props) => props.userData}) center center / cover no-repeat;
 `;
 
 const UserInfo = styled.div`

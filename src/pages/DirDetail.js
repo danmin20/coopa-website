@@ -29,14 +29,15 @@ import helpPopup from "../assets/img/cookies_img_help.svg";
 import Header from "../components/Header";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-// const token = {
-//   "x-access-token": localStorage.getItem("userToken"),
-// };
-
 const token = {
-  "x-access-token":
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+  "x-access-token": localStorage.getItem("userToken"),
 };
+
+// const token = {
+//   "x-access-token":
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
+// };
+// const userToken = localStorage.getItem('userToken');
 
 export default withRouter(({ history }) => {
   const [loading, setLoading] = useState(true);
