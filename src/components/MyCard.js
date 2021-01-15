@@ -85,7 +85,11 @@ export default ({ history, cookies, idx, setData }) => {
             <DeleteIcon src={deleteicon} onClick={handleDelClick} />
           )}
           {isDelOpen && (
-            <DelCookieModal id={cookies.id} setIsDelOpen={setIsDelOpen} />
+            <DelCookieModal
+              setData={setData}
+              id={cookies.id}
+              setIsDelOpen={setIsDelOpen}
+            />
           )}
           {cardHover && !parkingState && (
             <CopyToClipboard text={cookies.link} onCopy={onCopy}>

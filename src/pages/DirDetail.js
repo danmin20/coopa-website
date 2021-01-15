@@ -10,7 +10,6 @@ import {
   getDirAll,
   postShareToken,
   getShareToken,
-  getCookiesUnRead,
 } from "../lib/api";
 import { withRouter } from "react-router-dom";
 import Loading from "../components/Loading";
@@ -28,6 +27,7 @@ import ToastMsg from "../components/ToastMsg";
 import helpPopup from "../assets/img/cookies_img_help.svg";
 import Header from "../components/Header";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import helpIcon from "../assets/img/icon_help.svg";
 
 const token = {
   "x-access-token": localStorage.getItem("userToken"),
@@ -37,7 +37,6 @@ const token = {
 //   "x-access-token":
 //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4",
 // };
-// const userToken = localStorage.getItem('userToken');
 
 export default withRouter(({ history }) => {
   const [loading, setLoading] = useState(true);
@@ -158,13 +157,13 @@ export default withRouter(({ history }) => {
             <>
               <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup" />
               <div className="toggle">
-                <div
+                <img
+                  alt=""
+                  src={helpIcon}
                   className="toggle__help"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                >
-                  ?
-                </div>
+                />
                 <div className="toggle__title">안 읽은 쿠키 모아보기</div>
                 <Switch onChange={onToggleSwitch} />
               </div>
@@ -226,7 +225,7 @@ const PopupHelp = styled.img`
   width: 54.8rem;
   height: 11.2rem;
   top: 20rem;
-  right: 33.7rem;
+  right: 33.9rem;
 `;
 
 const Container = styled.div`
@@ -320,18 +319,9 @@ const Container = styled.div`
     align-items: center;
     margin-left: auto;
     &__help {
-      font-family: "Poppins", sans-serif;
       cursor: pointer;
-      width: 2.8rem;
-      height: 2.8rem;
-      background: ${({ theme }) => theme.colors.gray_4};
-      border-radius: 2.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: ${({ theme }) => theme.colors.white};
-      font-size: 1.6rem;
-      font-weight: 500;
+      width: 3.5rem;
+      height: 3.5rem;
     }
     &__title {
       margin: 0 1.5rem 0 0.8rem;
