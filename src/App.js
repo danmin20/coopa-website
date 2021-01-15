@@ -6,8 +6,8 @@ import { RecoilRoot } from "recoil";
 // import ProfileFixModal from "./components/ProfileFixModal";
 
 function App() {
-  const isLoggined = JSON.parse(localStorage.getItem("isLogin"));
-  console.log(isLoggined);
+  // const isLoggined = JSON.parse(localStorage.getItem("isLogin"));
+  // console.log(isLoggined);
 
   return (
     <>
@@ -16,7 +16,11 @@ function App() {
         <Router>
           <Switch>
             <Route path="/" exact>
-              {!isLoggined ? <LoginPage /> : <LandingPage />}
+              {!JSON.parse(localStorage.getItem("isLogin")) ? (
+                <LoginPage />
+              ) : (
+                <LandingPage />
+              )}
             </Route>
             <Route path="/share/:key" exact>
               <DirDetail />

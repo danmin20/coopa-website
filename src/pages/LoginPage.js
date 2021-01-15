@@ -10,8 +10,8 @@ import loginAPI from "../lib/loginApi";
 import { useRecoilState } from "recoil";
 import { UserTokenState } from "../states/atom";
 
-const clientId =
-  "428359515091-knafnj35m26iqbta2ddnmkgj5vjoc5bt.apps.googleusercontent.com";
+// const clientId =
+//   "891573382219-miosm98mtp0un5h8nlnaopvldsrsjtm5.apps.googleusercontent.com";
 // const token = {
 //   'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5MzQ5MDc2fQ.oG0IUwH9W07XOLVEABDVwSPHpFqjjy8tu9QIixLMqpc"
 // }
@@ -70,7 +70,7 @@ const LoginPage = () => {
             가장 간편한 콘텐츠 파킹랏
           </div>
           <GoogleLogin
-            clientId={clientId}
+            clientId={process.env.REACT_APP_CLIENTID}
             responseType={"id_token"}
             render={(renderProps) => (
               <LoginBtn onClick={renderProps.onClick}>
