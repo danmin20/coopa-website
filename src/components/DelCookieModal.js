@@ -157,6 +157,7 @@ const BtnWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  padding-bottom: 4.2rem;
 `;
 
 const Btn = styled.div`
