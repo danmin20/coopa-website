@@ -28,6 +28,7 @@ import helpPopup from "../assets/img/cookies_img_help.svg";
 import Header from "../components/Header";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import helpIcon from "../assets/img/icon_help.svg";
+import meerkat from "../assets/img/meerkat_empty.svg";
 
 const token = {
   "x-access-token": localStorage.getItem("userToken"),
@@ -192,6 +193,12 @@ export default withRouter(({ history }) => {
                 <SharedCard cookies={cookie} key={index} />
               )
             )}
+            {cookies.length == 0 && (
+              <EmptyView className="emptyview">
+                <img className="empty-img" src={meerkat} />
+                <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
+              </EmptyView>
+            )}
           </CardContainer>
         )}
       </Container>
@@ -328,5 +335,25 @@ const Container = styled.div`
       font-size: 2rem;
       color: ${({ theme }) => theme.colors.gray_5};
     }
+  }
+`;
+
+const EmptyView = styled.div`
+  margin-top: 17.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.gray_5};
+  .empty-img {
+    width: 18.2rem;
+    height: 15.4rem;
+    padding-right: 7rem;
+  }
+  .empty-desc {
+    margin-top: 3.6rem;
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 3.6rem;
   }
 `;
