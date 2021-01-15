@@ -395,8 +395,8 @@ const ContainerTwo = styled.div`
     }
   }
   .img {
-    min-width: 87.9rem;
-    min-height: 68.7rem;
+    width: 80rem;
+    height: 80rem;
   }
 `;
 
