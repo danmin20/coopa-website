@@ -56,6 +56,13 @@ export default withRouter(({ history }) => {
     // history.push("/");
     localStorage.setItem("isLogin", false);
     localStorage.removeItem("userToken");
+    chrome.runtime.sendMessage(
+      process.env.REACT_APP_EXTENSION_ID,
+      { isLogin: false, userToken: '' },
+      function (response) {
+        if (!response.success) console.log("fail");
+      }
+    );
     window.open("https://www.cookieparking.com", "_self");
   };
 
