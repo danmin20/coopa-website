@@ -35,9 +35,6 @@ export default ({ isProfileClicked, setIsProfileClicked }) => {
       name: nickInput.value,
       introduction: introInput.value,
     };
-    const token = {
-      "x-access-token": userToken,
-    };
     const response = await loginAPI.putUsers(token, data);
     console.log(response);
     const newData = {
