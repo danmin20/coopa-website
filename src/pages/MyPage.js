@@ -61,7 +61,8 @@ export default withRouter(({ history }) => {
       process.env.REACT_APP_EXTENSION_ID,
       { isLogin: false, userToken: "" },
       function (response) {
-        if (!response.success) console.log("fail");
+        console.log(response);
+        // if (!response.success) console.log("fail");
       }
     );
     // window.open("https://www.cookieparking.com", "_self");
