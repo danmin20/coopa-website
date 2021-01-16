@@ -64,7 +64,7 @@ export default withRouter(({ history }) => {
         if (!response.success) console.log("fail");
       }
     );
-    window.open("https://www.cookieparking.com", "_self");
+    // window.open("https://www.cookieparking.com", "_self");
   };
 
   const lottieOptions = {
