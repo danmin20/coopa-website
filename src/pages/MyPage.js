@@ -62,7 +62,7 @@ export default withRouter(({ history }) => {
       { isLogin: false, userToken: "" },
       function (response) {
         console.log(response);
-        // if (!response.success) console.log("fail");
+        if (!response.success) console.log("fail");
       }
     );
     // window.open("https://www.cookieparking.com", "_self");
