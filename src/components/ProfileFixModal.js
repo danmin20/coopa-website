@@ -6,7 +6,6 @@ import loginAPI from "../lib/loginApi";
 import { useRecoilState } from "recoil";
 import { UserDataState, UserTokenState } from "../states/atom";
 
-// localStorage userToken 으로 바꾸기
 // const token = {
 //   "x-access-token":
 //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE",

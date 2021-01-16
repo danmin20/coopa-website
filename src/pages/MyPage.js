@@ -22,10 +22,10 @@ import Lottie from "react-lottie";
 import loginAPI from "../lib/loginApi";
 import { withRouter } from "react-router-dom";
 
-// localStorage userToken 으로 바꾸기
 // const token = {
 //   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJFbWFpbCI6Imh5dW5qaW41Njk3QGdtYWlsLmNvbSIsImlhdCI6MTYxMDU0NTc3Mn0.RK7vdHhPEVCOTBmzF6rK4hKC5PaUH-6nfe_7lVJbkcE'
 // }
+
 const userToken = localStorage.getItem("userToken");
 
 export default withRouter(({ history }) => {

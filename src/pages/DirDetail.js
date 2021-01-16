@@ -57,7 +57,6 @@ export default withRouter(({ history }) => {
 
   const setMyData = async () => {
     const dirId = history.location.pathname.split("/")[2];
-    // let cookieResult;
     const result = await getDirCookies(token, dirId);
     const dirResult = await getDirAll(token);
 

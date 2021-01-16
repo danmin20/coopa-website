@@ -8,8 +8,6 @@ import img_under from "../assets/img/login_img_parkinglot.svg";
 import { GoogleLogin } from "react-google-login";
 import loginAPI from "../lib/loginApi";
 
-const url = "https://www.cookieparking.com";
-
 const LoginPage = () => {
   const handleSuccess = async (response) => {
     console.log(response);
